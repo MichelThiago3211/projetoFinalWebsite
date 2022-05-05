@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="Stylesheet" href="styleHome.css">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+
+        google.charts.load('current', {'packages':['corechart']});
+
+        function graficoDesenhar (){
+
+            var tabela = new google.visualization.DataTable();
+            tabela.addColumn('string','categorias');
+            tabela.addColumn('number','valores');
+            tabela.addRows([
+
+                ['teste',2000],
+                ['Transporte',500],
+            ]);
+
+            var grafico = new google.visualization.PieChart(document.getElementById('graficoPizza'));
+            grafico.draw(tabela);
+    }
+
+    google.charts.setOnLoadCallback(graficoDesenhar);
+    </script>
+</head>
+<body>
+    <header>
+        <img id="logoHeader" src="logoVetor.svg">
+    </header>
+    <div class="container flex-linha">
+        <div class="conteudo">
+            <div>
+                <img src="https://picsum.photos/450/350">
+            </div>
+            <div class="flex-coluna">
+                <h1>LOREM IPSUM</h1>
+                <p>LoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsumLoremIpsum</p>
+            </div>
+        </div>
+        <div class="conteudo">
+            <div id="graficoPizza"></div> 
+        </div>
+        <div class="conteudo">
+        </div>
+        <div class="conteudo flex-coluna">
+            
+            <h1 class="h1-sobrenos">Lorem Ipsum</h1>
+
+            <div class="flex-linha">
+                <p class="sobrenos-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt, ex quis posuere consequat, eros justo tempor enim, eu fringilla ante mi id tortor. Aliquam mollis dui nec est egestas, nec eleifend magna pulvinar. Nulla eu est ante. Nulla eget magna nibh. Cras vel quam feugiat, imperdiet lacus a, hendrerit sem. Sed sed pharetra arcu. Etiam et nisi pulvinar enim laoreet fringilla. Aenean tincidunt consectetur velit vel consectetur. Cras ac molestie metus.
+
+                    Etiam dictum eros vitae lorem blandit ultrices. Mauris placerat fermentum mauris, quis egestas magna sollicitudin et. Cras eget nibh diam. Sed urna dui, hendrerit non finibus et, pretium id lorem. Etiam at lorem sit amet libero commodo maximus ac et urna. Nunc in cursus nulla. Phasellus vitae ullamcorper est, vel tristique velit. Praesent eu accumsan tellus. Integer non arcu in dui volutpat tincidunt. Nullam finibus, ex non placerat tristique, risus risus tempor lectus, at accumsan risus felis non arcu. Aenean at facilisis nunc.
+                    
+                    Aliquam sit amet hendrerit nulla, quis porttitor neque. Vivamus augue ex, pellentesque vitae commodo ac, convallis id risus. Etiam pretium mi a tincidunt convallis. Maecenas vel risus non enim iaculis feugiat sed eu magna. In sed sem in augue mattis imperdiet. Vestibulum aliquet sodales nunc vitae congue. Aliquam nisl odio, aliquet quis condimentum non, maximus ac leo. Nulla vitae neque sit amet erat ultricies hendrerit auctor eu sapien. Pellentesque ornare accumsan blandit. Vestibulum elit lectus, tempus vel nulla eget, sagittis varius ex.
+                </p>
+                    <img style="height: min-content; width: min-content;" src="imgSobreNos.png">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <img id="logoFooter" src="logoVetor.svg">
+    </footer>    
+</body>
+</html>

@@ -1,0 +1,27 @@
+*{
+    
+}
+
+.flex-linha{
+    display: flex;
+}
+
+.flex-coluna{
+    display: flex;
+    flex-direction: column;
+}
+
+#login-forms {
+    background: rgb(255, 202, 202);
+    width: 500px;
+    margin: 65px auto;
+    border-radius: 4px;
+    padding: 20px;
+    gap: 20px; 
+  }
+
+.campo{
+    border-radius: 8px;
+    border:hidden;
+    height: 40px;
+}
