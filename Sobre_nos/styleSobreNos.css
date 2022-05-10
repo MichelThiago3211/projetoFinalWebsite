@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+*{
+    font-family: Ubuntu;
+}
+
+body{
+    
+    margin:0;
+
+}
+
+header{
+    height: 75px;
+    width: auto;
+    background-color: lightgray;
+}
+
+footer{
+    background-color: rgb(245, 187, 187);
+}
+
+.container{
+
+    max-width: 80vw;
+    margin:0 auto;
+    border:1px solid lightcyan;
+    flex-direction: column;
+}
+
+
+.conteudo{
+    margin: 0px;
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+    gap:10px;
+}
+
+.flex-coluna{
+    display:flex;
+    flex-direction: column;
+}
+
+.flex-linha{
+    display:flex;
+}
+
+.sobrenos-text{
+    text-align: justify;
+    text-justify: inter-word;
+    margin: 0 1vw;
+}
+
+.h1-sobrenos{
+    text-align:left;
+    margin-left: 1vw;
+}
+
+#logoHeader{
+
+    height: 80%;
+    width: auto;
+
+}
+
+#logoFooter{
+
+    max-width: 50px; 
+    height: 50px;
+
+}
+  
+#texto-direita{
+    text-align: justify;
+}
+
+#texto-esquerda{
+    text-align: justify;
+}
