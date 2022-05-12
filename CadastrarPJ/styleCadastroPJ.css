@@ -51,7 +51,7 @@ h1{
     font-size:medium;
 }
 
-.button {
+button {
     border-radius: 8px;
     background-color: tomato;
     border: none;
@@ -61,4 +61,4 @@ h1{
     text-align: center;
     text-decoration: none;
     font-size: 15px;
-  }
+}
