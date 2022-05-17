@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
 </head>
 <body>
-    <form id="login-forms" class="flex-coluna">
+    <?php
+        include_once "../conexao.php";
+    ?>
+    <form id="cadastroPF-forms" action="adicionarPF.php" method="post" class="flex-coluna">
         <div id="header-form">
             <h1>Cadastro Pessoa física</h1>
             <i class="fa fa-home fa-2x" aria-hidden="true"></i>
@@ -35,8 +38,16 @@
             <input class="campo" type="password" placeholder="Senha">
             <input class="campo" type="password" placeholder="Confirmar senha">
         </div>
-        <div class="action">
-        <button>Cadastrar-se</button>
+
+        <?php
+            
+            
+        
+        ?>
+
+        <input type="submit" id="botao-cadastroPF" value="Cadastre-se">
+
+        
      
     </form>
 </body>

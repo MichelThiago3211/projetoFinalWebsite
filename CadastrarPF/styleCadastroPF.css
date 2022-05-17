@@ -17,7 +17,7 @@ h1{
     flex-direction: column;
 }
 
-#login-forms {  
+#cadastroPF-forms {  
     width: 500px;
     margin: 65px auto;
     border-radius: 12px;
@@ -51,7 +51,7 @@ h1{
     font-size:medium;
 }
 
-button {
+#botao-cadastroPF{
     border-radius: 8px;
     background-color: tomato;
     border: none;

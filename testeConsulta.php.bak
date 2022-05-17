@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title>Consulta de Municipios</title>
+		<style>
+
+			table{
+				border-collapse: collapse;
+			}
+
+			td,th{
+				border: 1px solid black;
+			}
+
+		</style>
+	</head>
+	<body>
+		<center>
+		<h1>Consulta de Municipios</h1>
+		<p>
+
+		<?php
+		
+		include_once "conexao.php";
+		
+		$sql = "SELECT * FROM MUNICIPIOS";
+		$result = mysqli_query($conn, $sql);
+
+		// verifica os registros retornados
+		echo "<table border=\"\">";
+		echo "<tr>";
+			echo "<th>Codigo</td>";
+			echo "<th>Municipio</td>";
+			echo "<th>UF</td>";
+			echo "<th colspan='2'>Ações</td>";
+		echo "</tr>";
+		echo "</table>";
+
+		mysqli_close($conn);
+		?>
+
+		<form action="../index.html">
+			<input value="Voltar" type="submit">
+		</form>
+
+		</center>
+	</body>
+</html>
