@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php
-        include_once "../conexao.php";
+        include_once "/conexao.php";
     ?>
     <form id="cadastroPF-forms" action="adicionarPF.php" method="post" class="flex-coluna">
         <div id="header-form">
