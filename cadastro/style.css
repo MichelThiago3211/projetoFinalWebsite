@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+body {
+    width: 100%;
+    margin: 0;
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-columns: 150px auto 150px;
+    grid-template-rows: 75px auto 50px;
+    grid-template-areas:
+        "head head head"
+        "late main latd"
+        "foot foot foot";
+
+    overflow: auto;
+}
+
+p, h1, input, a {
+    font-family: Ubuntu;
+}
+
+header {
+    background-color: lightpink;
+    grid-area: head;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: main;
+}
+
+footer {
+    background-color: lightblue;
+    grid-area: foot;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-size: 30px;
+    margin: 5px;
+}
+
+form {  
+    width: 500px;
+    border-radius: 10px;
+    padding: 20px;
+    gap: 20px; 
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.3) ;
+}
+
+#endereco{
+    width: 90%;
+}
+
+.link{
+    text-decoration:none;
+    color: black;
+}
+
+form input {
+    border-radius: 8px;
+    border: 1px solid black;
+    height: 40px;
+    padding: 0 10px;
+    font-size:medium;
+}
+
+.botao {
+    border-radius: 8px;
+    background-color: tomato;
+    border: none;
+    color: white;
+    font-weight: 700;
+    margin-right: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 15px;
+}
+
+#dados-basicos, #senha {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+#senha > input, #dados-basicos > input {
+    width: 50%;
+}
+
+#senha {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+#senha input {
+    width: 50%;
+}
+
+#botoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+#botoes .botao {
+    width: 50%;
+}
+#botoes a {
+    text-decoration: none;
+
+}

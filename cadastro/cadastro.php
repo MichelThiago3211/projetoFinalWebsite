@@ -1,54 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="styleCadastroPF.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <?php
-        include_once "/conexao.php";
-    ?>
-    <form id="cadastroPF-forms" action="adicionarPF.php" method="post" class="flex-coluna">
-        <div id="header-form">
-            <h1>Cadastro Pessoa física</h1>
-            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-        </div>
-        <div>
-            <input class="campo" type="text" placeholder="Nome">
-            <input class="campo" type="text" placeholder="Sobrenome">
-        </div>
-        <div>
-            <input class="campo" type="email" placeholder="Email">
-            <input class="campo" type="text" placeholder="Telefone">
-        </div>
-        <div>
-            <input class="campo" type="text" placeholder="CPF">
-        </div>
-        <div>
-            <input id="endereco" class="campo" type="text" placeholder="Endereço">
-        </div>
-        <div>
-            <input class="campo" type="text" placeholder="Complemento">
-        </div>
-        <div>
-            <input class="campo" type="password" placeholder="Senha">
-            <input class="campo" type="password" placeholder="Confirmar senha">
-        </div>
+    <header>
+        <nav>
+            <a href="">link1</a>
+            <a href="">link2</a>
+            <a href="">link3</a>
+        </nav>
+    </header>
 
-        <?php
+    <main>
+        <form action="adicionar_pf.php" method="post" class="flex-coluna">
+            <h1>Cadastrar brechó</h1>
             
-            
-        
-        ?>
+            <fieldset id="dados-basicos">
+                    <input class="campo" type="text" placeholder="Nome">
+                    <input class="campo" type="text" placeholder="Sobrenome">
+                    <input class="campo" type="email" placeholder="Email">
+                    <input class="campo" type="text" placeholder="Telefone">
+                    <input class="campo" type="text" placeholder="CPF">
+                    <input id="endereco" class="campo" type="text" placeholder="Endereço">
+                    <input class="campo" type="text" placeholder="Complemento">
+            </fieldset>
 
-        <input type="submit" id="botao-cadastroPF" value="Cadastre-se">
+            <fieldset id="senha">
+                <input class="campo" type="password" placeholder="Senha">
+                <input class="campo" type="password" placeholder="Confirmar senha">
+            </fieldset>
 
-        
-     
-    </form>
+            <fieldset id="botoes">
+                <input type="submit" class="botao" value="Cadastre-se">
+                <a href="../login/login.php">Já possue uma conta?</a>
+            </fieldset>
+        </form>
+    </main>
+
+    <footer>
+        <p>Teste</p>
+    </footer>
 </body>
 </html>

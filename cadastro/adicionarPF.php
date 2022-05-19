@@ -1,20 +1,20 @@
 <?php
-        include_once "../conexao.php";
 
-        $nomspane = $_POST['nome'];
-        $estado = $_POST['estado'];
+    include_once "../conexao.php";
 
-        $conn = mysqli_connect($localhost, $user, $password, $banco);
+    $nomspane = $_POST['nome'];
+    $estado = $_POST['estado'];
 
-        //nome, sobrenome, email, telefone, cpf, endereco, complemento, senha
+    $conn = mysqli_connect($localhost, $user, $password, $banco);
 
-		$sql = "INSERT INTO municipios(cidade,uf) VALUES ('$nome', '$estado')";
-		$result = mysqli_query($conn, $sql);
+    //nome, sobrenome, email, telefone, cpf, endereco, complemento, senha
+
+	$sql = "INSERT INTO municipios (cidade, uf) VALUES ('$nome', '$estado')";
+	$result = mysqli_query($conn, $sql);
         
-        if (!$result)
-		{
-			echo  "<script>alert('Não foi possível conectar ao Banco de Dados!');</script>";
-			header('Location: index.php');
-		}
+    if (!$result) {
+		echo  "<script>alert('Não foi possível conectar ao Banco de Dados!');</script>";
+		header('Location: index.php');
+	}
 
-    ?>
+?>
