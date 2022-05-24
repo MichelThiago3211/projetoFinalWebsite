@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="input.css">
+</head>
+<body>
+    <header>
+        <img src="https://valensbusinessservices.com/wp-content/uploads/2020/11/10-1024x796.png" style="width: 500px">
+        <h1 style="font-size:50px;">Site Supremo</h1>
+        <p style="width: 500px; font-size:20px;">Esse é simplesmente o site mais foda que você vai achar na internet. Real, todo mundo perdendo </p>
+        <nav style="display:flex; gap:20px; font-size:20px">
+            <button>Sobre nós</button>
+            <button>Catálogo</button>
+        </nav>
+    </header>
+
+    <main>
+        <form action="adicionar_fornecedor.php" method="post">
+            <h1 id>Cadastro</h1>
+            
+            <!-- <fieldset>
+                <label for="tipo" style="font-size: 20px; font-family: Ubuntu;">Tipo de cadastro:</label>
+                <select name="tipo" id="tipo" class="campo">
+                    <option value="">Instituição</option>
+                    <option value="">Brechó</option>
+                </select>
+            </fieldset> -->
+
+            <fieldset id="dados-basicos">
+                <span class="custom-input">
+                    <input id="nome" name="nome" class="campo" type="text" required>
+                    <label for="nome">Nome</label>
+                </span>
+                <span class="custom-input">
+                    <input id="sobrenome" name="sobrenome" class="campo" type="text" required>
+                    <label for="sobrenome">Sobrenome</label>
+                </span>
+                <span class="custom-input">
+                    <input id="telefone" name="telefone" class="campo" type="text" required>
+                    <label for="telefone">Telefone</label>
+                </span>
+                <span class="custom-input">
+                    <input id="email" name="email" class="campo" type="email" required>
+                    <label for="email">Email</label>
+                </span>
+                <span class="custom-input">
+                    <input id="cpf" name="cpf" class="campo" type="text" required>
+                    <label for="cpf">CPF</label>
+                </span>
+                <span class="custom-input">
+                    <input id="endereco" name="endereco" class="campo" type="text" required>
+                    <label for="endereco">Endereço</label>
+                </span>
+                <span class="custom-input">
+                    <input id="complemento" name="complemento" class="campo" type="email" required>
+                    <label for="complemento">Complemento</label>
+                </span>
+            </fieldset>
+
+            <fieldset id="senha">
+                <span class="custom-input">
+                    <input id="senha" name="senha" class="campo" type="text" required>
+                    <label for="senha">Senha</label>
+                </span>
+                <span class="custom-input">
+                    <input id="confirmarsenha" name="confirmarsenha" class="campo" type="text" required>
+                    <label for="confirmarsenha">Confirmar senha</label>
+                </span>
+            </fieldset>
+
+            <fieldset id="botoes">
+                <input type="submit" class="botao" value="Cadastre-se">
+                <a href="../login/login.php">Já possue uma conta?</a>
+            </fieldset>
+        </form>
+    </main>
+</body>
+</html>
