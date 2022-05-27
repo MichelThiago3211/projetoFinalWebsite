@@ -23,7 +23,7 @@
     </header>
 
     <main>
-        <form action="adicionar_pf.php" method="post">
+        <form action="adicionar_fornecedor.php" method="post">
             <h1 id>Cadastro</h1>
             
             <!-- <fieldset>
@@ -37,20 +37,16 @@
             <fieldset id="dados-basicos">
                 <custom-input label="Nome" field-name="nome" required></custom-input>
                 <custom-input label="Sobrenome" field-name="sobrenome" required></custom-input>
-                <custom-input label="Telefone" field-name="telefone" required autocomplete=""></custom-input>
-                <custom-input label="E-mail" field-name="email" input-type="email" required></custom-input>
-                <custom-input label="CPF" field-name="cpf" pattern="%3n.%3n.%3n-%2n" required></custom-input>
-                <span class="custom-input largura-total">
-                    <input id="endereco" name="endereco" class="campo" type="text" required>
-                    <label for="endereco">Endereço</label>
-                    <div id="sugestoes-endereco"></div>
-                </span>
+                <custom-input label="Telefone" field-name="telefone" placeholder="(__) _____-____" required></custom-input>
+                <custom-input label="E-mail" field-name="email" placeholder="exemplo@email.com" required></custom-input>
+                <custom-input label="CPF" field-name="cpf" pattern="\d{3}\.\d{3}\.\d{3}\-\d{2}" placeholder="___.___.___-__" required></custom-input>
+                <custom-input label="Endereço" field-name="endereco" required></custom-input>
                 <custom-input label="Complemento" field-name="complemento" required></custom-input>
             </fieldset>
 
-            <fieldset id="senha">
-                <custom-input label="Senha" field-name="senha" input-type="password" required></custom-input>
-                <custom-input label="Confirmar senha" input-type="password" required></custom-input>
+            <fieldset id="senhas">
+                <custom-input label="Senha" field-name="senha" input-type="password" id="senha" required></custom-input>
+                <custom-input label="Confirmar senha" input-type="password" confirmation="senha" required></custom-input>
             </fieldset>
 
             <fieldset id="botoes">

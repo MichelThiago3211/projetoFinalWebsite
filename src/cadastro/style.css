@@ -74,7 +74,7 @@ fieldset {
     margin-top: 50px;
 }
 
-#dados-basicos, #senha {
+#dados-basicos, #senhas {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -96,7 +96,7 @@ fieldset {
     font-size:medium;
 }
 
-#senha {
+#senhas {
     width: 100%;
     display: flex;
     justify-content: space-between;

@@ -7,17 +7,35 @@ class CustomInput extends LitElement {
 
   firstUpdated(...args) {
     super.firstUpdated(...args);
+    
+    this._inputElem = this.shadowRoot.querySelector("input");
+    this._inputElem.value = this.value;
+
     this.internals.setFormValue(this.value);
     this._testValidity();
   }
   
+  get pattern() {return this._pattern;}
+  set pattern(v) {this._pattern = new RegExp(v);}
+
+  get confirmation() {return this._confirmation;}
+  set confirmation(v) {
+    this._confirmation = v;
+    if (this._confirmation !== null) {
+      this._confirmationTo = document.getElementById(v);
+    }
+  }
+
   static properties = {
-    label: {type: String},
-    "input-type": {type: String},
-    name: { type: String, reflect: true },
+    label: {},
+    "input-type": {},
+    name: {reflect: true},
     required: {type: Boolean, reflect: true},
-    value: {type: String},
-    pattern: {type: String}
+    value: {reflect: true},
+    validation: {},
+    placeholder: {},
+    pattern: {reflect: true},
+    confirmation: {reflect: true}
   };
 
   static styles = css`
@@ -50,12 +68,17 @@ class CustomInput extends LitElement {
 
   constructor() {
     super();
+
     this.label = "";
-    this.value = "";
     this["input-type"] = "text";
-    this.internals = this.attachInternals();
     this.required = false;
-    this.pattern = "%+a";
+    this.value = "";
+    this.placeholder = "";
+    this.confirmation = null;
+
+    this._pattern = null;
+
+    this.internals = this.attachInternals();
   }
 
   _handleInput(e) {
@@ -64,17 +87,20 @@ class CustomInput extends LitElement {
     this._testValidity();
   }
 
-  _handleFocus(e) {
-    
-  }
-
   _testValidity() {
-    const inputElem = this.shadowRoot.querySelector("input");
-
-    if (this.required) {
-      this.internals.setValidity({
-        valueMissing: true
-      }, 'This field is required', inputElem);
+    if (this.value.trim() === "") {
+      if (!this.required) {
+        this.internals.setValidity({});
+      }
+      else {
+        this.internals.setValidity({valueMissing: true}, "Este campo é obrigatório", this._inputElem);
+      }
+    }
+    else if (this._pattern !== null && !this._pattern.test(this.value)) {
+      this.internals.setValidity({patternMismatch: true}, "Valor inválido", this._inputElem);
+    }
+    else if (this._confirmation !== null && this.value !== this._confirmationTo.value) {
+      this.internals.setValidity({customError: true}, "Os valores não são iguais", this._inputElem);
     }
     else {
       this.internals.setValidity({});
@@ -84,6 +110,7 @@ class CustomInput extends LitElement {
   render() {
     return html`
       <label>${this.label}</label>
+      <input type="${this["input-type"]}" @input=${this._handleInput} placeholder="${this.placeholder}"></input>
     `;
   }
 }
