@@ -23,7 +23,7 @@
     </header>
 
     <main>
-        <form>
+        <form action="adicionar_pf.php" method="post">
             <h1 id>Cadastro</h1>
             
             <!-- <fieldset>
@@ -35,10 +35,10 @@
             </fieldset> -->
 
             <fieldset id="dados-basicos">
-                <custom-input label="Nome" field-name="nome" required autocomplete="given-name"></custom-input>
+                <custom-input label="Nome" field-name="nome" required></custom-input>
                 <custom-input label="Sobrenome" field-name="sobrenome" required></custom-input>
                 <custom-input label="Telefone" field-name="telefone" required autocomplete=""></custom-input>
-                <custom-input label="E-mail" field-name="email" input-type="email" autocomplete="email" required></custom-input>
+                <custom-input label="E-mail" field-name="email" input-type="email" required></custom-input>
                 <custom-input label="CPF" field-name="cpf" pattern="%3n.%3n.%3n-%2n" required></custom-input>
                 <span class="custom-input largura-total">
                     <input id="endereco" name="endereco" class="campo" type="text" required>
