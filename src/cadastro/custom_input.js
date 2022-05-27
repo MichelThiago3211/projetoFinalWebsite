@@ -16,7 +16,6 @@ class CustomInput extends LitElement {
     "input-type": {type: String},
     name: { type: String, reflect: true },
     required: {type: Boolean, reflect: true},
-    autocomplete: {type: String, reflect: true},
     value: {type: String},
     pattern: {type: String}
   };
@@ -56,7 +55,6 @@ class CustomInput extends LitElement {
     this["input-type"] = "text";
     this.internals = this.attachInternals();
     this.required = false;
-    this.autocomplete = "off";
     this.pattern = "%+a";
   }
 
@@ -86,7 +84,6 @@ class CustomInput extends LitElement {
   render() {
     return html`
       <label>${this.label}</label>
-      <input type="${this["input-type"]}" @focus=${this._handleFocus} @input=${this._handleInput} name="${this["field-name"]}" autocomplete="${this.autocomplete}"></input>
     `;
   }
 }
