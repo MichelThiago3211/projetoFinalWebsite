@@ -1,8 +1,7 @@
 <?php
+    include_once "../common/conexao.php";
 
-    include_once "../conexao.php";
-
-    $nomspane = $_POST['nome'];
+    $nome = $_POST['nome'];
     $estado = $_POST['estado'];
 
     $conn = mysqli_connect($localhost, $user, $password, $banco);
@@ -16,5 +15,4 @@
 		echo  "<script>alert('Não foi possível conectar ao Banco de Dados!');</script>";
 		header('Location: index.php');
 	}
-
 ?>

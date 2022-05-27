@@ -15,6 +15,7 @@ header {
     gap: 15px;
     color: white;
     background: linear-gradient(139deg, rgba(77,149,140,1) 0%, rgba(126,191,85,1) 100%);
+    text-align: center;
 }
 
 p, h1, input, a, select {
@@ -43,7 +44,7 @@ form {
     width: 500px;
     border-radius: 10px;
     padding: 20px;
-    gap: 20px; 
+    gap: 20px;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
@@ -70,14 +71,14 @@ fieldset {
     border: none;
     padding: 0;
     margin: 0;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 #dados-basicos, #senha {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 20px 10px;
     flex-wrap: wrap;
 }
 
@@ -85,7 +86,7 @@ fieldset {
     width: 49%;
 }
 
-.campo, input {
+.custom-input > input {
     width: 49%;
     box-sizing: border-box;
     border-radius: 8px;
@@ -129,4 +130,53 @@ nav button {
     background-color: transparent;
     padding: 15px;
     width: 150px;
+}
+
+.custom-input {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.custom-input > input {
+    width: 100%;
+}
+.custom-input > label {
+    position: absolute;
+    top: -10px;
+    padding: 0 5px;
+    left: 5px;
+    background-color: white;
+    font-family: Ubuntu;
+}
+
+.largura-total {
+    width: 100%;
+}
+
+#sugestoes-endereco {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-overflow: ellipsis;
+    border: 1px solid black;
+    border-top: none;
+    border-bottom: none;
+    background-color: #ddd;
+    box-sizing: border-box;
+    z-index: 1;
+}
+#sugestoes-endereco > span {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+custom-input {
+    font-family: Ubuntu;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 49%;
 }
