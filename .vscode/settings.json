@@ -14,7 +14,7 @@
         }
     ],
     "liveSassCompile.settings.watchOnLaunch": true,
-    "liveSassCompile.settings.showOutputWindowOn": "None",
+    "liveSassCompile.settings.showOutputWindowOn": "Error",
     "javascript.format.semicolons": "insert",
     "javascript.preferences.quoteStyle": "double"
 }

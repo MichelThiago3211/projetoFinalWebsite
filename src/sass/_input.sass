@@ -1,3 +1,5 @@
+@use 'global'
+
 div.campo
     height: 40px
     box-sizing: border-box
@@ -6,6 +8,8 @@ div.campo
     background-color: white
 
     input
+        --outline-color: black
+
         background-color: inherit
         width: 100%
         height: 100%
@@ -17,7 +21,6 @@ div.campo
 
         transition: box-shadow 200ms linear, border-color 200ms linear
 
-        --outline-color: black
         &:invalid
             --outline-color: crimson
 
@@ -31,3 +34,10 @@ div.campo
         top: -10px
         left: 5px
         background-color: inherit
+
+select
+    @include global.borda(black, var(--raio-borda))
+    background-color: #ddd
+    height: 40px
+    font-size: var(--fonte-pequena)
+    padding: 5px

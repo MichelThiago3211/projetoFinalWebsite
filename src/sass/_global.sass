@@ -1,0 +1,48 @@
+@mixin borda($cor, $raio: 0)
+    border: 1px solid $cor
+    border-radius: $raio
+
+%centro
+    display: flex
+    justify-content: center
+    align-items: center
+
+%centro-col
+    @extend %centro
+    flex-direction: column
+
+%no-edge
+    margin: 0
+    padding: 0
+
+%reticencias
+    text-overflow: ellipsis
+    white-space: nowrap
+    word-wrap: break-word
+    overflow: hidden
+    display: inline-block
+
+:root
+    --fonte-pequena: 16px
+    --fonte-media: 20px
+    --verde: #67ac6e
+    --raio-borda: 8px
+
+*, *::before, *::after
+    box-sizing: border-box
+
+*
+    font-family: Unbuntu
+
+a
+    text-decoration: none
+
+h1
+    font-size: 40px
+
+h1, p
+    margin: 5px 0
+
+body
+    margin: 0
+    min-height: 100vh
