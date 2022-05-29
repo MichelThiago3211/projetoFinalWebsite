@@ -7,7 +7,7 @@ export class Debouncer {
     this.instanceId = 0;
   }
   getInvoker() {
-      return () => this.func();
+    return () => this.func();
   }
   invoke() {
     clearTimeout(this.instanceId);

@@ -1,0 +1,39 @@
+div.campo
+    height: 40px
+    box-sizing: border-box
+    position: relative
+    font-size: 16px
+    background-color: white
+
+/* Input */
+
+div.campo > input
+    background-color: inherit
+    width: 100%
+    height: 100%
+    border: 1px solid black
+    border-radius: 8px
+    box-sizing: border-box
+    padding: 10px
+    font-size: 16px
+
+    transition: box-shadow 200ms linear, border-color 200ms linear
+
+div.campo > input:focus
+    box-shadow: inset 0px -3px 0px 0px black
+    outline: none
+
+div.campo > input:invalid
+    border-color: crimson
+
+div.campo > input:invalid:focus
+    box-shadow: inset 0px -3px 0px 0px crimson
+
+/* Label */
+
+div.campo > label
+    padding: 0 5px
+    position: absolute
+    top: -10px
+    left: 5px
+    background-color: inherit
