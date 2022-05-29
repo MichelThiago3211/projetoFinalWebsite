@@ -12,13 +12,13 @@ function atualizarCnpInput() {
 
   if (value === "brecho") {
     cnpLabel.innerHTML = "CPF";
-    cnpInput.pattern = "\\d{11}" 
-    cnpInput.placeholder="___.___.___-__";
+    cnpInput.pattern = "\\d{11}"
+    cnpInput.placeholder = "___.___.___-__";
   }
   else {
     cnpLabel.innerHTML = "CNPJ";
-    cnpInput.pattern = "\\d{14}" 
-    cnpInput.placeholder="__.___.___/0001-__";
+    cnpInput.pattern = "\\d{14}"
+    cnpInput.placeholder = "__.___.___/0001-__";
   }
 };
 
