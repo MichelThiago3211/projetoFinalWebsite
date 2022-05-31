@@ -1,50 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastro</title>
-        
-        <!-- CSS -->
-        <link rel="stylesheet" href="css/login.css">
-    
-        <!-- Fontes -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-    </head>
-    <body>
-        <header>
-            <img src="https://www.xivic.com/wp-content/uploads/2019/06/E-books.png" width="400">
-            <h1>Site Supremo</h1>
-            <p>Esse é simplesmente o site mais foda que você vai achar na internet. Com as nossas tecnologias muito avançadas de <i>blockchain</i> e 5G, facilitamos a doação de peças de vestuário através de qualquer cidade do <strike>mundo</strike> Brasil.</p>
-            <nav>
-                <a class="botao" href="sobre.html">Sobre nós</a>
-                <a class="botao" href="../catalogo/catalogo.html">Catálogo</a>
-            </nav>
-        </header>
-    
-        <main>
-            <form action="php/autenticacao.php" method="post">
-                <h1 id>Login</h1>
-                
-                <fieldset id="dados-fs">
-                    <div class="campo">
-                        <input type="text" name="email" autocomplete="email" autofocus required>
-                        <label>E-mail</label>
-                    </div>
-                    <div class="campo" id="senha">
-                        <input type="password" name="senha" autocomplete="current-password" required>
-                        <label>Senha</label>
-                    </div>
-                </fieldset>
-    
-                <fieldset id="botoes">
-                    <input type="submit" class="botao" value="Logar">
-                    
-                </fieldset>
-            </form>
-        </main>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styleLogin.css">
+</head>
+<body>
+    <form id="login-forms" class="flex-coluna">
+        <h1>Login</h1>
+        <input class="campo" type="email" placeholder="Email">
+        <input class="campo" type="password" placeholder="Senha">
+        <a href="#" class="link">Esqueceu a senha?</a>
+        <div class="action">
+        <button>Logar</button>
+    </form>
+</body>
 </html>
