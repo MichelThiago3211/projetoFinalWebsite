@@ -81,3 +81,8 @@ fieldset
     @extend %centro
     @include global.borda(black, var(--raio-borda))
     grid-row: span 3
+
+@media (max-width: 600px)
+    body
+        grid-template-columns: 1fr
+        grid-template-rows: 1fr 1fr

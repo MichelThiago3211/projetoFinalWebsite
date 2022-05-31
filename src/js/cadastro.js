@@ -75,22 +75,26 @@ async function sugerirEndereco() {
   }
   else {
     const url = ENDERECO_API_URL.replace("#", termo);
-    const sugestoes = (await (await fetch(url)).json()).features
-      ?.filter(e => e.properties.result_type === "building") || [];
 
-    if (sugestoes.length === 0) {
-      sugestoesEndereco.innerHTML = "<span>Nenhum resultado disponível.</span>";
-    }
-    else {
-      sugestoesEndereco.innerHTML = "";
-      for (let sugestao of sugestoes) {
-        const span = document.createElement("span");
-        span.className = "sugestao";
-        span.innerHTML = sugestao.properties.formatted;
-        span.onclick = () => definirEndereco(sugestao.properties);
-        sugestoesEndereco.append(span);
+    const requisicao = fetch(url);
+
+    requisicao.then(val => {
+      const sugestoes = (await val.json()).features?.filter(e => e.properties.result_type === "building") || [];
+
+      if (sugestoes.length === 0) {
+        sugestoesEndereco.innerHTML = "<span>Nenhum resultado disponível.</span>";
       }
-    }
+      else {
+        sugestoesEndereco.innerHTML = "";
+        for (let sugestao of sugestoes) {
+          const span = document.createElement("span");
+          span.className = "sugestao";
+          span.innerHTML = sugestao.properties.formatted;
+          span.onclick = () => definirEndereco(sugestao.properties);
+          sugestoesEndereco.append(span);
+        }
+      }
+    });
   }
 }
 
