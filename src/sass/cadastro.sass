@@ -1,0 +1,88 @@
+@use 'sugestoes'
+@use 'input'
+@use 'global'
+
+body
+    display: grid
+    grid-template-columns: 2fr 3fr
+
+header
+    @extend %centro-col
+    gap: 15px
+    color: white
+    background: linear-gradient(140deg, rgba(126,191,85,1) 0%, rgba(77,149,140,1) 100%)
+    text-align: center
+
+    p
+        width: 400px
+        font-size: var(--fonte-media)
+
+nav
+    display: flex
+    gap: 20px
+    margin-top: 20px
+
+    .botao
+        width: 150px
+        @include global.borda(white, null)
+        background-color: transparent
+
+main
+    @extend %centro
+    background-color: #cce9d9
+
+form
+    background-color: white
+    width: 600px
+    border-radius: 10px
+    padding: 20px 40px
+    gap: 20px
+    box-shadow: 0 0 20px transparentize(black, .7)
+
+    h1
+        width: 100%
+        text-align: center
+
+.botao
+    border: none
+    border-radius: var(--raio-borda)
+    background-color: var(--verde)
+    color: white
+    text-align: center
+    font-size: var(--fonte-media)
+    cursor: pointer
+    padding: 10px
+
+fieldset
+    @extend %no-edge
+    border: none
+    margin-top: 50px
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 20px
+
+#botoes
+    @extend %centro-col
+    gap: 10px
+
+    .botao
+        width: 200px
+
+#tipo-fornecedor
+    display: flex
+    flex-direction: column
+    gap: 10px
+    font-size: 16px
+
+#tipo-fornecedor, #endereco
+    grid-column: 1/3
+
+#logo
+    @extend %centro
+    @include global.borda(black, var(--raio-borda))
+    grid-row: span 3
+
+@media (max-width: 600px)
+    body
+        grid-template-columns: 1fr
+        grid-template-rows: 1fr 1fr
