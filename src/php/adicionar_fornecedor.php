@@ -1,10 +1,12 @@
 <?php
-    include_once "../common/conexao.php";
+    include_once "conexao.php";
 
     $nome = $_POST['nome'];
-    $estado = $_POST['estado'];
-
-    $conn = mysqli_connect($localhost, $user, $password, $banco);
+    $tipo = $_POST['tipo'];
+	$sobrenome = $_POST['sobrenome'];
+	$email = $_POST['email'];
+	$telefone = $_POST['telefone'];
+	$cnp = $_POST['cnp'];
 
     //nome, sobrenome, email, telefone, cpf, endereco, complemento, senha
 

@@ -51,11 +51,14 @@ const enderecoInput = document.querySelector("#endereco > input");
 
 const sugestoesDebouncer = new Debouncer(sugerirEndereco, 500);
 
-let endereco = null;
+let ultimoTermoEndereco = null;
 
 function definirEndereco(sugestao) {
   enderecoInput.value = sugestao.formatted;
   enderecoInput.setCustomValidity("");
+  
+	console.log(sugestao);
+	
   endereco = {
     rua: "",
     bairro: "",
@@ -76,9 +79,9 @@ async function sugerirEndereco() {
   else {
     const url = ENDERECO_API_URL.replace("#", termo);
 
-    const requisicao = fetch(url);
+		ultimoTermoEndereco = termo;
 
-    requisicao.then(val => {
+    fetch(url).then(async val => {
       const sugestoes = (await val.json()).features?.filter(e => e.properties.result_type === "building") || [];
 
       if (sugestoes.length === 0) {
