@@ -51,8 +51,6 @@ const enderecoInput = document.querySelector("#endereco > input");
 
 const sugestoesDebouncer = new Debouncer(sugerirEndereco, 500);
 
-let ultimoTermoEndereco = null;
-
 function definirEndereco(sugestao) {
   enderecoInput.value = sugestao.formatted;
   enderecoInput.setCustomValidity("");
@@ -61,12 +59,10 @@ function definirEndereco(sugestao) {
 	
   endereco = {
     rua: "",
-    bairro: "",
     numero: 0,
     cidade: "",
     cep: "",
-    latitude: "",
-    longitude: "",
+		estado: ""
   }
 }
 
@@ -79,26 +75,22 @@ async function sugerirEndereco() {
   else {
     const url = ENDERECO_API_URL.replace("#", termo);
 
-		ultimoTermoEndereco = termo;
+		const sugestoes = (await (await fetch(url)).json()).features || [];
 
-    fetch(url).then(async val => {
-      const sugestoes = (await val.json()).features?.filter(e => e.properties.result_type === "building") || [];
-
-      if (sugestoes.length === 0) {
-        sugestoesEndereco.innerHTML = "<span>Nenhum resultado disponível.</span>";
-      }
-      else {
-        sugestoesEndereco.innerHTML = "";
-        for (let sugestao of sugestoes) {
-          const span = document.createElement("span");
-          span.className = "sugestao";
-          span.innerHTML = sugestao.properties.formatted;
-          span.onclick = () => definirEndereco(sugestao.properties);
-          sugestoesEndereco.append(span);
-        }
-      }
-    });
-  }
+		if (sugestoes.length === 0) {
+			sugestoesEndereco.innerHTML = "<span>Nenhum resultado disponível.</span>";
+		}
+		else {
+			sugestoesEndereco.innerHTML = "";
+			for (let sugestao of sugestoes) {
+				const span = document.createElement("span");
+				span.className = "sugestao";
+				span.innerHTML = sugestao.properties.formatted;
+				span.onclick = () => definirEndereco(sugestao.properties);
+				sugestoesEndereco.append(span);
+			}
+		}
+	}
 }
 
 function esconderSugestoes(e) {
