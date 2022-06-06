@@ -17,15 +17,7 @@
     <script src="js/cadastro.js" type="module"></script>
 </head>
 <body>
-    <header>
-        <img src="https://www.xivic.com/wp-content/uploads/2019/06/E-books.png" width="400">
-        <h1>Site Supremo</h1>
-        <p>Esse é simplesmente o site mais foda que você vai achar na internet. Com as nossas tecnologias muito avançadas de <i>blockchain</i> e 5G, facilitamos a doação de peças de vestuário através de qualquer cidade do <strike>mundo</strike> Brasil.</p>
-        <nav>
-            <a class="botao" href="sobre.html">Sobre nós</a>
-            <a class="botao" href="catalogo.html">Catálogo</a>
-        </nav>
-    </header>
+    <?php include "header.html"; ?>
 
     <main>
         <form action="adicionar_fornecedor.php" method="post">
@@ -84,7 +76,7 @@
 
             <fieldset id="botoes">
                 <input type="submit" class="botao" value="Cadastre-se">
-                <a href="login.html">Já possue uma conta?</a>
+                <a href="login.php">Já possue uma conta?</a>
             </fieldset>
         </form>
     </main>

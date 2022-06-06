@@ -12,18 +12,9 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
     </head>
     <body>
-        <header>
-            <img src="https://www.xivic.com/wp-content/uploads/2019/06/E-books.png" width="400">
-            <h1>Site Supremo</h1>
-            <p>Esse é simplesmente o site mais foda que você vai achar na internet. Com as nossas tecnologias muito avançadas de <i>blockchain</i> e 5G, facilitamos a doação de peças de vestuário através de qualquer cidade do <strike>mundo</strike> Brasil.</p>
-            <nav>
-                <a class="botao" href="sobre.html">Sobre nós</a>
-                <a class="botao" href="../catalogo/catalogo.html">Catálogo</a>
-            </nav>
-        </header>
+        <?php include "header.html"; ?>
     
         <main>
             <form action="php/autenticacao.php" method="post">
