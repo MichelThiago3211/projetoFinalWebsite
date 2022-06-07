@@ -47,7 +47,7 @@ confirmarSenhaInput.addEventListener("input", testarConfirmacaoSenha);
 const ENDERECO_API_URL = "https://api.geoapify.com/v1/geocode/autocomplete?text=#&apiKey=f62b5fe78b08493c995352735ed8bfd3";
 
 const sugestoesEndereco = document.querySelector("#endereco > div.sugestoes");
-const enderecoInput = document.querySelector("#endereco > input");
+const enderecoInput = document.getElementById("endereco-input")
 
 const sugestoesDebouncer = new Debouncer(sugerirEndereco, 500);
 
@@ -94,7 +94,7 @@ function esconderSugestoes(e) {
     if (alvo.nodeName === "#text") {
       alvo = alvo.parentElement;
     }
-
+/
     if (alvo.classList.contains("sugestao")) {
       alvo.click();
     }
