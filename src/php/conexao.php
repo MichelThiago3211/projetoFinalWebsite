@@ -1,7 +1,7 @@
 <?php
-  $endereco = "192.168.20.3";
+  $endereco = "localhost";
   $usuario = "root";
-  $senha = "12345";
+  $senha = "projeto_MS_2022";
   $banco = "projeto_ms";
 
   $conn = mysqli_connect($endereco, $usuario, $senha, $banco);

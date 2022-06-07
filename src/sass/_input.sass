@@ -41,3 +41,14 @@ select
     height: 40px
     font-size: var(--fonte-pequena)
     padding: 5px
+
+.imagem-input
+    @extend %centro
+    @include global.borda(black, var(--raio-borda))
+    height: 160px
+    width: 160px
+    
+    cursor: pointer
+
+input[type=file]
+    display: none

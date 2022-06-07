@@ -15,12 +15,13 @@
 
     <!-- Javascript -->
     <script src="js/cadastro.js" type="module"></script>
+    <script src="js/upload_arq.js" defer></script>
 </head>
 <body>
     <?php include "header.html"; ?>
 
     <main>
-        <form action="adicionar_fornecedor.php" method="post">
+        <form enctype="multipart/form-data" action="adicionar_fornecedor.php" method="post">
             <h1 id>Cadastro</h1>
             
             <fieldset id="dados-fs">
@@ -39,18 +40,24 @@
                     <input type="text" name="sobrenome" autocomplete="family-name" required>
                     <label>Sobrenome</label>
                 </div>
-                <div class="campo">
-                    <input type="text" name="email" pattern=".+@\w+\.\w[\w\.]*" placeholder="exemplo@email.com" autocomplete="email" required>
-                    <label>E-mail</label>
-                </div>
-                <div id="logo">LOGO</div>
-                <div class="campo">
-                    <input type="text" name="telefone" placeholder="(__) _____-____" pattern="[0-9]{11}" autocomplete="tel-national" required>
-                    <label>Telefone</label>
-                </div>
-                <div class="campo" id="cnp">
-                    <input type="text" name="cnp" required>
-                    <label></label>
+                <div id="dados-imagem">
+                    <div class="campos">
+                        <div class="campo">
+                            <input type="text" name="email" pattern=".+@\w+\.\w[\w\.]*" placeholder="exemplo@email.com" autocomplete="email" required>
+                            <label>E-mail</label>
+                        </div>
+                        <div class="campo">
+                            <input type="text" name="telefone" placeholder="(__) _____-____" pattern="[0-9]{11}" autocomplete="tel-national" required>
+                            <label>Telefone</label>
+                        </div>
+                        <div class="campo" id="cnp">
+                            <input type="text" name="cnp" required>
+                            <label></label>
+                        </div>
+                    </div>
+                    <label class="imagem-input" for="imagem">Teste</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1048576"/> <!-- 1MB -->
+                    <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg" required>
                 </div>
                 <div class="campo" id="endereco">
                     <input type="text" id="endereco-input" name="endereco" autocomplete="off" required>
