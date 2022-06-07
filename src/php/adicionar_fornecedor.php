@@ -39,4 +39,4 @@
 			echo "<script>alert('Erro ao enviar a imagem!');</script>";
 		}
     }
-    
+?>
