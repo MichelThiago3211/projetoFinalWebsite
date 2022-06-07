@@ -20,7 +20,7 @@
     <?php include "header.html"; ?>
 
     <main>
-        <form enctype="multipart/form-data" action="adicionar_fornecedor.php" method="post">
+        <form enctype="multipart/form-data" action="php/adicionar_fornecedor.php" method="post">
             <h1 id>Cadastro</h1>
             
             <fieldset id="dados-fs">
@@ -90,7 +90,7 @@
                 </div>
                 <!-- Confirmar senha -->
                 <div class="campo" id="confirmar-senha">
-                    <input type="password" required autocomplete="new-off">
+                    <input type="password" required autocomplete="off">
                     <label>Confirmar senha</label>
                 </div>
             </fieldset>
