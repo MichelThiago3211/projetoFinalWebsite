@@ -1,47 +1,48 @@
 <?php
     include_once "conexao.php";
 
-    $tipo = $_POST['tipo'];
+    $tipo = ($_POST['tipo']=='brecho'?0:1);
     $nome = $_POST['nome'];
 	$sobrenome = $_POST['sobrenome'];
-	$email = $_POST['email'];
+	
+    $nomeCompleto = $nome . " " . $sobrenome;
+    
+    $email = $_POST['email'];
 	$telefone = $_POST['telefone'];
 	$cnp = $_POST['cnp'];
     $complemento = $_POST['complemento'];
     $senha = $_POST['senha'];
-    $cidade = $_POST[''];
+    
+    $rua = $_POST['rua'];
+    $numero = $_POST['numero'];
+    $cep = $_POST['cep'];
+    $cidade = $_POST['cidade'];
 
+	$diretorio  = "../images/";
+    $temArquivo = $_FILES["imagem"]['name'] != '';
+	$arquivo    = $temArquivo ? $_FILES["imagem"] : FALSE;
+    $logo       = $diretorio.$arquivo['name'];
 
     $sql = "SELECT id_municipio FROM municipio WHERE (nome='$cidade')";
+    $result = mysqli_query($conn, $sql);
+    $idMunicipio = 1;
 
-    /* PEGA A IMAGEM */
-    if(isset($_FILES['arquivo'])){
-        $conteudoDoArquivo = file_get_contents($_FILES['imagem']['tmp_name']);
-
-        switch ($_FILES['arquivo']['error']) {
-            case UPLOAD_ERR_OK:
-                break;
-            case UPLOAD_ERR_NO_FILE:
-                throw new RuntimeException('No file sent.');
-            case UPLOAD_ERR_INI_SIZE:
-            case UPLOAD_ERR_FORM_SIZE:
-                throw new RuntimeException('Exceeded filesize limit.');
-            default:
-                throw new RuntimeException('Unknown errors.');
-        }
+    $sql = "INSERT INTO fornecedor(complemento, numero, rua, cep, nome, telefone, email, senha, ativo, cnp, tipo, id_municipio". ($temArquivo? ', imagem' : '') . ") VALUES ('$complemento', $numero, '$rua', $cep, '$nomeCompleto', '$telefone', '$email', '$senha', 0, '$cnp', '$tipo', $idMunicipio" . ($temArquivo? ", '".$logo."'" : '') . ");";
+    echo $sql;
+    $result = mysqli_query($conn, $sql);
+   
+    if (!$result) {
+        echo  "<script>alert('Não foi possível conectar ao Banco de Dados!');</script>";
+        header('Location: sobre.html');
     }
     else {
-        echo "No file found";
+		if($temArquivo) {
+			if (move_uploaded_file($arquivo["tmp_name"], '../'.$diretorio.$arquivo["name"])) {
+				echo "<script>alert('Imagem enviada com sucesso!');</script>";
+			}
+			else {
+				echo "<script>alert('Erro ao enviar a imagem!');</script>";
+			}
+		}
     }
-
-
-    //nome, sobrenome, email, telefone, cpf, endereco, complemento, senha
-
-	$sql = "INSERT INTO municipios (cidade, uf) VALUES ('$nome', '$estado')";
-	$result = mysqli_query($conn, $sql);
-        
-    if (!$result) {
-		echo  "<script>alert('Não foi possível conectar ao Banco de Dados!');</script>";
-		header('Location: index.php');
-	}
-?>
+    
