@@ -28,7 +28,7 @@
                 <!-- Tipo -->
                 <div id="tipo-fornecedor">
                     <label for="tipo">Tipo de fornecedor</label>
-                    <select id="tipo">
+                    <select name="tipo" id="tipo">
                         <option value="brecho" selected>Brechó</option>
                         <option value="instituicao">Instituição</option>
                     </select>
@@ -86,7 +86,7 @@
             <fieldset id="senha-fs">
                 <!-- Senha -->
                 <div class="campo" id="senha">
-                    <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}" name="senha" autocomplete="new-password" required>
+                    <input name="senha" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}" name="senha" autocomplete="new-password" required>
                     <label>Senha</label>
                 </div>
                 <!-- Confirmar senha -->
