@@ -68,6 +68,10 @@
                 </div>
                 <!-- Endereço -->
                 <div class="campo" id="endereco">
+                    <input type="hidden" name="rua" id="rua-hidden">
+                    <input type="hidden" name="numero" id="numero-hidden">
+                    <input type="hidden" name="cep" id="cep-hidden">
+                    <input type="hidden" name="cidade" id="cidade-hidden">
                     <input type="text" id="endereco-input" name="endereco" autocomplete="off" required>
                     <label>Endereço</label>
                     <div class="sugestoes"></div>
