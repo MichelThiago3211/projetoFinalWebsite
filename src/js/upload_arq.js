@@ -11,7 +11,6 @@ function validarTamanho(campo) {
 
   if(campo.files[0].size > tamanhoMaximo){
     campo.setCustomValidity("O arquivo deve ter no máximo " + descricaoTamanho + " Megabytes");
-    console.log(campo);
   }
   else {
     campo.setCustomValidity("");
