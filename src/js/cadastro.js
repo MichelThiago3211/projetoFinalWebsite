@@ -94,7 +94,6 @@ function esconderSugestoes(e) {
     if (alvo.nodeName === "#text") {
       alvo = alvo.parentElement;
     }
-/
     if (alvo.classList.contains("sugestao")) {
       alvo.click();
     }
