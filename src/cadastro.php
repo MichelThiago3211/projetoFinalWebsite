@@ -62,7 +62,8 @@
                     </div>
                     <!-- Logo do brechó/instituição -->
                     <label class="imagem-input" for="imagem">
-                        <img alt="Inserir imagem" id="preview">
+                        <img id="preview">
+                        Inserir imagem
                     </label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1048576"/> <!-- 1MB -->
                     <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg">
