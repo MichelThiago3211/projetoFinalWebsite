@@ -25,6 +25,7 @@
             <h1 id>Cadastro</h1>
             
             <fieldset id="dados-fs">
+                <!-- Tipo -->
                 <div id="tipo-fornecedor">
                     <label for="tipo">Tipo de fornecedor</label>
                     <select id="tipo">
@@ -32,38 +33,46 @@
                         <option value="instituicao">Instituição</option>
                     </select>
                 </div>
+                <!-- Nome -->
                 <div class="campo">
                     <input type="text" name="nome" autocomplete="given-name" autofocus required>
                     <label>Nome</label>
                 </div>
+                <!-- Sobrenome -->
                 <div class="campo">
                     <input type="text" name="sobrenome" autocomplete="family-name" required>
                     <label>Sobrenome</label>
                 </div>
                 <div id="dados-imagem">
                     <div class="campos">
+                        <!-- E-mail -->
                         <div class="campo">
                             <input type="text" name="email" pattern=".+@\w+\.\w[\w\.]*" placeholder="exemplo@email.com" autocomplete="email" required>
                             <label>E-mail</label>
                         </div>
+                        <!-- Telefone -->
                         <div class="campo">
                             <input type="text" name="telefone" placeholder="(__) _____-____" pattern="[0-9]{11}" autocomplete="tel-national" required>
                             <label>Telefone</label>
                         </div>
+                        <!-- CNP -->
                         <div class="campo" id="cnp">
                             <input type="text" name="cnp" required>
                             <label></label>
                         </div>
                     </div>
+                    <!-- Logo do brechó/instituição -->
                     <label class="imagem-input" for="imagem">Teste</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1048576"/> <!-- 1MB -->
                     <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg" required>
                 </div>
+                <!-- Endereço -->
                 <div class="campo" id="endereco">
                     <input type="text" id="endereco-input" name="endereco" autocomplete="off" required>
                     <label>Endereço</label>
                     <div class="sugestoes"></div>
                 </div>
+                <!-- Complemento -->
                 <div class="campo">
                     <input type="text" name="complemento">
                     <label>Complemento</label>
@@ -71,10 +80,12 @@
             </fieldset>
 
             <fieldset id="senha-fs">
+                <!-- Senha -->
                 <div class="campo" id="senha">
                     <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}" name="senha" autocomplete="new-password" required>
                     <label>Senha</label>
                 </div>
+                <!-- Confirmar senha -->
                 <div class="campo" id="confirmar-senha">
                     <input type="password" required>
                     <label>Confirmar senha</label>
