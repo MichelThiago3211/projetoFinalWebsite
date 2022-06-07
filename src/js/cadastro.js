@@ -52,6 +52,7 @@ const enderecoInput = document.getElementById("endereco-input")
 const sugestoesDebouncer = new Debouncer(sugerirEndereco, 500);
 
 function definirEndereco(sugestao) {
+  console.log(enderecoInput.value);
   enderecoInput.value = sugestao.formatted;
   enderecoInput.setCustomValidity("");
 	
@@ -81,23 +82,17 @@ async function sugerirEndereco() {
 				const span = document.createElement("span");
 				span.className = "sugestao";
 				span.innerHTML = sugestao.properties.formatted;
-				span.onclick = () => definirEndereco(sugestao.properties);
+				span.onclick = () => {
+          definirEndereco(sugestao.properties);
+          esconderSugestoes();
+        }
 				sugestoesEndereco.append(span);
 			}
 		}
 	}
 }
 
-function esconderSugestoes(e) {
-  let alvo = e?.explicitOriginalTarget;
-  if (alvo) {
-    if (alvo.nodeName === "#text") {
-      alvo = alvo.parentElement;
-    }
-    if (alvo.classList.contains("sugestao")) {
-      alvo.click();
-    }
-  }
+function esconderSugestoes() {
   sugestoesEndereco.style.display = "none";
 }
 
@@ -109,4 +104,3 @@ function mostrarSugestoes() {
 }
 
 enderecoInput.addEventListener("input", mostrarSugestoes);
-enderecoInput.addEventListener("blur", e => esconderSugestoes(e));

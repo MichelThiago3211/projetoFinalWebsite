@@ -15,7 +15,6 @@
 
     <!-- Javascript -->
     <script src="js/cadastro.js" type="module"></script>
-    <script src="js/upload_arq.js" defer></script>
 </head>
 <body>
     <?php include "header.html"; ?>
@@ -57,7 +56,7 @@
                         </div>
                         <!-- CNP -->
                         <div class="campo" id="cnp">
-                            <input type="text" name="cnp" required>
+                            <input type="text" name="cnp" required autocomplete="off">
                             <label></label>
                         </div>
                     </div>
@@ -78,7 +77,7 @@
                 </div>
                 <!-- Complemento -->
                 <div class="campo">
-                    <input type="text" name="complemento">
+                    <input type="text" name="complemento" autocomplete="none">
                     <label>Complemento</label>
                 </div>
             </fieldset>
@@ -91,7 +90,7 @@
                 </div>
                 <!-- Confirmar senha -->
                 <div class="campo" id="confirmar-senha">
-                    <input type="password" required>
+                    <input type="password" required autocomplete="new-off">
                     <label>Confirmar senha</label>
                 </div>
             </fieldset>
