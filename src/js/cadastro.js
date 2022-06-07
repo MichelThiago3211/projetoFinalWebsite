@@ -56,9 +56,9 @@ function definirEndereco(sugestao) {
   enderecoInput.setCustomValidity("");
 	
   document.getElementById("rua-hidden").value = sugestao.street;
-  document.getElementById("numero-hidden").value = sugestao.numero;
-  document.getElementById("cep-hidden").value = sugestao.cep;
-  document.getElementById("cidade-hidden").value = sugestao.cidade;
+  document.getElementById("numero-hidden").value = sugestao.housenumber;
+  document.getElementById("cep-hidden").value = sugestao.postcode;
+  document.getElementById("cidade-hidden").value = sugestao.city;
 }
 
 async function sugerirEndereco() {
