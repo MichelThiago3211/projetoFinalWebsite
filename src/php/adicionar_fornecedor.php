@@ -15,7 +15,7 @@
     
     $rua = $_POST['rua'];
     $numero = $_POST['numero'];
-    $cep = $_POST['cep'];
+    $cep = str_replace("-", "", $_POST['cep']);
     $cidade = $_POST['cidade'];
 
 	$diretorio  = "../images/";
