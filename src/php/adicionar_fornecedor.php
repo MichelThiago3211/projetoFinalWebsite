@@ -28,7 +28,6 @@
     $idMunicipio = 1;
 
     $sql = "INSERT INTO fornecedor(complemento, numero, rua, cep, nome, telefone, email, senha, ativo, cnp, tipo, id_municipio". ($temArquivo? ', imagem' : '') . ") VALUES ('$complemento', $numero, '$rua', $cep, '$nomeCompleto', '$telefone', '$email', '$senha', 0, '$cnp', '$tipo', $idMunicipio" . ($temArquivo? ", '".$logo."'" : '') . ");";
-    echo $sql;
     $result = mysqli_query($conn, $sql);
    
     if (!$result) {
@@ -36,13 +35,8 @@
         header('Location: sobre.html');
     }
     else {
-		if($temArquivo) {
-			if (move_uploaded_file($arquivo["tmp_name"], '../'.$diretorio.$arquivo["name"])) {
-				echo "<script>alert('Imagem enviada com sucesso!');</script>";
-			}
-			else {
-				echo "<script>alert('Erro ao enviar a imagem!');</script>";
-			}
+		if ($temArquivo && !move_uploaded_file($arquivo["tmp_name"], '../'.$diretorio.$arquivo["name"])) {
+			echo "<script>alert('Erro ao enviar a imagem!');</script>";
 		}
     }
     
