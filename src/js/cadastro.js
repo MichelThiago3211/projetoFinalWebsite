@@ -52,7 +52,6 @@ const enderecoInput = document.getElementById("endereco-input")
 const sugestoesDebouncer = new Debouncer(sugerirEndereco, 500);
 
 function definirEndereco(sugestao) {
-  console.log(enderecoInput.value);
   enderecoInput.value = sugestao.formatted;
   enderecoInput.setCustomValidity("");
 	
