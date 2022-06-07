@@ -103,3 +103,13 @@ function mostrarSugestoes() {
 }
 
 enderecoInput.addEventListener("input", mostrarSugestoes);
+
+// Upload do logo
+
+document.getElementById("imagem").onchange = e => {
+  let preview = document.getElementById('preview');
+  preview.src = URL.createObjectURL(e.target.files[0]);
+  preview.onload = function() {
+    URL.revokeObjectURL(preview.src);
+  }
+}
