@@ -57,13 +57,10 @@ function definirEndereco(sugestao) {
   
 	console.log(sugestao);
 	
-  endereco = {
-    rua: "",
-    numero: 0,
-    cidade: "",
-    cep: "",
-		estado: ""
-  }
+  document.getElementById("rua-hidden").value = sugestao.street;
+  document.getElementById("numero-hidden").value = sugestao.numero;
+  document.getElementById("cep-hidden").value = sugestao.cep;
+  document.getElementById("cidade-hidden").value = sugestao.cidade;
 }
 
 async function sugerirEndereco() {
