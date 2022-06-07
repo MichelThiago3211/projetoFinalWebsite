@@ -54,8 +54,6 @@ const sugestoesDebouncer = new Debouncer(sugerirEndereco, 500);
 function definirEndereco(sugestao) {
   enderecoInput.value = sugestao.formatted;
   enderecoInput.setCustomValidity("");
-  
-	console.log(sugestao);
 	
   document.getElementById("rua-hidden").value = sugestao.street;
   document.getElementById("numero-hidden").value = sugestao.numero;
