@@ -59,7 +59,6 @@ function definirEndereco(sugestao) {
   document.getElementById("numero-hidden").value = sugestao.housenumber;
   document.getElementById("cep-hidden").value = sugestao.postcode;
   document.getElementById("cidade-hidden").value = sugestao.city;
-  document.getElementById("estado-hidden").value = sugestao.county;
 }
 
 async function sugerirEndereco() {
