@@ -42,11 +42,12 @@
    
     if (!$result) {
         echo  "<script>alert('Não foi possível conectar ao Banco de Dados!');</script>";
-        header('Location: sobre.html');
+        header('Location: ../cadastro.php');
     }
     else {
-		if ($temArquivo && !move_uploaded_file($arquivo["tmp_name"], '../'.$diretorio.$arquivo["name"])) {
+		if ($temArquivo && !move_uploaded_file($arquivo["tmp_name"], '../'.$logo)) {
 			echo "<script>alert('Erro ao enviar a imagem!');</script>";
 		}
+        header('Location: ../catalogo.php');
     }
 ?>

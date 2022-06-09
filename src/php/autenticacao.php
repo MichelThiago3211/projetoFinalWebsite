@@ -7,7 +7,7 @@
 	
 	$sql = "SELECT * FROM fornecedor WHERE (email='$email') AND (senha='$senha')";
 
-	$resultado = mysqli_query($conn, $sql);
+	$resultado = mysqli_query($conexao, $sql);
 	$linha = mysqli_num_rows($resultado);
 
     var_dump($linha);
