@@ -7,20 +7,22 @@
 	
 	$sql = "SELECT * FROM fornecedor WHERE (email='$email') AND (senha='$senha')";
 
-	$result = mysqli_query($conn, $sql);
-	$row = mysqli_num_rows($result);
+	$resultado = mysqli_query($conn, $sql);
+	$linha = mysqli_num_rows($resultado);
 
-	if ($row > 0)
+    var_dump($linha);
+
+	if ($linha > 0)
 	{
 		// cria sessão
 		session_start();
-		$_SESSION['usuario'] = $user;
-		$_SESSION['senha'] = $password;
-		header('Location: ../sobre.html');
+		$_SESSION['email'] = $email;
+		$_SESSION['senha'] = $senha;
+		header('Location: ../catalogo.php');
 	}
 	else
 	{
 		// volta para a tela de login
-		header('Location: login.html');
+		header('Location: ../login.php');
 	}
 ?>

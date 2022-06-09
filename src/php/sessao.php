@@ -2,23 +2,15 @@
 	// conexão
 	include_once "conexao.php";
 
-	$conn = mysqli_connect($localhost, $user, $password, $banco);
-
-	if (!$conn)
-	{
-		echo  "<script>alert('Não foi possível conectar ao Banco de Dados!');</script>";
-		header('Location: logout.php');
-	}			
-
 	// abre sessão
 	session_start();
-	if ((!isset($_SESSION["usuario"])) || (!isset($_SESSION["senha"])))
+	if ((!isset($_SESSION["email"])) || (!isset($_SESSION["senha"])))
 	{
-		header("Location: login.html");
+		header("Location: ../login.php");
 	}
 	else
 	{
-		$usuario = $_SESSION["usuario"];
+		$email = $_SESSION["email"];
 		$senha = $_SESSION["senha"];
 	}
 ?>
