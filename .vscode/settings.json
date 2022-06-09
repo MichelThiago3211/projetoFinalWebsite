@@ -16,5 +16,6 @@
     "liveSassCompile.settings.watchOnLaunch": true,
     "liveSassCompile.settings.showOutputWindowOn": "Error",
     "javascript.format.semicolons": "insert",
-    "javascript.preferences.quoteStyle": "double"
+    "javascript.preferences.quoteStyle": "double",
+	"editor.insertSpaces": true,
 }
