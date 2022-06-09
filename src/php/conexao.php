@@ -4,9 +4,9 @@
   $senha = "12345";
   $banco = "projeto_ms";
 
-  $conn = mysqli_connect($endereco, $usuario, $senha, $banco);
+  $conexao = mysqli_connect($endereco, $usuario, $senha, $banco);
 
-  if (!$conn) {
+  if (!$conexao) {
     echo "<script>alert('Não foi possível conectar ao banco de dados.');</script>";
   }
 ?>

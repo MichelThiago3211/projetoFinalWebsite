@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo</title>
-        
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/catalogo.css">
 
@@ -17,25 +17,6 @@
     <?php include "_header.php"; ?>
 
     <main>
-        <div id="catalogo">
-            <div id="catalogo-fs">
-                <h1>Catálogo</h1>
-                <div id="catalogo-fs-produtos">
-                    <?php
-                        $sql = "SELECT * FROM produtos";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<div class='produto'>";
-                            echo "<img src='img/produtos/" . $row['img'] . "' alt='" . $row['nome'] . "'>";
-                            echo "<h2>" . $row['nome'] . "</h2>";
-                            echo "<p>" . $row['descricao'] . "</p>";
-                            echo "<p>R$ " . $row['preco'] . "</p>";
-                            echo "</div>";
-                        }
-                    ?>
-                </div>
-            </div>
-        </div>
     </main>
 </body>
 </html>
