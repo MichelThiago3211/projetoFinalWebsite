@@ -24,12 +24,12 @@
     $logo       = $diretorio.$arquivo['name'];
 
     $sql = "SELECT id_municipio FROM municipio WHERE (nome='$cidade')";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conexao, $sql);
     
     if(is_null(mysqli_fetch_array($result, MYSQLI_NUM))){
         
         $sql = "INSERT INTO MUNICIPIO (NOME,ESTADO) VALUES ('$cidade', 'RS');";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($conexao, $sql);
 
     } 
     
@@ -38,7 +38,7 @@
     var_dump($idMunicipio);
     $sql = "INSERT INTO fornecedor(complemento, numero, rua, cep, nome, telefone, email, senha, ativo, cnp, tipo, id_municipio". ($temArquivo? ', imagem' : '') . ") VALUES ('$complemento', $numero, '$rua', $cep, '$nomeCompleto', '$telefone', '$email', '$senha', 0, '$cnp', '$tipo', $idMunicipio " . ($temArquivo? ", '".$logo."'" : '') . ");";
     echo $sql;
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conexao, $sql);
    
     if (!$result) {
         echo  "<script>alert('Não foi possível conectar ao Banco de Dados!');</script>";
