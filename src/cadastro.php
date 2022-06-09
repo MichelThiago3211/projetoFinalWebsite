@@ -74,6 +74,7 @@
                     <input type="hidden" name="numero" id="numero-hidden">
                     <input type="hidden" name="cep" id="cep-hidden">
                     <input type="hidden" name="cidade" id="cidade-hidden">
+                    <input type="hidden" name="estado" id="estado-hidden">
                     <input type="text" id="endereco-input" name="endereco" autocomplete="off" required>
                     <label>Endereço</label>
                     <div class="sugestoes"></div>
