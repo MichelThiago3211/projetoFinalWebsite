@@ -1,0 +1,22 @@
+@use 'global'
+
+header
+    @extend %centro-col
+    gap: 15px
+    color: white
+    background: linear-gradient(140deg, rgba(126,191,85,1) 0%, rgba(77,149,140,1) 100%)
+    text-align: center
+
+    p
+        width: 400px
+        font-size: var(--fonte-media)
+
+nav
+    display: flex
+    gap: 20px
+    margin-top: 20px
+
+    .botao
+        width: 150px
+        @include global.borda(white, null)
+        background-color: transparent

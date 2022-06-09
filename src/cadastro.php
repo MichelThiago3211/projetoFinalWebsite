@@ -17,7 +17,7 @@
     <script src="js/cadastro.js" type="module"></script>
 </head>
 <body>
-    <?php include "header.html"; ?>
+    <?php include "_lateral_forms.html"; ?>
 
     <main>
         <form enctype="multipart/form-data" action="php/adicionar_fornecedor.php" method="post">
