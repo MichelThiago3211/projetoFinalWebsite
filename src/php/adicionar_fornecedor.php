@@ -49,6 +49,10 @@
         if ($temArquivo && !move_uploaded_file($_FILES["imagem"]["tmp_name"], '../'.$logoCaminho)) {
             echo "<script>alert('Erro ao enviar a imagem!');</script>";
         }
-        header('Location: ../login.php');
+        // Abre a sessão e redireciona para o catálogo
+        session_start();
+		$_SESSION['email'] = $email;
+		$_SESSION['senha'] = $senha;
+		header('Location: ../catalogo.php');
     }
 ?>

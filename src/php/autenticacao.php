@@ -5,11 +5,9 @@
 	$senha = $_POST['senha'];
 	
 	$sql = "SELECT * FROM fornecedor WHERE (email='$email') AND (senha='$senha')";
-
 	$resultado = mysqli_query($conexao, $sql);
-	$linha = mysqli_num_rows($resultado);
 
-	if ($linha > 0) {
+	if (mysqli_num_rows($resultado) > 0) {
 		// Cria a sessão
 		session_start();
 		$_SESSION['email'] = $email;
