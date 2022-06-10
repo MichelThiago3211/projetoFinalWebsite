@@ -1,6 +1,8 @@
 <?php
     include_once "php/sessao.php";
 
+    $nome = false;
+
     if (isset($email)) {
         $sql = "select nome, imagem from fornecedor where email='$email' && senha='$senha'";
         $resultado = mysqli_query($conexao, $sql);
@@ -23,7 +25,19 @@
         <a href="sobre_nos.php">SOBRE NÓS</a>
     </nav>
     <div id="usuario">
-        <?php echo $nome ?>
-        <img src="<?php echo $logo; ?>" alt="">
+        <?php
+            if ($nome) {
+                echo "<a href='perfil.php'>$nome";
+            }
+            else {
+                echo "<a href='login.php'>Login";
+            }
+        ?>
+        <?php
+            if (isset($logo)) {
+                echo "<img src='$logo' alt='Logo'>";
+            }
+        ?>
+        </a>
     </div>
 </header>
