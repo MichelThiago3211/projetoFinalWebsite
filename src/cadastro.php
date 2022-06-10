@@ -99,7 +99,7 @@
             </fieldset>
 
             <fieldset id="botoes">
-                <input type="submit" class="botao" value="Cadastre-se">
+                <input type="submit" class="botao" value="Cadastrar">
                 <a href="login.php">Já possue uma conta?</a>
             </fieldset>
         </form>

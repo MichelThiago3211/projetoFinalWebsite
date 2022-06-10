@@ -22,7 +22,7 @@
     <nav>
         <a href="cadastro.php">HOME</a>
         <a href="catalogo.php">CATÁLOGO</a>
-        <a href="sobre_nos.php">SOBRE NÓS</a>
+        <a href="sobre.html">SOBRE NÓS</a>
     </nav>
     <div id="usuario">
         <?php
