@@ -3,8 +3,7 @@
 
 	// Abre a sessão
 	session_start();
-	if (isset($_SESSION["email"]) && isset($_SESSION["senha"])) {
-		$email = $_SESSION["email"];
-		$senha = $_SESSION["senha"];
+	if (isset($_SESSION["id_fornecedor"])) {
+		$idSessao = $_SESSION["id_fornecedor"];
 	}
 ?>

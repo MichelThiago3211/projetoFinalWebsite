@@ -1,10 +1,8 @@
 <?php
     include_once "php/sessao.php";
 
-    $nome = false;
-
-    if (isset($email)) {
-        $sql = "select nome, imagem from fornecedor where email='$email' && senha='$senha'";
+    if (isset($idSessao)) {
+        $sql = "select nome, imagem from fornecedor where id_fornecedor='$idSessao'";
         $resultado = mysqli_query($conexao, $sql);
 
         $linha = mysqli_fetch_array($resultado, MYSQLI_NUM);
@@ -22,20 +20,16 @@
     <nav>
         <a href="cadastro.php">HOME</a>
         <a href="catalogo.php">CATÁLOGO</a>
-        <a href="sobre.html">SOBRE NÓS</a>
+        <a href="sobre.php">SOBRE NÓS</a>
     </nav>
     <div id="usuario">
         <?php
-            if ($nome) {
-                echo "<a href='perfil.php'>$nome";
+            if (isset($idSessao)) {
+                echo "<a href='perfil.php?id_fornecedor=$idSessao'>$nome";
+                echo "<img src='$logo' alt='Logo'>";
             }
             else {
                 echo "<a href='login.php'>Login";
-            }
-        ?>
-        <?php
-            if (isset($logo)) {
-                echo "<img src='$logo' alt='Logo'>";
             }
         ?>
         </a>

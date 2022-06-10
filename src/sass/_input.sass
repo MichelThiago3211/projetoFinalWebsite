@@ -8,7 +8,7 @@ div.campo
     background-color: white
 
     input
-        --outline-color: black
+        --contorno: black
 
         background-color: inherit
         width: 100%
@@ -17,15 +17,15 @@ div.campo
         box-sizing: border-box
         padding: 10px
         font-size: 16px
-        border: 1px solid var(--outline-color)
+        border: 1px solid var(--contorno)
 
         transition: box-shadow 200ms linear, border-color 200ms linear
 
         &:invalid
-            --outline-color: crimson
+            --contorno: crimson
 
         &:focus
-            box-shadow: inset 0px -3px 0px 0px var(--outline-color)
+            box-shadow: inset 0px -3px 0px 0px var(--contorno)
             outline: none
 
     label
@@ -36,15 +36,17 @@ div.campo
         background-color: inherit
 
 select
-    @include global.borda(black, var(--raio-borda))
+    border: 1px solid black
+    border-radius: global.$raio
     background-color: #ddd
     height: 40px
-    font-size: var(--fonte-pequena)
+    font-size: global.$fonte-sm
     padding: 5px
 
 .imagem-input
     @extend %centro
-    @include global.borda(black, var(--raio-borda))
+    border: 1px solid black
+    border-radius: global.$raio
     height: 160px
     width: 160px
     cursor: pointer

@@ -1,6 +1,4 @@
-@mixin borda($cor, $raio: 0)
-    border: 1px solid $cor
-    border-radius: $raio
+@import 'vars'
 
 %centro
     display: flex
@@ -21,12 +19,6 @@
     word-wrap: break-word
     overflow: hidden
     display: inline-block
-
-:root
-    --fonte-pequena: 16px
-    --fonte-media: 20px
-    --verde: #67ac6e
-    --raio-borda: 8px
 
 *, *::before, *::after
     box-sizing: border-box

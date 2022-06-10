@@ -35,11 +35,11 @@ form
 
 .botao
     border: none
-    border-radius: var(--raio-borda)
-    background-color: var(--verde)
+    border-radius: global.$raio
+    background-color: global.$cor-primaria
     color: white
     text-align: center
-    font-size: var(--fonte-media)
+    font-size: global.$fonte-md
     cursor: pointer
     padding: 10px
 
@@ -69,7 +69,8 @@ fieldset
 
 #logo
     @extend %centro
-    @include global.borda(black, var(--raio-borda))
+    border: 1px solid black
+    border-radius: global.$raio
     grid-row: span 3
 
 @media (max-width: 600px)

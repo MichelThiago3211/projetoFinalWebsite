@@ -1,3 +1,23 @@
+<?php
+    @include_once "php/sessao.php";
+
+    $idGet = $_GET["id_fornecedor"];
+    
+    // Se os IDs forem iguais, o usuário é o dono do perfil
+    $dono = isset($idSessao) && $idSessao == $idGet;
+
+    // Dados do fornecedor
+    $fornecedorConsultaSql = "select * from fornecedor where id_fornecedor='$idGet'";
+    $fornecedorConsultaRes = mysqli_query($conexao, $fornecedorConsultaSql);
+    $dados = mysqli_fetch_array($fornecedorConsultaRes, MYSQLI_NUM);
+
+    $nome = $dados[1];
+    $imagem = $dados[11];
+    if ($imagem == null) {
+        $imagem = "img/perfil.png";
+    }  
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +37,16 @@
     <?php include "_header.php"; ?>
 
     <main>
+        <div id="dados">
+            <h2><?php echo $nome; ?></h2>
+            <img id="logo" src="<?php echo $imagem; ?>" alt="<?php echo $nome; ?>"></h2>
+        </div>
+        <div id="local">
+            <h1>Local</h1>
+        </div>
+        <div id="pecas">
+            <h1>Pecas</h1>
+        </div>
     </main>
 </body>
 </html>
