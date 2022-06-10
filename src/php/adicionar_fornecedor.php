@@ -2,7 +2,7 @@
     include_once "conexao.php";
 
     // Dados básicos
-    $tipo = ($_POST['tipo']=='brecho'?0:1);
+    $tipo = ($_POST['tipo'] == 'brecho'? 0 : 1);
     $nomeCompleto = $_POST['nome'] . " " . $_POST['sobrenome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
@@ -18,8 +18,8 @@
 
     // Logo
     $diretorio  = "../images/";
-    $temArquivo = $_FILES["imagem"]['name'] != '';
-    $logoCaminho = $diretorio . $cnp . "." . pathinfo($_FILES["imagem"]['name'], PATHINFO_EXTENSION);
+    $temImagem = $_FILES["imagem"]['name'] != '';
+    $imagemCaminho = $diretorio . $cnp . "." . pathinfo($_FILES["imagem"]['name'], PATHINFO_EXTENSION);
 
     //  Busca a cidade no banco de dados
     $cidadeConsultaSql = "SELECT id_municipio FROM municipio WHERE (nome='$cidade')";
@@ -37,7 +37,7 @@
     $idMunicipio = mysqli_fetch_array($cidadeRes, MYSQLI_NUM)[0];      
     
     // Insere o fornecedor no banco de dados
-    $fornecedorInserirSql = "INSERT INTO fornecedor(complemento, numero, rua, cep, nome, telefone, email, senha, ativo, cnp, tipo, id_municipio". ($temArquivo? ', imagem' : '') . ") VALUES ('$complemento', $numero, '$rua', $cep, '$nomeCompleto', '$telefone', '$email', '$senha', 0, '$cnp', '$tipo', $idMunicipio " . ($temArquivo? ", '" . $logoCaminho . "'" : '') . ");";
+    $fornecedorInserirSql = "INSERT INTO fornecedor(complemento, numero, rua, cep, nome, telefone, email, senha, ativo, cnp, tipo, id_municipio". ($temImagem? ', imagem' : '') . ") VALUES ('$complemento', $numero, '$rua', $cep, '$nomeCompleto', '$telefone', '$email', '$senha', 0, '$cnp', '$tipo', $idMunicipio " . ($temImagem? ", '" . $imagemCaminho . "'" : '') . ");";
     $fornecedorInserirRes = mysqli_query($conexao, $fornecedorInserirSql);
    
     // Verifica se ocorreu algum erro
@@ -46,7 +46,7 @@
         header('Location: ../cadastro.php');
     }
     else {
-        if ($temArquivo && !move_uploaded_file($_FILES["imagem"]["tmp_name"], '../'.$logoCaminho)) {
+        if ($temImagem && !move_uploaded_file($_FILES["imagem"]["tmp_name"], '../'.$imagemCaminho)) {
             echo "<script>alert('Erro ao enviar a imagem!');</script>";
         }
         // Abre a sessão e redireciona para o catálogo
