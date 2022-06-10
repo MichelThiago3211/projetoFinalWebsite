@@ -37,7 +37,12 @@
     $idMunicipio = mysqli_fetch_array($cidadeRes, MYSQLI_NUM)[0];      
     
     // Insere o fornecedor no banco de dados
-    $fornecedorInserirSql = "INSERT INTO fornecedor(complemento, numero, rua, cep, nome, telefone, email, senha, ativo, cnp, tipo, id_municipio". ($temImagem? ', imagem' : '') . ") VALUES ('$complemento', $numero, '$rua', $cep, '$nomeCompleto', '$telefone', '$email', '$senha', 0, '$cnp', '$tipo', $idMunicipio " . ($temImagem? ", '" . $imagemCaminho . "'" : '') . ");";
+    $fornecedorInserirSql = 
+        "INSERT INTO fornecedor(complemento, numero, rua, cep, nome, telefone, email, senha, ativo, cnp, tipo, id_municipio".
+        ($temImagem? ', imagem)' : ')').
+        "VALUES ('$complemento', $numero, '$rua', $cep, '$nomeCompleto', '$telefone', '$email', '$senha', 0, '$cnp', '$tipo', $idMunicipio".
+        ($temImagem? ", '$imagemCaminho')" : ')');
+    
     $fornecedorInserirRes = mysqli_query($conexao, $fornecedorInserirSql);
    
     // Verifica se ocorreu algum erro
