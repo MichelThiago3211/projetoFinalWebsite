@@ -13,10 +13,10 @@
 
 <link href="css/header.css" rel="stylesheet">
 <header>
-    <div id="logo">
+    <a id="logo" href="cadastro.php">
         <img src="img/logo_branco.png" alt="Logo">
         <h1>Site Supremo</h1>
-    </div>
+    </a>
     <nav>
         <a href="cadastro.php">HOME</a>
         <a href="catalogo.php">CATÁLOGO</a>
@@ -26,7 +26,9 @@
         <?php
             if (isset($idSessao)) {
                 echo "<a href='perfil.php?id_fornecedor=$idSessao'>$nome";
-                echo "<img src='$logo' alt='Logo'>";
+                if ($logo != null) {
+                    echo "<img src='$logo' alt='Logo'>";
+                }
             }
             else {
                 echo "<a href='login.php'>Login";

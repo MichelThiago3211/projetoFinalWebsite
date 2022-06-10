@@ -3,7 +3,7 @@
 
     // Dados básicos
     $tipo = ($_POST['tipo'] == 'brecho'? 0 : 1);
-    $nomeCompleto = $_POST['nome'] . " " . $_POST['sobrenome'];
+    $nomeCompleto = $tipo == 1? $_POST['nome'] : ($_POST['nome'] . " " . $_POST['sobrenome']);
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $cnp = $_POST['cnp'];
@@ -18,8 +18,11 @@
 
     // Logo
     $diretorio  = "../imagens/fornecedor/";
-    $temImagem = $_FILES["imagem"]['name'] != '';
-    $imagemCaminho = $diretorio . $cnp . "." . pathinfo($_FILES["imagem"]['name'], PATHINFO_EXTENSION);
+    $logo = $_FILES['imagem'];
+    $temImagem = $logo['name'] != '' && $logo['error'] == 0;
+    if ($temImagem) {
+        $imagemCaminho = $diretorio . $cnp . "." . pathinfo($logo['name'], PATHINFO_EXTENSION);
+    }
 
     //  Busca a cidade no banco de dados
     $cidadeConsultaSql = "SELECT id_municipio FROM municipio WHERE (nome='$cidade')";
@@ -42,7 +45,6 @@
         ($temImagem? ', imagem)' : ')').
         "VALUES ('$complemento', $numero, '$rua', $cep, '$nomeCompleto', '$telefone', '$email', '$senha', 0, '$cnp', '$tipo', $idMunicipio".
         ($temImagem? ", '$imagemCaminho')" : ')');
-    
     $fornecedorInserirRes = mysqli_query($conexao, $fornecedorInserirSql);
    
     // Verifica se ocorreu algum erro
@@ -51,7 +53,7 @@
         header('Location: ../cadastro.php');
     }
     else {
-        if ($temImagem && !move_uploaded_file($_FILES["imagem"]["tmp_name"], '../'.$imagemCaminho)) {
+        if ($temImagem && !move_uploaded_file($logo["tmp_name"], '../'.$imagemCaminho)) {
             echo "<script>alert('Erro ao enviar a imagem!');</script>";
         }
         // Autenticação

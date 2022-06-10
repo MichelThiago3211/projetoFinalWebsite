@@ -33,13 +33,13 @@
                     </select>
                 </div>
                 <!-- Nome -->
-                <div class="campo">
+                <div class="campo" id="nome">
                     <input type="text" name="nome" autocomplete="given-name" autofocus required>
                     <label>Nome</label>
                 </div>
                 <!-- Sobrenome -->
-                <div class="campo">
-                    <input type="text" name="sobrenome" autocomplete="family-name" required>
+                <div class="campo" id="sobrenome">
+                    <input type="text" name="sobrenome" autocomplete="family-name">
                     <label>Sobrenome</label>
                 </div>
                 <div id="dados-imagem">

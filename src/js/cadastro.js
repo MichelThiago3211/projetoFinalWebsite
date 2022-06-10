@@ -4,26 +4,38 @@ import { Debouncer } from "./debounce.js";
 
 // CPF/CNPJ
 
-const cnpInput = document.querySelector("#cnp > input");
-const cnpLabel = document.querySelector("#cnp > label");
+const nomeInput = document.getElementById("nome");
+const sobrenomeInput = document.getElementById("sobrenome");
 
-function atualizarCnpInput() {
+const cnpInput = document.getElementById("cnp");
+
+function atualizarTipo() {
   const value = document.getElementById("tipo").value;
 
   if (value === "brecho") {
-    cnpLabel.innerHTML = "CPF";
-    cnpInput.pattern = "\\d{11}"
-    cnpInput.placeholder = "___.___.___-__";
+    cnpInput.children[1].innerHTML = "CPF";
+    cnpInput.children[0].pattern = "\\d{11}"
+    cnpInput.children[0].placeholder = "___.___.___-__";
+
+    nomeInput.children[1].innerHTML = "Nome";
+    sobrenomeInput.children[0].required = true;
+    sobrenomeInput.hidden = false;
+    nomeInput.style.gridColumn = "initial";
   }
   else {
-    cnpLabel.innerHTML = "CNPJ";
-    cnpInput.pattern = "\\d{14}"
-    cnpInput.placeholder = "__.___.___/0001-__";
+    cnpInput.children[1].innerHTML = "CNPJ";
+    cnpInput.children[0].pattern = "\\d{14}"
+    cnpInput.children[0].placeholder = "__.___.___/0001-__";
+
+    nomeInput.children[1].innerHTML = "Nome da instituição";
+    sobrenomeInput.children[0].required = false;
+    sobrenomeInput.hidden = true;
+    nomeInput.style.gridColumn = "span 2";
   }
 };
 
-document.getElementById("tipo").addEventListener("change", atualizarCnpInput);
-atualizarCnpInput();
+document.getElementById("tipo").addEventListener("change", atualizarTipo);
+atualizarTipo();
 
 // Confirmação da senha
 
@@ -70,7 +82,8 @@ async function sugerirEndereco() {
   else {
     const url = ENDERECO_API_URL.replace("#", termo);
 
-		const sugestoes = (await (await fetch(url)).json()).features || [];
+		let sugestoes = (await (await fetch(url)).json()).features || [];
+    sugestoes = sugestoes.filter(sugestao => sugestao.properties.result_type === "building");
 
 		if (sugestoes.length === 0) {
 			sugestoesEndereco.innerHTML = "<span>Nenhum resultado disponível.</span>";
