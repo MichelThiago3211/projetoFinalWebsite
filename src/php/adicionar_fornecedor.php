@@ -17,7 +17,7 @@
     $cidade = $_POST['cidade'];
 
     // Logo
-    $diretorio  = "../images/";
+    $diretorio  = "../imagens/fornecedor/";
     $temImagem = $_FILES["imagem"]['name'] != '';
     $imagemCaminho = $diretorio . $cnp . "." . pathinfo($_FILES["imagem"]['name'], PATHINFO_EXTENSION);
 
