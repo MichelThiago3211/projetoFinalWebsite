@@ -1,4 +1,5 @@
 @use "global"
+@use "input"
 
 body
     display: grid
@@ -6,7 +7,7 @@ body
     margin: 0
     padding: 0
     min-height: 100vh
-    background-color: #e5f3ef
+    background-color: global.$cor-clara
 
 main
     display: grid
@@ -14,9 +15,8 @@ main
     padding: 30px 200px
     gap: 20px
 
-main > *
+main > div
     background-color: #fff
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1)
     border-radius: 20px
     @extend %centro
 
@@ -35,3 +35,4 @@ main > *
         object-fit: cover
         border: 1px solid black
         border-radius: 10px
+        margin: 20px 0
