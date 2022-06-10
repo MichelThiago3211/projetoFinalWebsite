@@ -5,8 +5,8 @@
     $tipo = ($_POST['tipo']=='brecho'?0:1);
     $nomeCompleto = $_POST['nome'] . " " . $_POST['sobrenome'];
     $email = $_POST['email'];
-	$telefone = $_POST['telefone'];
-	$cnp = $_POST['cnp'];
+    $telefone = $_POST['telefone'];
+    $cnp = $_POST['cnp'];
     $complemento = $_POST['complemento'];
     $senha = $_POST['senha'];
 
@@ -17,7 +17,7 @@
     $cidade = $_POST['cidade'];
 
     // Logo
-	$diretorio  = "../images/";
+    $diretorio  = "../images/";
     $temArquivo = $_FILES["imagem"]['name'] != '';
     $logoCaminho = $diretorio . $cnp . "." . pathinfo($_FILES["imagem"]['name'], PATHINFO_EXTENSION);
 
@@ -26,7 +26,7 @@
     $cidadeRes = mysqli_query($conexao, $cidadeConsultaSql);  
     
     // Se a cidade não existir, insere ela no banco de dados
-    if(is_null(mysqli_fetch_array($cidadeRes, MYSQLI_NUM))){
+    if(is_null(mysqli_fetch_array($cidadeRes, MYSQLI_NUM))) {
         $cidadeInserirSql = "INSERT INTO MUNICIPIO (NOME,ESTADO) VALUES ('$cidade', 'RS')";
         mysqli_query($conexao, $cidadeInserirSql);
     }
@@ -46,9 +46,9 @@
         header('Location: ../cadastro.php');
     }
     else {
-		if ($temArquivo && !move_uploaded_file($_FILES["imagem"]["tmp_name"], '../'.$logoCaminho)) {
-			echo "<script>alert('Erro ao enviar a imagem!');</script>";
-		}
+        if ($temArquivo && !move_uploaded_file($_FILES["imagem"]["tmp_name"], '../'.$logoCaminho)) {
+            echo "<script>alert('Erro ao enviar a imagem!');</script>";
+        }
         header('Location: ../login.php');
     }
 ?>
