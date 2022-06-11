@@ -56,7 +56,7 @@ confirmarSenhaInput.addEventListener("input", testarConfirmacaoSenha);
 
 // Autopreenchimento do endereço
 
-const ENDERECO_API_URL = "https://api.geoapify.com/v1/geocode/autocomplete?text=#&apiKey=f62b5fe78b08493c995352735ed8bfd3";
+const ENDERECO_API_URL = "https://api.geoapify.com/v1/geocode/autocomplete?text=#&apiKey=2d75276c11f0447795135731bb13d08b";
 
 const sugestoesEndereco = document.querySelector("#endereco > div.sugestoes");
 const enderecoInput = document.getElementById("endereco-input")
