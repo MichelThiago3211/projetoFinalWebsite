@@ -17,7 +17,7 @@
     <script src="js/cadastro.js" type="module"></script>
 </head>
 <body>
-    <?php include "_lateral_forms.html"; ?>
+    <?php include "_lateral.html"; ?>
 
     <main>
         <form enctype="multipart/form-data" action="php/adicionar_fornecedor.php" method="post">
@@ -39,14 +39,14 @@
                 </div>
                 <!-- Sobrenome -->
                 <div class="campo" id="sobrenome">
-                    <input type="text" name="sobrenome" autocomplete="family-name">
+                    <input type="text" name="sobrenome" autocomplete="family-name" maxlength=30>
                     <label>Sobrenome</label>
                 </div>
                 <div id="dados-imagem">
                     <div class="campos">
                         <!-- E-mail -->
                         <div class="campo">
-                            <input type="text" name="email" pattern=".+@\w+\.\w[\w\.]*" placeholder="exemplo@email.com" autocomplete="email" required>
+                            <input type="text" name="email" pattern=".+@\w+\.\w[\w\.]*" placeholder="exemplo@email.com" autocomplete="email" maxlength=254 required>
                             <label>E-mail</label>
                         </div>
                         <!-- Telefone -->
@@ -65,24 +65,14 @@
                         <img id="preview">
                         Inserir imagem
                     </label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1048576"/> <!-- 1MB -->
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- 1MB / elemento exigido pelo PHP -->
                     <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg">
                 </div>
-                <!-- Endereço -->
-                <div class="campo" id="endereco">
-                    <input type="hidden" name="rua" id="rua-hidden">
-                    <input type="hidden" name="numero" id="numero-hidden">
-                    <input type="hidden" name="cep" id="cep-hidden">
-                    <input type="hidden" name="cidade" id="cidade-hidden">
-                    <input type="text" id="endereco-input" name="endereco" autocomplete="off" required>
-                    <label>Endereço</label>
-                    <div class="sugestoes"></div>
-                </div>
-                <!-- Complemento -->
-                <div class="campo">
-                    <input type="text" name="complemento" autocomplete="none">
-                    <label>Complemento</label>
-                </div>
+            </fieldset>
+
+            <!-- Endereço -->
+            <fieldset id="endereco-fs">
+                <?php include "_endereco.html"; ?>
             </fieldset>
 
             <fieldset id="senha-fs">

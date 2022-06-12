@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include "_lateral_forms.html"; ?>
+    <?php include "_lateral.html"; ?>
 
     <main>
         <form action="php/autenticacao.php" method="post">

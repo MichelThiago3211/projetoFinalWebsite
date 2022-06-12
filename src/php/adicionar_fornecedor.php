@@ -1,62 +1,91 @@
 <?php
     include_once "conexao.php";
 
-    // Dados básicos
+    // Informações básicas
     $tipo = ($_POST['tipo'] == 'brecho'? 0 : 1);
     $nomeCompleto = $tipo == 1? $_POST['nome'] : ($_POST['nome'] . " " . $_POST['sobrenome']);
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $cnp = $_POST['cnp'];
-    $complemento = $_POST['complemento'];
     $senha = $_POST['senha'];
 
     // Endereço    
+    $cep = $_POST['cep'];
+    $cidade = $_POST['cidade'];
+    $uf = $_POST['uf'];
     $rua = $_POST['rua'];
     $numero = $_POST['numero'];
-    $cep = str_replace("-", "", $_POST['cep']);
-    $cidade = $_POST['cidade'];
+    $referencia = $_POST['referencia'];
+    $complemento = $_POST['complemento'];
 
     // Logo
-    $diretorio  = "../imagens/fornecedor/";
     $logo = $_FILES['imagem'];
     $temImagem = $logo['name'] != '' && $logo['error'] == 0;
     if ($temImagem) {
-        $imagemCaminho = $diretorio . $cnp . "." . pathinfo($logo['name'], PATHINFO_EXTENSION);
+        $extensao = pathinfo($logo['name'], PATHINFO_EXTENSION);
+        $imagemCaminho = "../imagens/fornecedor/$cnp.$extensao";
     }
 
-    //  Busca a cidade no banco de dados
-    $cidadeConsultaSql = "SELECT id_municipio FROM municipio WHERE (nome='$cidade')";
-    $cidadeRes = mysqli_query($conexao, $cidadeConsultaSql);  
-    
-    // Se a cidade não existir, insere ela no banco de dados
-    if(is_null(mysqli_fetch_array($cidadeRes, MYSQLI_NUM))) {
-        $cidadeInserirSql = "INSERT INTO MUNICIPIO (NOME,ESTADO) VALUES ('$cidade', 'RS')";
-        mysqli_query($conexao, $cidadeInserirSql);
-    }
+    $idMunicipio = buscarIdCidade($cidade, $uf);
+    $senhaCriptografada = hash("sha256", $senha);
 
-    // Repete a query para atualizar os resultados
-    $cidadeRes = mysqli_query($conexao, $cidadeConsultaSql);
-    // Salva o ID da cidade
-    $idMunicipio = mysqli_fetch_array($cidadeRes, MYSQLI_NUM)[0];      
-    
     // Insere o fornecedor no banco de dados
-    $fornecedorInserirSql = 
-        "INSERT INTO fornecedor(complemento, numero, rua, cep, nome, telefone, email, senha, ativo, cnp, tipo, id_municipio".
-        ($temImagem? ', imagem)' : ')').
-        "VALUES ('$complemento', $numero, '$rua', $cep, '$nomeCompleto', '$telefone', '$email', '$senha', 0, '$cnp', '$tipo', $idMunicipio".
-        ($temImagem? ", '$imagemCaminho')" : ')');
-    $fornecedorInserirRes = mysqli_query($conexao, $fornecedorInserirSql);
+    $stm = $conexao->prepare("INSERT INTO fornecedor(nome, telefone, email, senha, cnp, tipo, ativo) VALUES (?, ?, ?, ?, ?, ?, 0)");
+    $stm->bind_param("sssssi", $nomeCompleto, $telefone, $email, $senhaCriptografada, $cnp, $tipo);
+    $stm->execute();
+
+    $idFornecedor = $stm->insert_id;
+
+    // Adiciona a imagem do fornecedor
+    if ($temImagem) {
+        $stm = $conexao->prepare("UPDATE fornecedor SET imagem = ? WHERE id_fornecedor = ?");
+        $stm->bind_param("ss", $imagemCaminho, $idFornecedor);
+        $stm->execute();
+    }
    
     // Verifica se ocorreu algum erro
-    if (!$fornecedorInserirRes) {
-        echo  "<script>alert('Não foi possível conectar ao Banco de Dados!');</script>";
-        header('Location: ../cadastro.php');
+    if ($stm->error) {
+        echo "<script>alert('Erro ao inserir fornecedor no banco de dados');</script>";
+        header("Location: ../cadastro.php");
     }
-    else {
-        if ($temImagem && !move_uploaded_file($logo["tmp_name"], '../'.$imagemCaminho)) {
-            echo "<script>alert('Erro ao enviar a imagem!');</script>";
+    
+    if ($temImagem) {
+        $movido = move_uploaded_file($logo["tmp_name"], '../'.$imagemCaminho);
+        if (!$movido) {
+            echo "<script>alert('Erro ao salvar imagem');</script>";
+            header("Location: ../cadastro.php");
         }
-        // Autenticação
-        include "autenticacao.php";
+    }
+
+    // Cria o ponto de coleta que representa a sede do fornecedor
+    $stm = $conexao->prepare("INSERT INTO ponto_coleta (horario, complemento, numero, rua, cep, id_municipio, id_fornecedor, referencia, sede) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)");
+    $stm->bind_param("ssisiiis", $horario, $complemento, $numero, $rua, $cep, $idMunicipio, $idFornecedor, $referencia);
+    $stm->execute();
+
+    // Verifica se ocorreu algum erro
+    if ($stm->error) {
+        echo "<script>alert('Erro ao inserir ponto de coleta no banco de dados');</script>";
+        header("Location: ../cadastro.php");
+    }
+
+    // Autenticação
+    include "autenticacao.php";
+
+    function buscarIdCidade($cidade, $uf) {
+        global $conexao;
+        
+        $stm = $conexao->prepare("SELECT id_municipio FROM municipio WHERE nome = ? AND estado = ?");
+        $stm->bind_param("ss", $cidade, $uf);
+        $stm->execute();
+        $res = $stm->get_result();
+        
+        if ($res->num_rows > 0) {
+            return $res->fetch_array()[0];
+        }
+
+        $stm = $conexao->prepare("INSERT INTO municipio (nome, estado) VALUES (?, ?)");
+        $stm->bind_param("ss", $cidade, $uf);
+        $stm->execute();
+        return $conexao->insert_id;
     }
 ?>

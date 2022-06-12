@@ -1,7 +1,5 @@
 "use strict";
 
-import { Debouncer } from "./debounce.js";
-
 // CPF/CNPJ
 
 const nomeInput = document.getElementById("nome");
@@ -18,6 +16,7 @@ function atualizarTipo() {
     cnpInput.children[0].placeholder = "___.___.___-__";
 
     nomeInput.children[1].innerHTML = "Nome";
+    nomeInput.children[0].setAttribute("maxlength", 69);
     sobrenomeInput.children[0].required = true;
     sobrenomeInput.hidden = false;
     nomeInput.style.gridColumn = "initial";
@@ -28,6 +27,7 @@ function atualizarTipo() {
     cnpInput.children[0].placeholder = "__.___.___/0001-__";
 
     nomeInput.children[1].innerHTML = "Nome da instituição";
+    nomeInput.children[0].setAttribute("maxlength", 100);
     sobrenomeInput.children[0].required = false;
     sobrenomeInput.hidden = true;
     nomeInput.style.gridColumn = "span 2";
@@ -53,69 +53,6 @@ function testarConfirmacaoSenha() {
 
 senhaInput.addEventListener("input", testarConfirmacaoSenha);
 confirmarSenhaInput.addEventListener("input", testarConfirmacaoSenha);
-
-// Autopreenchimento do endereço
-
-const ENDERECO_API_URL = "https://api.geoapify.com/v1/geocode/autocomplete?text=#&apiKey=2d75276c11f0447795135731bb13d08b";
-
-const sugestoesEndereco = document.querySelector("#endereco > div.sugestoes");
-const enderecoInput = document.getElementById("endereco-input")
-
-const sugestoesDebouncer = new Debouncer(sugerirEndereco, 500);
-
-function definirEndereco(sugestao) {
-  enderecoInput.value = sugestao.formatted;
-  enderecoInput.setCustomValidity("");
-	
-  document.getElementById("rua-hidden").value = sugestao.street;
-  document.getElementById("numero-hidden").value = sugestao.housenumber;
-  document.getElementById("cep-hidden").value = sugestao.postcode;
-  document.getElementById("cidade-hidden").value = sugestao.city;
-}
-
-async function sugerirEndereco() {
-  const termo = enderecoInput.value.trim();
-
-  if (termo === "") {
-    esconderSugestoes();
-  }
-  else {
-    const url = ENDERECO_API_URL.replace("#", termo);
-
-		let sugestoes = (await (await fetch(url)).json()).features || [];
-    sugestoes = sugestoes.filter(sugestao => sugestao.properties.result_type === "building");
-
-		if (sugestoes.length === 0) {
-			sugestoesEndereco.innerHTML = "<span>Nenhum resultado disponível.</span>";
-		}
-		else {
-			sugestoesEndereco.innerHTML = "";
-			for (let sugestao of sugestoes) {
-				const span = document.createElement("span");
-				span.className = "sugestao";
-				span.innerHTML = sugestao.properties.formatted;
-				span.onclick = () => {
-          definirEndereco(sugestao.properties);
-          esconderSugestoes();
-        }
-				sugestoesEndereco.append(span);
-			}
-		}
-	}
-}
-
-function esconderSugestoes() {
-  sugestoesEndereco.style.display = "none";
-}
-
-function mostrarSugestoes() {
-  enderecoInput.setCustomValidity("Endereço inválido");
-  sugestoesDebouncer.invoke();
-  sugestoesEndereco.style.display = "flex";
-  sugestoesEndereco.innerHTML = "<span>Carregando...</span>";
-}
-
-enderecoInput.addEventListener("input", mostrarSugestoes);
 
 // Upload do logo
 

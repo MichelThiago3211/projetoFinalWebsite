@@ -2,23 +2,29 @@
     include_once "php/sessao.php";
 
     if (isset($idSessao)) {
-        $sql = "select nome, imagem from fornecedor where id_fornecedor='$idSessao'";
-        $resultado = mysqli_query($conexao, $sql);
+        $stm = $conexao->prepare("select nome, imagem from fornecedor where id_fornecedor=?");
+        $stm->bind_param("i", $idSessao);
+        $stm->execute();
+        $res = $stm->get_result();
 
-        $linha = mysqli_fetch_array($resultado, MYSQLI_NUM);
-        $nome = $linha[0];
-        $logo = $linha[1];
+        if ($res->num_rows == 0) {
+            header("Location: php/logout.php");
+        }
+        
+        $valores = $res->fetch_assoc();
+        $nome = $valores["nome"];
+        $logo = $valores["imagem"];
     }
 ?>
 
 <link href="css/header.css" rel="stylesheet">
+
 <header>
     <a id="logo" href="cadastro.php">
         <img src="img/logo_branco.png" alt="Logo">
         <h1>Site Supremo</h1>
     </a>
     <nav>
-        <a href="cadastro.php">HOME</a>
         <a href="catalogo.php">CATÁLOGO</a>
         <a href="sobre.php">SOBRE NÓS</a>
     </nav>
