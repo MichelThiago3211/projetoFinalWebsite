@@ -51,7 +51,7 @@
                         </div>
                         <!-- Telefone -->
                         <div class="campo">
-                            <input type="text" name="telefone" placeholder="(__) _____-____" pattern="[0-9]{11}" autocomplete="tel-national" required>
+                            <input type="text" name="telefone" placeholder="(__) _____-____" pattern="[0-9]{10,11}" autocomplete="tel-national" required>
                             <label>Telefone</label>
                         </div>
                         <!-- CNP -->
