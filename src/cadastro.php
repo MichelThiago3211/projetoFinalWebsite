@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
     <!-- Javascript -->
+    <script src="js/file_input.js" defer></script>
     <script src="js/cadastro.js" type="module"></script>
 </head>
 <body>
