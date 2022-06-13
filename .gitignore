@@ -1,3 +1,4 @@
-src/css
+*.css
+*.css.map
 **/.sass-cache
 .env
