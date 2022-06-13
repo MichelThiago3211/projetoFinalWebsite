@@ -32,7 +32,7 @@
             </fieldset>
             <fieldset id="botoes">
                 <input type="submit" class="botao" value="Entrar">
-                <a href="cadastro.php">Não possue uma conta?</a>
+                <a href="cadastro">Não possue uma conta?</a>
             </fieldset>
         </form>
     </main>

@@ -91,7 +91,7 @@
 
             <fieldset id="botoes">
                 <input type="submit" class="botao" value="Cadastrar">
-                <a href="login.php">Já possue uma conta?</a>
+                <a href="login">Já possue uma conta?</a>
             </fieldset>
         </form>
     </main>
