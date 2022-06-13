@@ -3,7 +3,7 @@
 
     // Asserta que haja uma sessão em aberto
     if (!isset($idSessao)) {
-        header("Location: login.php");
+        header("Location: login");
     }
 ?>
 

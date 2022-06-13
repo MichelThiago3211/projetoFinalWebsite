@@ -46,14 +46,14 @@
     // Verifica se ocorreu algum erro
     if ($stm->error) {
         echo "<script>alert('Erro ao inserir fornecedor no banco de dados');</script>";
-        header("Location: ../cadastro.php");
+        header("Location: ../cadastro");
     }
     
     if ($temImagem) {
         $movido = move_uploaded_file($logo["tmp_name"], '../'.$imagemCaminho);
         if (!$movido) {
             echo "<script>alert('Erro ao salvar imagem');</script>";
-            header("Location: ../cadastro.php");
+            header("Location: ../cadastro");
         }
     }
 
@@ -65,7 +65,7 @@
     // Verifica se ocorreu algum erro
     if ($stm->error) {
         echo "<script>alert('Erro ao inserir ponto de coleta no banco de dados');</script>";
-        header("Location: ../cadastro.php");
+        header("Location: ../cadastro");
     }
 
     // Autenticação

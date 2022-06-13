@@ -8,7 +8,7 @@
         $res = $stm->get_result();
 
         if ($res->num_rows == 0) {
-            header("Location: php/logout.php");
+            header("Location: php/logout");
         }
         
         $valores = $res->fetch_assoc();

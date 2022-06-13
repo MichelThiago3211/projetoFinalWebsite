@@ -19,9 +19,9 @@
 		// Cria a sessão
 		session_start();
 		$_SESSION['id_fornecedor'] = $res->fetch_array()[0];
-		header('Location: ../catalogo.php');
+		header('Location: ../catalogo');
 	}
 	else {
-		header('Location: ../login.php');
+		header('Location: ../login');
 	}
 ?>
