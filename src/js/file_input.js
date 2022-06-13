@@ -13,11 +13,23 @@ for (let elem of document.querySelectorAll('input[type="file"]')) {
       const tamanho = e.target.files[i].size;
 
       if (tamanho > tamanhoMaximo) {
-        alert("Imagens devem ter no máximo 1MB");
+        alert("Os arquivos devem ter no máximo " + formatarBytes(tamanhoMaximo));
         e.target.value = "";
         e.stopImmediatePropagation();
         break;
       }
     }
   });
+}
+
+function formatarBytes(bytes) {
+  if (bytes >= 1024 * 1024) {
+    return (bytes / 1024 / 1024).toFixed(2) + " MB";
+  }
+  else if (bytes >= 1024) {
+    return (bytes / 1024).toFixed(2) + " KB";
+  }
+  else {
+    return bytes + " bytes";
+  }
 }

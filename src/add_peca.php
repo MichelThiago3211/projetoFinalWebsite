@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/add_peca.css">
 
     <!-- Javascript -->
+    <script src="js/file_input.js" defer></script>
     <script src="js/add_peca.js" type="module"></script>
 
     <!-- Fontes -->
@@ -42,7 +43,7 @@
                     ?>
                     <label id="add-imagem" class="img-cont">
                         <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
-                        <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- 1MB / elemento exigido pelo PHP -->
+                        <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- 1MB -->
                         <input type="file" multiple name="imagens" id="imagens-input" accept="image/png, image/jpeg">
                     </label>
                 </div>
