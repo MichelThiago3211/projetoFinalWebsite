@@ -85,22 +85,7 @@
             <p>
                 <b>Telefone:</b> <?= $telefoneFormatado ?><br>
                 <b>Email:</b> <?= $email ?><br>
-                
-                <?php
-                    $stm = $conexao->prepare("SELECT tipo FROM fornecedor WHERE nome = ? AND email = ?");
-                    $stm->bind_param("ss", $nome, $email);
-                    $stm->execute();
-                    $res = $stm->get_result();
-
-                    $tipo = $res->fetch_array()[0];
-
-                    if($tipo == 0){
-                        $tipoEscreve = "Brechó";
-                    } else{
-                        $tipoEscreve = "Instituição";
-                    }
-                ?>
-                <b>Tipo:</b> <?= $tipoEscreve ?><br>
+                <a href="editar_peca">Adicionar peça</a>
             </p>
         </div>
 
@@ -132,7 +117,7 @@
             <h2>Peças anunciadas</h2>
             
             <?php if($dono): ?>
-                <a href="peca"><button class="botao" id="add-peca">Adicionar peça</button></a>
+                <a href="editar_peca"><button class="botao" id="add-peca">Adicionar peça</button></a>
             <?php endif; ?>         
         
         </div>

@@ -1,5 +1,6 @@
 <?php
     include_once "php/sessao.php";
+    include_once "model/ponto_coleta.php";
 
     // Asserta que haja uma sessão em aberto
     if (!isset($idSessao)) {
@@ -22,6 +23,18 @@
         $categoria->descricao = $linha["descricao"];
         $categorias[] = $categoria;
     }
+
+    // Carrega os pontos de coleta
+    $pontosColeta = array();
+    
+    $stm = $conexao->prepare("SELECT * FROM ponto_coleta WHERE id_fornecedor = ?");
+    $stm->bind_param("i", $idSessao);
+    $stm->execute();
+    $res = $stm->get_result();
+
+    while ($ponto = $res->fetch_assoc()) {
+        $pontosColeta[] = PontoColeta::ler($ponto);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -32,11 +45,11 @@
     <title>Adicionar peça</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/peca.css">
+    <link rel="stylesheet" href="css/editar_peca.css">
 
     <!-- Javascript -->
     <script src="js/file_input.js" defer></script>
-    <script src="js/peca.js" type="module"></script>
+    <script src="js/editar_peca.js" type="module"></script>
 
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,11 +76,11 @@
     </template>
 
     <main>
-        <form action="php/_peca" method="post" enctype="multipart/form-data">
+        <form action="php/adicionar_peca" method="post" enctype="multipart/form-data">
             <h1>Adicionar peça</h1>
 
             <!-- Título -->
-            <div class="campo" id="titulo">
+            <div class="campo" id="titulo" maxlength=100>
                 <input type="text" name="titulo" required>
                 <label>Título</label>
             </div>
@@ -80,7 +93,7 @@
                     Adicionar imagens
                     
                     <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- 1MB -->
-                    <input type="file" multiple name="imagens" id="imagens-input" accept="image/png, image/jpeg" required>
+                    <input type="file" multiple id="imagens-input" accept="image/png, image/jpeg" required>
                 </label>
             </div>
 
@@ -95,6 +108,7 @@
                     <?php endforeach; ?>
 
                 </select>
+                <!-- Cor -->
                 <select name="cor" required>
                     <option value="">Cor</option>
                     <option value="azul">Azul</option>
@@ -108,10 +122,12 @@
                     <option value="amarelo">Amarelo</option>
                     <option value="roxo">Roxo</option>
                 </select>
+                <!-- Tamanho -->
                 <div class="campo" id="tamanho">
-                    <input type="text" name="tamanho" required>
+                    <input type="text" name="tamanho" maxlength=3 required>
                     <label>Tamanho</label>
                 </div>
+                <!-- Preço -->
                 <div class="campo" id="preco">
                     <span>R$</span>
                     <input type="number" min="0" step="0.01" name="preco" value="0" required>
@@ -121,16 +137,16 @@
             
             <!-- Descrição -->
             <div class="campo" id="descricao">
-                <textarea type="text" name="descricao" placeholder="Descreva a peça..."></textarea>
+                <textarea type="text" name="descricao" maxlength=500 placeholder="Descreva a peça..."></textarea>
                 <label>Descrição</label>
             </div>
 
             <!-- Ponto de coleta -->
-            <select name="ponto-coleta" required>
+            <select name="ponto-coleta" id="ponto-coleta" required>
                 <option value="">Ponto de coleta</option>
                 
                 <?php foreach ($pontosColeta as $ponto): ?>
-                    <!-- TODO -->
+                    <option value="<?= $ponto->id ?>"><?= $ponto->formatar() ?></option>
                 <?php endforeach; ?>
             </select>
 

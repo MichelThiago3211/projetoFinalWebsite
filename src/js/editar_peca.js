@@ -15,7 +15,7 @@ imagemInput.addEventListener("change", e => {
   for (const imagem of e.target.files) {
 
     if (imagens.querySelectorAll(".imagem").length > 5) {
-      alert("Limite de iamgens atingido!");
+      alert("Limite de imagens atingido!");
       return;
     }
 
@@ -31,15 +31,32 @@ imagemInput.addEventListener("change", e => {
     remover.addEventListener("click", () => {
       imagens.removeChild(container);
       imagensInseridas.splice(imagensInseridas.indexOf(imagem), 1);
-      console.log(imagensInseridas);
     });
     
     // Adiciona a imagem à lista
     adicionarImagem.before(imagemElem);
     imagensInseridas.push(imagem);
-    console.log(imagensInseridas);
   }
 });
 
 const preco = document.getElementsByName("preco")[0];
-console.log(preco);
+
+// Interceptar envio do form para adicionar as imagens inseridas
+
+const form = document.getElementsByTagName("form")[0];
+
+form.addEventListener("submit", e => {
+  const dadosForm = new FormData(form);
+
+  const req = new XMLHttpRequest();
+  req.open("POST", form.action);
+  
+  for (let imagem of imagensInseridas) {
+    dadosForm.append("imagens[]", imagem);
+  }
+
+  req.send(dadosForm);
+  req.onreadystatechange = () => console.log(req.responseText);
+
+  e.preventDefault();
+});
