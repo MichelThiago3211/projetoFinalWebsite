@@ -131,7 +131,10 @@
         <div id="pecas">
             <h2>Peças anunciadas</h2>
             
-            <a href="peca"><button class="botao" id="add-peca">Adicionar peça</button></a>
+            <?php if($dono): ?>
+                <a href="peca"><button class="botao" id="add-peca">Adicionar peça</button></a>
+            <?php endif; ?>         
+        
         </div>
     </main>
 </body>
