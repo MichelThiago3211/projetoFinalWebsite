@@ -1,0 +1,97 @@
+@use "global"
+@use "base"
+@use "input"
+
+form
+    width: 750px
+    margin: 0 auto
+
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-auto-rows: min-content
+    height: auto
+    background-color: white
+    border-radius: 10px
+    padding: 20px 40px 30px 40px
+    gap: 20px
+
+#titulo
+    grid-column: span 2
+
+#dados-div
+    display: flex
+    flex-direction: column
+    gap: 20px
+
+#imagens
+    grid-column: span 2
+    display: flex
+    flex-wrap: wrap
+    gap: 10px
+
+.imagem
+    border-radius: 10px
+    height: 100px
+    position: relative
+    border-radius: global.$raio
+    overflow: hidden
+
+    img
+        height: 100%
+        width: auto
+
+    .remover
+        @extend %centro
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background-color: rgba(0, 0, 0, 0.5)
+        color: white
+        cursor: pointer
+        opacity: 0
+
+        transition: opacity .2s linear
+
+        &:hover
+            opacity: 1
+
+#add-imagem
+    @extend %centro-col
+    width: 100px
+    text-align: center
+    border: 1px solid #999
+    background-color: #ddd
+    cursor: pointer
+    color: #666
+
+.botao
+    width: 200px
+    margin: 0 auto
+    grid-column: span 2
+
+#preco
+    position: relative
+
+    span
+        position: absolute
+        height: 100%
+        padding: 0 10px
+        display: flex
+        align-items: center
+        color: #666
+    
+    input
+        padding: 10px 10px 10px 35px
+
+#descricao
+    height: 100%
+
+    & > textarea
+        height: 100%
+        width: 100%
+        resize: none
+
+#ponto-coleta
+    grid-column: span 2

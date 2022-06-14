@@ -6,7 +6,7 @@ div.campo
     font-size: 16px
     background-color: white
 
-    input
+    input, textarea
         --contorno: black
 
         background-color: inherit
@@ -66,4 +66,18 @@ select
         object-fit: cover
 
 input[type=file]
-    display: none
+    // Usa 'opacity: 0' ao invés de 'display: none' ou outro para que o input possa ter 'required'
+    opacity: 0
+    width: 0
+    height: 0
+    position: absolute
+
+.botao
+    border: none
+    border-radius: global.$raio
+    background-color: global.$cor-primaria
+    color: white
+    text-align: center
+    font-size: global.$fonte-md
+    cursor: pointer
+    padding: 10px

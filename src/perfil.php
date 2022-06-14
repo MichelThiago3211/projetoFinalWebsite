@@ -132,10 +132,11 @@
     <main>
         <div id="dados">
             <h2><?php echo $nome; ?></h2>
-            <img id="logo" src="<?php echo $imagem; ?>" alt="<?php echo $nome; ?>"></h2>
+            <img id="logo" src="<?= $imagem ?>" alt="<?= $nome ?>"></h2>
             <p>
-                <b>Telefone:</b> <?php echo $telefoneFormatado; ?><br>
-                <b>Email:</b> <?php echo $email; ?><br>
+                <b>Telefone:</b> <?= $telefoneFormatado ?><br>
+                <b>Email:</b> <?= $email ?><br>
+                <a href="peca">Adicionar peça</a>
             </p>
         </div>
 
