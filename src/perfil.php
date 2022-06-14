@@ -7,7 +7,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/perfil.css">
-
+    
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
 <?php
     include '_header.php';
     include_once "php/sessao.php";
-
+    include_once "model/ponto_coleta.php";   
     $idGet = $_GET["id_fornecedor"];
     
     // Se os IDs forem iguais, o usuário é o dono do perfil
@@ -57,42 +57,8 @@
     
     $telefoneFormatado = "(".substr($telefone, 0, 2).") ".substr($telefone, 2, 5)."-".substr($telefone, 7, 4);
 
-    // Pontos de coleta
-    class Ponto {
-        public $horario;
-        public $rua;
-        public $numero;
-        public $cep;
-        public $cidade;
-        public $estado;
-        public $referencia;
-        public $complemento;
 
-        public function localFormatado() {
-            return $this->rua.", ".$this->numero." - ".$this->cidade.", ".$this->estado;
-        }
 
-        public function renderizar() { ?>
-        <div>
-            <?php
-                if (!is_null($this->referencia)) {
-                    echo "<h3>" . $this->referencia . "</h3>";
-                }
-            ?>
-            <p>
-                <?php
-                    echo "<b>Endereço: </b>" . $this->localFormatado() . "<br>";
-                    if (!is_null($this->complemento)) {
-                        echo "<b>Complemento: </b> ".$this->complemento."<br>";
-                    }
-                    if (!is_null($this->horario)) {
-                        echo "<b>Horário de funcionamento: </b>" . $this->horario;
-                    } 
-                ?>
-            </p>
-        </div>
-    <?php }
-    }
 
     $stm = $conexao->prepare("SELECT * FROM ponto_coleta WHERE id_fornecedor = ?");
     $stm->bind_param("i", $idGet);
@@ -103,24 +69,8 @@
     $pontos = array();
 
     while ($ponto = $res->fetch_assoc()) {
-        $p = new Ponto();
-        $p->horario = $ponto["horario"];
-        $p->complemento = $ponto["complemento"];
-        $p->numero = $ponto["numero"];
-        $p->rua = $ponto["rua"];
-        $p->cep = $ponto["cep"];
-        $p->referencia = $ponto["referencia"];
-            
-        // Consulta a cidade e estado do endereço
-        $stm = $conexao->prepare("SELECT nome, estado FROM municipio WHERE id_municipio = ?");
-        $stm->bind_param("i", $ponto["id_municipio"]);
-        $stm->execute();
-        $res = $stm->get_result();
-
-        $dados = $res->fetch_assoc();
-        $p->cidade = $dados["nome"];
-        $p->estado = $dados["estado"];
-
+        $p = PontoColeta::ler($ponto);
+        
         if ($ponto["sede"]) {
             $sedes[] = $p;
         } else {
@@ -128,7 +78,6 @@
         }
     }
 ?>
-
     <main>
         <div id="dados">
             <h2><?php echo $nome; ?></h2>
@@ -136,27 +85,54 @@
             <p>
                 <b>Telefone:</b> <?= $telefoneFormatado ?><br>
                 <b>Email:</b> <?= $email ?><br>
-                <a href="peca">Adicionar peça</a>
+                
+                <?php
+                    $stm = $conexao->prepare("SELECT tipo FROM fornecedor WHERE nome = ? AND email = ?");
+                    $stm->bind_param("ss", $nome, $email);
+                    $stm->execute();
+                    $res = $stm->get_result();
+
+                    $tipo = $res->fetch_array()[0];
+
+                    if($tipo == 0){
+                        $tipoEscreve = "Brechó";
+                    } else{
+                        $tipoEscreve = "Instituição";
+                    }
+                ?>
+                <b>Tipo:</b> <?= $tipoEscreve ?><br>
             </p>
         </div>
 
         <div id="pontos">
             <iframe
             height="100%" width="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=<?php echo $_ENV["MAPS_API"] ?>&q=<?php echo urlencode($sedes[0]->localFormatado()) ?>">
+            src="https://www.google.com/maps/embed/v1/place?key=<?php echo $_ENV["MAPS_API"] ?>&q=<?php echo urlencode($sedes[0]->formatar()) ?>">
             </iframe>
             <div id="pontos-lista">
                 <h2>Sede</h2>
-                <?php
-                    foreach ($sedes as $p) {
-                        $p->renderizar();
-                    }
-                ?>
+                
+                <?php foreach ($sedes as $p): ?>
+                    <p><b>Endereço:</b> <?= $p->formatar()?></p>
+                <?php endforeach; ?>
+                    
                 <h2>Pontos de coleta</h2>
-                </div>
+                    
+                <?php foreach ($pontos as $p): ?>
+                    <p><b>Endereço:</b> <?= $p->formatar() ?></p>
+                <?php endforeach; ?>
+                
+                <?php if($dono): ?>
+                    <button class="botao">Adicionar ponto de coleta</button>
+                <?php endif; ?>  
+
             </div>
         </div>
-        <div id="pecas"></div>
+        <div id="pecas">
+            <h2>Peças anunciadas</h2>
+            
+            <a href="peca"><button class="botao" id="add-peca">Adicionar peça</button></a>
+        </div>
     </main>
 </body>
 </html>
