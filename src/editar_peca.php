@@ -109,24 +109,26 @@
                     <?php endforeach; ?>
 
                 </select>
-                <!-- Cor -->
-                <select name="cor" required>
-                    <option value="">Cor</option>
-                    <option value="azul">Azul</option>
-                    <option value="verde">Verde</option>
-                    <option value="vermelho">Vermelho</option>
-                    <option value="preto">Preto</option>
-                    <option value="branco">Branco</option>
-                    <option value="cinza">Cinza</option>
-                    <option value="rosa">Rosa</option>
-                    <option value="laranja">Laranja</option>
-                    <option value="amarelo">Amarelo</option>
-                    <option value="roxo">Roxo</option>
-                </select>
-                <!-- Tamanho -->
-                <div class="campo" id="tamanho">
-                    <input type="text" name="tamanho" maxlength=3 required>
-                    <label>Tamanho</label>
+                <div id="caracteristicas">
+                    <!-- Cor -->
+                    <select name="cor" required>
+                        <option value="">Cor</option>
+                        <option value="azul">Azul</option>
+                        <option value="verde">Verde</option>
+                        <option value="vermelho">Vermelho</option>
+                        <option value="preto">Preto</option>
+                        <option value="branco">Branco</option>
+                        <option value="cinza">Cinza</option>
+                        <option value="rosa">Rosa</option>
+                        <option value="laranja">Laranja</option>
+                        <option value="amarelo">Amarelo</option>
+                        <option value="roxo">Roxo</option>
+                    </select>
+                    <!-- Tamanho -->
+                    <div class="campo" id="tamanho">
+                        <input type="text" name="tamanho" maxlength=3 required>
+                        <label>Tamanho</label>
+                    </div>
                 </div>
                 <!-- Preço -->
                 <div class="campo" id="preco">
