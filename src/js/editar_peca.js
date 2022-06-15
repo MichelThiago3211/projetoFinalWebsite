@@ -41,7 +41,7 @@ imagemInput.addEventListener("change", e => {
 
 const preco = document.getElementsByName("preco")[0];
 
-// Interceptar envio do form para adicionar as imagens inseridas
+// Intercepta envio do form para adicionar as imagens inseridas
 
 const form = document.getElementsByTagName("form")[0];
 
@@ -59,4 +59,7 @@ form.addEventListener("submit", e => {
   req.onreadystatechange = () => console.log(req.responseText);
 
   e.preventDefault();
+
+  // Volta para a página inicial
+  window.location.href = "perfil.php?id=" + id;
 });

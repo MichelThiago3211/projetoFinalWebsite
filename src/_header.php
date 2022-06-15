@@ -31,7 +31,7 @@
     <div id="usuario">
         <?php
             if (isset($idSessao)) {
-                echo "<a href='perfil?id_fornecedor=$idSessao'>$nome";
+                echo "<a href='perfil?id=$idSessao'>$nome";
                 if ($logo != null) {
                     echo "<img src='$logo' alt='Logo'>";
                 }

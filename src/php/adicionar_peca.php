@@ -7,7 +7,7 @@ $tamanho = $_POST["tamanho"];
 $cor = $_POST["cor"];
 $descricao = $_POST["descricao"];
 $titulo = $_POST["titulo"];
-$preco = $_POST["preco"];
+$preco = $_POST["preco"] * 100;
 $idCategoria = $_POST["categoria"];
 $idPontoColeta = $_POST["ponto-coleta"];
 
@@ -18,6 +18,20 @@ $res = $stm->get_result();
 
 // Imagens
 
-foreach ($_FILES as $img) {
-    // TODO
+$numImagens = count($_FILES["imagens"]["name"]);
+$idPeca = $conexao->insert_id;
+
+// Adiciona cada uma das imagens inseridas na tabela imagem_peca
+for ($i = 0; $i < $numImagens; $i++) {
+    $extensao = pathinfo($_FILES["imagens"]["name"][$i], PATHINFO_EXTENSION);
+    $imagemCaminho = "../imagens/peca/".$idPeca."_".$i.".".$extensao;
+
+    $movido = move_uploaded_file($_FILES["imagens"]["tmp_name"][$i], '../'.$imagemCaminho);
+    if (!$movido) {
+        echo "<script>alert('Erro ao salvar imagem');</script>";
+        header("Location: ../adicionar_peca");
+    }
+    $stm = $conexao->prepare("INSERT INTO imagem_peca (imagem, id_peca) values (?, ?)");
+    $stm->bind_param("si", $imagemCaminho, $idPeca);
+    $stm->execute();
 }

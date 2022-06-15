@@ -49,6 +49,7 @@
 
     <!-- Javascript -->
     <script src="js/file_input.js" defer></script>
+    <script> window.id = <?php echo $idSessao; ?>; </script>
     <script src="js/editar_peca.js" type="module"></script>
 
     <!-- Fontes -->

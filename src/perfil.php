@@ -22,7 +22,7 @@
     include '_header.php';
     include_once "php/sessao.php";
     include_once "model/ponto_coleta.php";   
-    $idGet = $_GET["id_fornecedor"];
+    $idGet = $_GET["id"];
     
     // Se os IDs forem iguais, o usuário é o dono do perfil
     $dono = isset($idSessao) && $idSessao == $idGet;
@@ -56,9 +56,6 @@
     $email = $dados["email"];
     
     $telefoneFormatado = "(".substr($telefone, 0, 2).") ".substr($telefone, 2, 5)."-".substr($telefone, 7, 4);
-
-
-
 
     $stm = $conexao->prepare("SELECT * FROM ponto_coleta WHERE id_fornecedor = ?");
     $stm->bind_param("i", $idGet);
