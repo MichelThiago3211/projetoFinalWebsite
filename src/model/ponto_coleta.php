@@ -10,6 +10,7 @@ class PontoColeta {
     public $complemento;
     public $sede;
 
+    // FK
     public $municipio;
     public $fornecedor;
 
@@ -35,7 +36,6 @@ class PontoColeta {
 
     public function municipio() {
         include_once "municipio.php";
-        
         global $conexao;
 
         $stm = $conexao->prepare("SELECT * FROM municipio WHERE id_municipio = ?");
