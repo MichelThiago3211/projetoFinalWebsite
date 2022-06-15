@@ -1,8 +1,9 @@
 <?php
     include_once "php/sessao.php";
     include_once "model/ponto_coleta.php";
+    include_once "model/categoria_peca.php";
 
-    // Asserta que haja uma sessão em aberto
+    // Assegura que haja uma sessão em aberto
     if (!isset($idSessao)) {
         header("Location: login");
     }
@@ -14,14 +15,13 @@
 
     // Carrega as categorias
     $categorias = array();
+    
     $stm = $conexao->prepare("SELECT * FROM categoria_peca");
     $stm->execute();
     $res = $stm->get_result();
+    
     while ($linha = $res->fetch_assoc()) {
-        $categoria = new Categoria();
-        $categoria->id = $linha["id_categoria_peca"];
-        $categoria->descricao = $linha["descricao"];
-        $categorias[] = $categoria;
+        $categorias[] = Categoria::ler($linha);
     }
 
     // Carrega os pontos de coleta
@@ -32,8 +32,8 @@
     $stm->execute();
     $res = $stm->get_result();
 
-    while ($ponto = $res->fetch_assoc()) {
-        $pontosColeta[] = PontoColeta::ler($ponto);
+    while ($linha = $res->fetch_assoc()) {
+        $pontosColeta[] = PontoColeta::ler($linha);
     }
 ?>
 
@@ -59,9 +59,6 @@
     
     <!-- Ícones -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css"/>
-    <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
 </head>
 <body>
     <?php include "_header.php"; ?>

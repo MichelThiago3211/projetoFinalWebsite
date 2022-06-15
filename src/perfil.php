@@ -19,7 +19,7 @@
 <body>
 
 <?php
-    include '_header.php';
+    include "_header.php";
     include_once "php/sessao.php";
     include_once "model/ponto_coleta.php";   
     $idGet = $_GET["id"];
@@ -77,7 +77,7 @@
 ?>
     <main>
         <div id="dados">
-            <h2><?php echo $nome; ?></h2>
+            <h2><?= $nome ?></h2>
             <img id="logo" src="<?= $imagem ?>" alt="<?= $nome ?>"></h2>
             <p>
                 <b>Telefone:</b> <?= $telefoneFormatado ?><br>
@@ -89,7 +89,7 @@
         <div id="pontos">
             <iframe
             height="100%" width="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=<?php echo $_ENV["MAPS_API"] ?>&q=<?php echo urlencode($sedes[0]->formatar()) ?>">
+            src="https://www.google.com/maps/embed/v1/place?key=<?= $_ENV["MAPS_API"] ?>&q=<?= urlencode($sedes[0]->formatar()) ?>">
             </iframe>
             <div id="pontos-lista">
                 <h2>Sede</h2>

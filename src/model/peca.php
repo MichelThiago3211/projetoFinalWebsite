@@ -19,7 +19,7 @@ class Peca {
         $p->titulo = $obj["titulo"];
         $p->tamanho = $obj["tamanho"];
         $p->cor = $obj["cor"];
-        $p->preco = $obj["preco"];
+        $p->preco = $obj["preco"] / 100;
         $p->descricao = $obj["descricao"];
         $p->categoria = $obj["id_categoria_peca"];
         $p->ponto_coleta = $obj["id_ponto_coleta"];
