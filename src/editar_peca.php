@@ -8,11 +8,6 @@
         header("Location: login");
     }
 
-    class Categoria {
-        public $id;
-        public $descricao;
-    }
-
     // Carrega as categorias
     $categorias = array();
     
@@ -21,7 +16,7 @@
     $res = $stm->get_result();
     
     while ($linha = $res->fetch_assoc()) {
-        $categorias[] = Categoria::ler($linha);
+        $categorias[] = CategoriaPeca::ler($linha);
     }
 
     // Carrega os pontos de coleta
