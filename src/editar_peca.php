@@ -2,10 +2,35 @@
     include_once "php/sessao.php";
     include_once "model/ponto_coleta.php";
     include_once "model/categoria_peca.php";
+    include_once "model/peca.php";
 
     // Assegura que haja uma sessão em aberto
     if (!isset($idSessao)) {
         header("Location: login");
+    }
+
+    // Caso um ID tenha sido passado na URL, a operação é de edição
+    $id = $_GET["id"] ?? -1;
+    $edicao = $id != -1;
+
+    if ($edicao) {
+        // Consulta os dados da peça
+        $stm = $conexao->prepare("SELECT * FROM peca WHERE id_peca = ?");
+        $stm->bind_param("i", $id);
+        $stm->execute();
+        $res = $stm->get_result();
+        
+        $peca = Peca::ler($res->fetch_assoc());
+
+        // Verifica se o usuário tem permissão para editar a peça
+        $stm = $conexao->prepare("SELECT * FROM ponto_coleta WHERE id_fornecedor = ? AND id_ponto_coleta = ?");
+        $stm->bind_param("ii", $idSessao, $peca->pontoColeta);
+        $stm->execute();
+        $res = $stm->get_result();
+
+        if ($res->num_rows == 0) {
+            header("Location: login");
+        }
     }
 
     // Carrega as categorias
@@ -44,7 +69,6 @@
 
     <!-- Javascript -->
     <script src="js/file_input.js" defer></script>
-    <script> window.id = <?php echo $idSessao; ?>; </script>
     <script src="js/editar_peca.js" type="module"></script>
 
     <!-- Fontes -->
@@ -58,35 +82,36 @@
 <body>
     <?php include "_header.php"; ?>
 
-    <!-- Template para as imagens -->
-    <template id="template-imagem">
-        <div class="imagem">
-            <img>
-            <div class="remover">
-                <i class="fa fa-times fa-2x"></i>
-            </div>
-        </div>
-    </template>
-
     <main>
-        <form action="php/adicionar_peca" method="post" enctype="multipart/form-data">
-            <h1>Adicionar peça</h1>
+        <form action="php/_editar_peca" method="post" enctype="multipart/form-data">
+            <h1><?= $edicao ? "Editar" : "Adicionar" ?> peça</h1>
+
+            <?php if ($edicao): ?>
+                <input type="hidden" name="id" value="<?= $id ?>">
+            <?php endif; ?>
 
             <!-- Título -->
             <div class="campo" id="titulo" maxlength=100>
-                <input type="text" name="titulo" required>
+                <input type="text" name="titulo" required value="<?= $peca->titulo ?? "" ?>">
                 <label>Título</label>
             </div>
 
             <!-- Imagens da peça -->
             <div id="imagens">
+                <!-- Carrega as imagens já adicionadas -->
+                <?php if ($edicao): ?>
+                    <?php foreach ($peca->imagens() as $imagem): ?>
+                        <img src="<?= $imagem->caminho ?>">
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
                 <!-- Botão para adicionar novas imagens -->
                 <label id="add-imagem" class="imagem">
-                    <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
-                    Adicionar imagens
+                    <i class="fa fa-file-image-o fa-2x" aria-hidden="true"></i>
+                    Carregar imagens
                     
                     <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- 1MB -->
-                    <input type="file" multiple id="imagens-input" accept="image/png, image/jpeg" required>
+                    <input type="file" multiple id="imagens-input" name="imagens[]" accept="image/png, image/jpeg" <?= !$edicao ? "required" : "" ?>>
                 </label>
             </div>
 
@@ -97,7 +122,9 @@
 
                     <!-- Carrega as categorias do banco de dados -->
                     <?php foreach ($categorias as $categoria): ?>
-                        <option value="<?= $categoria->id ?>"><?= $categoria->descricao ?></option>
+                        <option value="<?= $categoria->id ?>" <?php if ($edicao && $peca->categoria == $categoria->id) echo "selected"; ?>>
+                            <?= $categoria->descricao ?>
+                        </option>
                     <?php endforeach; ?>
 
                 </select>
@@ -105,34 +132,31 @@
                     <!-- Cor -->
                     <select name="cor" required>
                         <option value="">Cor</option>
-                        <option value="azul">Azul</option>
-                        <option value="verde">Verde</option>
-                        <option value="vermelho">Vermelho</option>
-                        <option value="preto">Preto</option>
-                        <option value="branco">Branco</option>
-                        <option value="cinza">Cinza</option>
-                        <option value="rosa">Rosa</option>
-                        <option value="laranja">Laranja</option>
-                        <option value="amarelo">Amarelo</option>
-                        <option value="roxo">Roxo</option>
+
+                        <!-- Carrega as cores da classe Peca -->
+                        <?php foreach (Peca::$cores as $k => $v): ?>
+                            <option value="<?= $k ?>" <?php if ($edicao && $peca->cor == $k) echo "selected"; ?>>
+                                <?= $v ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                     <!-- Tamanho -->
                     <div class="campo" id="tamanho">
-                        <input type="text" name="tamanho" maxlength=3 required>
+                        <input type="text" name="tamanho" maxlength=3 required value="<?php echo $peca->tamanho ?? ""; ?>">
                         <label>Tamanho</label>
                     </div>
                 </div>
                 <!-- Preço -->
                 <div class="campo" id="preco">
                     <span>R$</span>
-                    <input type="number" min="0" step="0.01" name="preco" value="0" required>
+                    <input type="number" min="0" step="0.01" name="preco" required value="<?php echo $peca->preco ?? "0"; ?>">
                     <label>Preço</label>
                 </div>
             </div>
             
             <!-- Descrição -->
             <div class="campo" id="descricao">
-                <textarea type="text" name="descricao" maxlength=500 placeholder="Descreva a peça..."></textarea>
+                <textarea type="text" name="descricao" maxlength=500 placeholder="Descreva a peça..."><?php echo $peca->descricao ?? ""; ?></textarea>
                 <label>Descrição</label>
             </div>
 
@@ -141,12 +165,14 @@
                 <option value="">Ponto de coleta</option>
                 
                 <?php foreach ($pontosColeta as $ponto): ?>
-                    <option value="<?= $ponto->id ?>"><?= $ponto->formatar() ?></option>
+                    <option value="<?= $ponto->id ?>" <?php if ($edicao && $peca->pontoColeta == $ponto->id) echo "selected"; ?>>
+                        <?= $ponto->formatar() ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
 
             <!-- Confirmação -->
-            <input type="submit" value="Adicionar" class="botao">
+            <input type="submit" class="botao" value="<?php echo $edicao ? "Editar" : "Adicionar"; ?>">
         </form>
     </main>
 </body>

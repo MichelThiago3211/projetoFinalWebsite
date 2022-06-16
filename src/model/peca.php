@@ -10,8 +10,21 @@ class Peca {
 
     // FK
     public $categoria;
-    public $ponto_coleta;
+    public $pontoColeta;
     public $reserva;
+
+    public static $cores = [
+        "branco" => "Branco",
+        "azul" => "Azul",
+        "verde" => "Verde",
+        "vermelho" => "Vermelho",
+        "preto" => "Preto",
+        "cinza" => "Cinza",
+        "rosa" => "Rosa",
+        "laranja" => "Laranja",
+        "amarelo" => "Amarelo",
+        "roxo" => "Roxo"
+    ];
 
     public static function ler($obj) {
         $p = new Peca();
@@ -22,7 +35,7 @@ class Peca {
         $p->preco = $obj["preco"] / 100;
         $p->descricao = $obj["descricao"];
         $p->categoria = $obj["id_categoria_peca"];
-        $p->ponto_coleta = $obj["id_ponto_coleta"];
+        $p->pontoColeta = $obj["id_ponto_coleta"];
         $p->reserva = $obj["id_reserva"];
         return $p;
     }
@@ -61,5 +74,22 @@ class Peca {
         $res = $stm->get_result();
 
         return Reserva::ler($res->fetch_assoc());
+    }
+
+    public function imagens() {
+        include_once "imagem_peca.php";
+        global $conexao;
+
+        $stm = $conexao->prepare("SELECT * FROM imagem_peca WHERE id_peca = ?");
+        $stm->bind_param("i", $this->id);
+        $stm->execute();
+        $res = $stm->get_result();
+
+        $imagens = [];
+        while ($obj = $res->fetch_assoc()) {
+            $imagens[] = ImagemPeca::ler($obj);
+        }
+        
+        return $imagens;
     }
 }
