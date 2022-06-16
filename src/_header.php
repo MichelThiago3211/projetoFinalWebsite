@@ -9,6 +9,7 @@
 
         if ($res->num_rows == 0) {
             header("Location: php/logout");
+            exit;
         }
         
         $valores = $res->fetch_assoc();

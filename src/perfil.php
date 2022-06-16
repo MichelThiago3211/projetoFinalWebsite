@@ -82,7 +82,6 @@
             <p>
                 <b>Telefone:</b> <?= $telefoneFormatado ?><br>
                 <b>Email:</b> <?= $email ?><br>
-                <a href="editar_peca">Adicionar peça</a>
             </p>
         </div>
 
@@ -105,7 +104,7 @@
                 <?php endforeach; ?>
                 
                 <?php if($dono): ?>
-                    <button class="botao">Adicionar ponto de coleta</button>
+                    <a href="editar_ponto_coleta" class="botao">Adicionar ponto de coleta</a>
                 <?php endif; ?>  
 
             </div>
@@ -114,7 +113,7 @@
             <h2>Peças anunciadas</h2>
             
             <?php if($dono): ?>
-                <a href="editar_peca"><button class="botao" id="add-peca">Adicionar peça</button></a>
+                <a href="editar_peca" id="add-peca" class="botao">Adicionar peça</a>
             <?php endif; ?>         
         
         </div>

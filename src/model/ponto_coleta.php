@@ -45,4 +45,16 @@ class PontoColeta {
 
         return Municipio::ler($res->fetch_assoc());
     }
+
+    public function fornecedor() {
+        include_once "fornecedor.php";
+        global $conexao;
+
+        $stm = $conexao->prepare("SELECT * FROM fornecedor WHERE id_fornecedor = ?");
+        $stm->bind_param("i", $this->fornecedor);
+        $stm->execute();
+        $res = $stm->get_result();
+
+        return Fornecedor::ler($res->fetch_assoc());
+    }
 }

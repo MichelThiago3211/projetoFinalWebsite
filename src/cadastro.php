@@ -73,7 +73,7 @@
 
             <!-- Endereço -->
             <fieldset id="endereco-fs">
-                <?php include "_endereco.html"; ?>
+                <?php include "_endereco.php"; ?>
             </fieldset>
 
             <fieldset id="senha-fs">

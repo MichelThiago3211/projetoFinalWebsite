@@ -1,5 +1,6 @@
 <?php
     include_once "conexao.php";
+    include_once "buscar_municipio.php";
 
     // Informações básicas
     $tipo = ($_POST['tipo'] == 'brecho'? 0 : 1);
@@ -26,7 +27,7 @@
         $imagemCaminho = "../imagens/fornecedor/$cnp.$extensao";
     }
 
-    $idMunicipio = buscarIdCidade($cidade, $uf);
+    $idMunicipio = buscarIdMunicipio($cidade, $uf);
     $senhaCriptografada = hash("sha256", $senha);
 
     // Insere o fornecedor no banco de dados
@@ -70,22 +71,4 @@
 
     // Autenticação
     include "autenticacao.php";
-
-    function buscarIdCidade($cidade, $uf) {
-        global $conexao;
-        
-        $stm = $conexao->prepare("SELECT id_municipio FROM municipio WHERE nome = ? AND estado = ?");
-        $stm->bind_param("ss", $cidade, $uf);
-        $stm->execute();
-        $res = $stm->get_result();
-        
-        if ($res->num_rows > 0) {
-            return $res->fetch_array()[0];
-        }
-
-        $stm = $conexao->prepare("INSERT INTO municipio (nome, estado) VALUES (?, ?)");
-        $stm->bind_param("ss", $cidade, $uf);
-        $stm->execute();
-        return $conexao->insert_id;
-    }
 ?>
