@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="css/pecas.css">
 
-<?php foreach ($pecas as $p): ?>
+<?php 
+    include_once "model/peca.php";
+    include_once "model/imagem_peca.php";
+
+    foreach ($pecas as $p): ?>
     <div class="peca <?= $p->preco == 0? "doacao" : "venda" ?>">
         <?php
             // Imagem
@@ -18,10 +22,14 @@
             // Município
             $m = $p->pontoColeta()->municipio();
         ?>
+
+        <!-- Imagem -->
         <img src="<?= $primeiraImagem->caminho ?>" alt="<?= $p->titulo ?>">
         
+        <!-- Título -->
         <h3><?= $p->titulo ?></h3>
 
+        <!-- Informações básicas -->
         <span>
             <?= $categoriaNome ?> &bull; <?= Peca::$cores[$p->cor] ?><br>
             <?php if (isset(Peca::$tamanhos[$p->tamanho] )): ?>
@@ -32,6 +40,8 @@
             <br>
             <?= $m->nome . " - " . $m->estado ?>
         </span>
+
+        <!-- Preço -->
         <span class="preco"><?= $p->preco == 0? "DOAÇÃO" : "R$ " . $p->preco ?></span>
     </div>
 <?php endforeach; ?>
