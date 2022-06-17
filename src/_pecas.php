@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="css/pecas.css">
+
 <?php foreach ($pecas as $p): ?>
     <div class="peca <?= $p->preco == 0? "doacao" : "venda" ?>">
         <?php

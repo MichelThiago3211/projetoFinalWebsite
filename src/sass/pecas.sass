@@ -1,0 +1,32 @@
+.peca
+    width: 200px
+    height: min-content
+    background-color: white
+    display: flex
+    flex-direction: column
+    text-align: center
+    padding: 15px
+    border-radius: 10px
+
+    h3
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+
+    img
+        object-fit: cover
+        width: 170px
+        min-height: 150px
+        max-height: 150px
+        border-radius: 8px
+        margin-bottom: 10px
+
+    .preco
+        margin-top: 10px
+        font-weight: bold
+        font-size: 20px
+        color: #666
+    
+    &.doacao
+        .preco
+            color: green
