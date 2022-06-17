@@ -1,1 +1,90 @@
+@use "global"
+@use "input"
 @use "base"
+
+body
+    max-height: 100vh
+    grid-template-rows: 75px calc(100vh - 75px)
+
+main
+    background-color: global.$cor-clara
+    display: grid
+    grid-template-columns: 300px 1fr
+    grid-template-rows: 40px 1fr
+    gap: 20px
+    max-height: 100%
+
+#filtros
+    grid-row: span 2
+    background: white
+    display: flex
+    flex-direction: column
+    gap: 20px
+    border-radius: 10px
+    text-align: center
+    padding: 10px 20px 20px 20px
+
+#botoes
+    margin-top: auto
+    display: flex
+    flex-direction: column
+    gap: 10px
+    width: 100%
+
+#preco
+    position: relative
+
+    span
+        position: absolute
+        height: 100%
+        padding: 0 10px
+        display: flex
+        align-items: center
+        color: #666
+    
+    input
+        padding: 10px 10px 10px 35px
+
+#pecas
+    display: flex
+    flex-flow: row wrap
+    height: 100%
+    gap: 20px
+    overflow: auto
+    padding-right: 20px
+    
+#pesquisa
+    background: global.$cor-clara
+
+.peca
+    width: 200px
+    height: 300px
+    background-color: white
+    display: flex
+    flex-direction: column
+    text-align: center
+    padding: 15px
+    border-radius: 10px
+
+    h3
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+
+    img
+        object-fit: cover
+        width: 170px
+        min-height: 150px
+        max-height: 150px
+        border-radius: 8px
+        margin-bottom: 10px
+
+    .preco
+        margin-top: 10px
+        font-weight: bold
+        font-size: 20px
+        color: #666
+    
+    &.doacao
+        .preco
+            color: green

@@ -26,6 +26,14 @@ class Peca {
         "roxo" => "Roxo"
     ];
 
+    public static $tamanhos = [
+        "p" => "P",
+        "m" => "M",
+        "g" => "G",
+        "gg" => "GG",
+        "xgg" => "XGG"
+    ];
+
     public static function ler($obj) {
         $p = new Peca();
         $p->id = $obj["id_peca"];

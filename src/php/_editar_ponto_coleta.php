@@ -7,11 +7,11 @@ include_once "buscar_municipio.php";
 $cep = $_POST["cep"];
 $cidade = $_POST["cidade"];
 $uf = $_POST["uf"];
-$rua = $_POST["rua"];
+$rua = trim($_POST["rua"]);
 $numero = $_POST["numero"];
-$referencia = $_POST["referencia"];
-$complemento = $_POST["complemento"];
-$horario = $_POST["horario"];
+$referencia = trim($_POST["referencia"]);
+$complemento = trim($_POST["complemento"]);
+$horario = trim($_POST["horario"]);
 
 $idMunicipio = buscarIdMunicipio($cidade, $uf);
 

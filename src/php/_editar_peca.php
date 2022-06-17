@@ -3,10 +3,10 @@
 include_once "sessao.php";
 
 // Dados
-$tamanho = $_POST["tamanho"];
+$tamanho = strtolower(trim($_POST["tamanho"]));
 $cor = $_POST["cor"];
-$descricao = $_POST["descricao"];
-$titulo = $_POST["titulo"];
+$descricao = trim($_POST["descricao"]);
+$titulo = trim($_POST["titulo"]);
 $preco = $_POST["preco"] * 100;
 $idCategoria = $_POST["categoria"];
 $idPontoColeta = $_POST["ponto-coleta"];
@@ -24,7 +24,7 @@ if ($edicao) {
 }
 else {
     $stm = $conexao->prepare("INSERT INTO peca (tamanho, cor, descricao, titulo, preco, id_categoria_peca, id_ponto_coleta) values (?, ?, ?, ?, ?, ?, ?)");
-    $stm->bind_param("isssiii", $tamanho, $cor, $descricao, $titulo, $preco, $idCategoria, $idPontoColeta);
+    $stm->bind_param("ssssiii", $tamanho, $cor, $descricao, $titulo, $preco, $idCategoria, $idPontoColeta);
     $stm->execute();
     $id = $conexao->insert_id;
 }
