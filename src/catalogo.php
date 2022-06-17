@@ -3,22 +3,31 @@
     include_once "model/peca.php";
     include_once "model/categoria_peca.php";
     include_once "model/imagem_peca.php";
+    include_once "model/municipio.php";
 
     $cor = $_GET["cor"] ?? "";
     $categoria = $_GET["categoria"] ?? "";
     $tamanho = $_GET["tamanho"] ?? "";
     $preco = $_GET["preco"] ?? "";
     $pesquisa = $_GET["pesquisa"] ?? "";
+    $municipio = $_GET["municipio"] ?? "";
 
     // Carrega as categorias
     $categorias = array();
-    
     $stm = $conexao->prepare("SELECT * FROM categoria_peca");
     $stm->execute();
     $res = $stm->get_result();
-    
     while ($linha = $res->fetch_assoc()) {
         $categorias[] = CategoriaPeca::ler($linha);
+    }
+
+    // Carrega os municípios
+    $municipios = array();
+    $stm = $conexao->prepare("SELECT * FROM municipio");
+    $stm->execute();
+    $res = $stm->get_result();
+    while ($linha = $res->fetch_assoc()) {
+        $municipios[] = Municipio::ler($linha);
     }
 
     // Carrega as peças
@@ -39,6 +48,9 @@
     }
     if ($pesquisa != "") {
         $filtros[] = "titulo LIKE '%$pesquisa%'";
+    }
+    if ($municipio != "") {
+        $filtros[] = " (SELECT id_municipio FROM ponto_coleta where ponto_coleta.id_ponto_coleta = peca.id_ponto_coleta) = $municipio";
     }
 
     $stm = $conexao->prepare("SELECT * FROM peca" . (count($filtros) > 0 ? " WHERE " . implode(" AND ", $filtros) : ""));
@@ -112,6 +124,18 @@
                 <?php endforeach; ?>
             </select>
 
+            <!-- Município -->
+            <select name="municipio">
+                <option value="">Município</option>
+
+                <!-- Carrega os municípios do banco de dados -->
+                <?php foreach ($municipios as $m): ?>
+                    <option value="<?= $m->id ?>" <?= $m->id == $municipio ? "selected" : "" ?>>
+                        <?= $m->nome ?> - <?= $m->estado ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+
             <!-- Preço máximo -->
             <div class="campo" id="preco">
                 <span>R$</span>
@@ -136,30 +160,34 @@
             <?php foreach ($pecas as $p): ?>
                 <div class="peca <?= $p->preco == 0? "doacao" : "venda" ?>">
                     <?php
-                        // Carrega a imagem da peça
+                        // Imagem
                         $stm = $conexao->prepare("SELECT * FROM imagem_peca WHERE id_peca = $p->id LIMIT 1");
                         $stm->execute();
                         $res = $stm->get_result();
                         $primeiraImagem = ImagemPeca::ler($res->fetch_assoc());
 
-                        // Carrega a categoria da peça
+                        // Categoria
                         $stm = $conexao->prepare("SELECT descricao FROM categoria_peca WHERE id_categoria_peca = $p->categoria");
                         $stm->execute();
                         $res = $stm->get_result();
                         $categoriaNome = $res->fetch_array()[0];
+
+                        // Município
+                        $m = $p->pontoColeta()->municipio();
                     ?>
                     <img src="<?= $primeiraImagem->caminho ?>" alt="<?= $p->titulo ?>">
                     
                     <h3><?= $p->titulo ?></h3>
+
                     <span>
                         <?= $categoriaNome ?> &bull; <?= Peca::$cores[$p->cor] ?><br>
-                        Tamanho <?php
-                            if (isset(Peca::$tamanhos[$p->tamanho] )) {
-                                echo Peca::$tamanhos[$p->tamanho];
-                            } else {
-                                echo $p->tamanho;
-                            }
-                        ?>
+                        <?php if (isset(Peca::$tamanhos[$p->tamanho] )): ?>
+                            Tamanho <?= Peca::$tamanhos[$p->tamanho] ?>
+                        <?php else: ?>
+                            Tamanho <?= $p->tamanho ?>
+                        <?php endif; ?>
+                        <br>
+                        <?= $m->nome . " - " . $m->estado ?>
                     </span>
                     <span class="preco"><?= $p->preco == 0? "DOAÇÃO" : "R$ " . $p->preco ?></span>
                 </div>
