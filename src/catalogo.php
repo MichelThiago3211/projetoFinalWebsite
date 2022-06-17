@@ -59,11 +59,9 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/catalogo.css">
-    <link rel="stylesheet" href="css/carrossel.css">
 
     <!-- Javascript -->
     <script src="js/catalogo.js" defer></script>
-    <script src="js/carrossel.js" defer></script>
 
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,7 +150,7 @@
                     ?>
                     <img src="<?= $primeiraImagem->caminho ?>" alt="<?= $p->titulo ?>">
                     
-                    <h3><?= $p->titulo ?></h3><br>
+                    <h3><?= $p->titulo ?></h3>
                     <span>
                         <?= $categoriaNome ?> &bull; <?= Peca::$cores[$p->cor] ?><br>
                         Tamanho <?php
