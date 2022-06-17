@@ -19,7 +19,7 @@ $edicao = isset($id);
 
 if ($edicao) {
     $stm = $conexao->prepare("UPDATE peca SET tamanho=?, cor=?, descricao=?, titulo=?, preco=?, id_categoria_peca=?, id_ponto_coleta=? WHERE id_peca=?");
-    $stm->bind_param("isssiiii", $tamanho, $cor, $descricao, $titulo, $preco, $idCategoria, $idPontoColeta, $id);
+    $stm->bind_param("ssssiiii", $tamanho, $cor, $descricao, $titulo, $preco, $idCategoria, $idPontoColeta, $id);
     $stm->execute();
 }
 else {
