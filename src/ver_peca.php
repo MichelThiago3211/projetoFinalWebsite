@@ -49,7 +49,7 @@
         $dono = $peca->pontoColeta()->fornecedor == ($idSessao ?? -1);
         $urlImagens = array_map(fn($img) => "'".$img->caminho."'", $peca->imagens());
     ?>
-    
+
     <script>
         window.imagens = [<?= implode(",", $urlImagens) ?>];
     </script>
@@ -129,7 +129,7 @@
             </div>
         </div>
 
-        <form id="reserva" action="php/reservar" method="post">
+        <form id="reserva" action="php/reservar?id=<?= $id ?>" method="post">
             <h2>Reservar</h2>
             <div class="campo">
                 <input type="text" name="nome" required>

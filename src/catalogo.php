@@ -47,11 +47,12 @@
         $filtros[] = "preco <=" . $preco * 100;
     }
     if ($pesquisa != "") {
-        $filtros[] = "titulo LIKE '%$pesquisa%'";
+        $filtros[] = "titulo LIKE '%$pesquisa%' || descricao LIKE '%$pesquisa%'";
     }
     if ($municipio != "") {
         $filtros[] = " (SELECT id_municipio FROM ponto_coleta where ponto_coleta.id_ponto_coleta = peca.id_ponto_coleta) = $municipio";
     }
+    $filtros[] = "id_reserva IS NULL";
 
     $stm = $conexao->prepare("SELECT * FROM peca" . (count($filtros) > 0 ? " WHERE " . implode(" AND ", $filtros) : ""));
     $stm->execute();
