@@ -3,9 +3,9 @@
 <?php 
     include_once "model/peca.php";
     include_once "model/imagem_peca.php";
+?>
 
-    foreach ($pecas as $p): ?>
-
+<?php foreach ($pecas as $p): ?>
     <a href="ver_peca?id=<?= $p->id ?>">
         <div class="peca <?= $p->preco == 0? "doacao" : "venda" ?>">
             <?php

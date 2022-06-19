@@ -69,8 +69,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/editar_peca.css">
 
-    <!-- Javascript -->
-    <script src="js/file_input.js" defer></script>
+    <!-- JavaScript -->
+    <script src="js/arquivos.js" defer></script>
     <script src="js/editar_peca.js" type="module"></script>
 
     <!-- Fontes -->
@@ -144,21 +144,21 @@
                     </select>
                     <!-- Tamanho -->
                     <div class="campo" id="tamanho">
-                        <input type="text" name="tamanho" maxlength=3 required value="<?php echo $peca->tamanho ?? ""; ?>">
+                        <input type="text" name="tamanho" maxlength=3 required value="<?= $peca->tamanho ?? "" ?>">
                         <label>Tamanho</label>
                     </div>
                 </div>
                 <!-- Preço -->
                 <div class="campo" id="preco">
                     <span>R$</span>
-                    <input type="number" min="0" step="0.01" name="preco" required value="<?php echo $peca->preco ?? "0"; ?>">
+                    <input type="number" min="0" step="0.01" name="preco" required value="<?= $peca->preco ?? "0" ?>">
                     <label>Preço</label>
                 </div>
             </div>
             
             <!-- Descrição -->
             <div class="campo" id="descricao">
-                <textarea type="text" name="descricao" maxlength=500 placeholder="Descreva a peça..."><?php echo $peca->descricao ?? ""; ?></textarea>
+                <textarea type="text" name="descricao" maxlength=500 placeholder="Descreva a peça..."><?= $peca->descricao ?? "" ?></textarea>
                 <label>Descrição</label>
             </div>
 
@@ -174,7 +174,7 @@
             </select>
 
             <!-- Confirmação -->
-            <input type="submit" class="botao" value="<?php echo $edicao ? "Editar" : "Adicionar"; ?>">
+            <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
         </form>
     </main>
 </body>

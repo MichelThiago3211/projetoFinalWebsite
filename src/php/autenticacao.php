@@ -15,8 +15,8 @@
 	$stm->execute();
     $res = $stm->get_result();
 
+    // Se encontrou, inicia a sessão
 	if ($res->num_rows > 0) {
-		// Cria a sessão
 		session_start();
 		$_SESSION['id_fornecedor'] = $res->fetch_array()[0];
 		header('Location: ../catalogo');

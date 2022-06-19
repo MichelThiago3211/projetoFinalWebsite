@@ -8,14 +8,14 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/cadastro.css">
 
+    <!-- JavaScript -->
+    <script src="js/arquivos.js" defer></script>
+    <script src="js/cadastro.js" type="module"></script>
+
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-    <!-- Javascript -->
-    <script src="js/file_input.js" defer></script>
-    <script src="js/cadastro.js" type="module"></script>
 </head>
 <body>
     <?php include "_lateral.html"; ?>

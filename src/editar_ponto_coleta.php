@@ -64,7 +64,7 @@
             </div>
 
             <!-- Confirmação -->
-            <input type="submit" class="botao" value="<?php echo $edicao ? "Editar" : "Adicionar"; ?>">
+            <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
         </form>
     </main>
 </body>

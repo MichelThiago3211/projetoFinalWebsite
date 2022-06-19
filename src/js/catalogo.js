@@ -3,6 +3,7 @@
 const form = document.forms[0];
 document.getElementById("limpar").onclick = limparFormulario;
 
+// Reseta todos os campos do formulário e recarrega a página
 function limparFormulario() {
   const selectElements = document.getElementsByTagName("select");
   for (let select of selectElements) {

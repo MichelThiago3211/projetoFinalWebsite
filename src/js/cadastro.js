@@ -1,12 +1,10 @@
 "use strict";
 
-// CPF/CNPJ
-
 const nomeInput = document.getElementById("nome");
 const sobrenomeInput = document.getElementById("sobrenome");
-
 const cnpInput = document.getElementById("cnp");
 
+// Quando o tipo de fornecedor for alterado, atualiza o campo CNP e os campos do nome e sobrenome
 function atualizarTipo() {
   const value = document.getElementById("tipo").value;
 
@@ -17,9 +15,10 @@ function atualizarTipo() {
 
     nomeInput.children[1].innerHTML = "Nome";
     nomeInput.children[0].setAttribute("maxlength", 69);
+    nomeInput.style.gridColumn = "initial";
+
     sobrenomeInput.children[0].required = true;
     sobrenomeInput.hidden = false;
-    nomeInput.style.gridColumn = "initial";
   }
   else {
     cnpInput.children[1].innerHTML = "CNPJ";
@@ -28,20 +27,17 @@ function atualizarTipo() {
 
     nomeInput.children[1].innerHTML = "Nome da instituição";
     nomeInput.children[0].setAttribute("maxlength", 100);
+    nomeInput.style.gridColumn = "span 2";
+    
     sobrenomeInput.children[0].required = false;
     sobrenomeInput.hidden = true;
-    nomeInput.style.gridColumn = "span 2";
   }
 };
 
 document.getElementById("tipo").addEventListener("change", atualizarTipo);
 atualizarTipo();
 
-// Confirmação da senha
-
-const senhaInput = document.querySelector("#senha > input");
-const confirmarSenhaInput = document.querySelector("#confirmar-senha > input");
-
+// Verifica se as senhas são iguais
 function testarConfirmacaoSenha() {
   if (confirmarSenhaInput.value !== senhaInput.value) {
     confirmarSenhaInput.setCustomValidity("As senhas não são iguais");
@@ -51,11 +47,13 @@ function testarConfirmacaoSenha() {
   }
 }
 
+const confirmarSenhaInput = document.querySelector("#confirmar-senha > input");
+const senhaInput = document.querySelector("#senha > input");
+
 senhaInput.addEventListener("input", testarConfirmacaoSenha);
 confirmarSenhaInput.addEventListener("input", testarConfirmacaoSenha);
 
-// Upload do logo
-
+// Quando uma imagem for enviada, exibe uma preview dela
 document.getElementById("imagem").onchange = e => {
   let preview = document.getElementById('preview');
   preview.src = URL.createObjectURL(e.target.files[0]);

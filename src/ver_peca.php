@@ -9,7 +9,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/ver_peca.css">
 
-    <!-- Javascript -->
+    <!-- JavaScript -->
     <script src="js/ver_peca.js" defer></script>
 
     <!-- Fontes -->
@@ -33,18 +33,17 @@
         $stm->bind_param("i", $id);
         $stm->execute();
         $res = $stm->get_result();
+    ?>
 
-        if ($res->num_rows == 0) {
-            ?>
-                <main style = "display: flex; justify-content: center; align-items: center;">
-                    <h1>Peça não encontrada</h1>
-                </main>
-                </body>
-                </html>
-            <?php
-            exit;
-        }
+    <?php if ($res->num_rows == 0): ?>
+        <main style = "display: flex; justify-content: center; align-items: center;">
+            <h1>Peça não encontrada</h1>
+        </main>
+        </body>
+        </html>
+    <?php exit; endif; ?>
 
+    <?php
         $peca = Peca::ler($res->fetch_assoc());
         $dono = $peca->pontoColeta()->fornecedor == ($idSessao ?? -1);
         $urlImagens = array_map(fn($img) => "'".$img->caminho."'", $peca->imagens());

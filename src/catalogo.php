@@ -73,7 +73,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/catalogo.css">
 
-    <!-- Javascript -->
+    <!-- JavaScript -->
     <script src="js/catalogo.js" defer></script>
 
     <!-- Fontes -->
