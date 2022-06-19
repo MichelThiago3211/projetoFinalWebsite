@@ -28,18 +28,24 @@
             <!-- Imagem -->
             <img src="<?= $primeiraImagem->caminho ?>" alt="<?= $p->titulo ?>">
             
-            <!-- Título -->
-            <h3><?= $p->titulo ?></h3>
+            <div class="dados">
+                <!-- Título -->
+                <h3><?= $p->titulo ?></h3>
 
-            <!-- Informações básicas -->
-            <span>
-                <?= $categoriaNome ?> &bull; <?= Peca::$cores[$p->cor] ?><br>
-                Tamanho <?= Peca::$tamanhos[$p->tamanho] ?? $p->tamanho ?><br>
-                <?= $m->nome . " - " . $m->estado ?>
-            </span>
+                <!-- Informações básicas -->
+                <span>
+                    <?= $categoriaNome ?> 
+                    &bull;
+                    <?= Peca::$cores[$p->cor] ?>
+                    &bull;
+                    Tamanho <?= Peca::$tamanhos[$p->tamanho] ?? $p->tamanho ?>
+                    <br>
+                    <?= $m->nome . " - " . $m->estado ?>
+                </span>
 
+            </div>
             <!-- Preço -->
-            <span class="preco"><?= $p->preco == 0? "DOAÇÃO" : "R$ " . number_format((float)$p->preco, 2, ',', '') ?></span>
+            <div class="preco"><?= $p->preco == 0? "DOAÇÃO" : "R$ " . number_format((float)$p->preco, 2, ',', '') ?></div>
         </div>
     </a>
 <?php endforeach; ?>
