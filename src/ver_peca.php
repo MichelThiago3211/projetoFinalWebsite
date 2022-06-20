@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,7 +54,7 @@
     </script>
 
     <main>
-        <div id="peca">
+        <div id="peca" class="box">
             <?php if ($dono): ?>
                 <a id="botao-editar" href="editar_peca?id=<?= $id ?>">
                     <i class="fa fa-2x fa-edit"></i>
@@ -99,7 +99,7 @@
         </div>
 
         <!-- Ponto de coleta -->
-        <div id="ponto-coleta">
+        <div id="ponto-coleta" class="box">
             <iframe
                 height="100%" width="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
                 src="https://www.google.com/maps/embed/v1/place?key=<?= $_ENV["MAPS_API"] ?>&q=<?= urlencode($peca->pontoColeta()->formatar()) ?>">
@@ -128,7 +128,7 @@
             </div>
         </div>
 
-        <form id="reserva" action="php/reservar?id=<?= $id ?>" method="post">
+        <form id="reserva" action="php/reservar?id=<?= $id ?>" method="post" class="box">
             <h2>Reservar</h2>
             <div class="campo">
                 <input type="text" name="nome" required>

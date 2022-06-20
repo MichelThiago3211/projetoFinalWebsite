@@ -86,7 +86,7 @@
 
     <main>
         <!-- Menu de filtros -->
-        <form id="filtros" action="catalogo" method="get">
+        <form id="filtros" action="catalogo" method="get" class="box">
             <h2>Filtros</h2>
             
             <!-- Categoria -->

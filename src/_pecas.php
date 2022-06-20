@@ -7,7 +7,7 @@
 
 <?php foreach ($pecas as $p): ?>
     <a href="ver_peca?id=<?= $p->id ?>">
-        <div class="peca <?= $p->preco == 0? "doacao" : "venda" ?>">
+        <div class="peca box <?= $p->preco == 0? "doacao" : "venda" ?>">
             <?php
                 // Imagem
                 $stm = $conexao->prepare("SELECT * FROM imagem_peca WHERE id_peca = $p->id LIMIT 1");
@@ -34,12 +34,8 @@
 
                 <!-- Informações básicas -->
                 <span>
-                    <?= $categoriaNome ?> 
-                    &bull;
-                    <?= Peca::$cores[$p->cor] ?>
-                    &bull;
                     Tamanho <?= Peca::$tamanhos[$p->tamanho] ?? $p->tamanho ?>
-                    <br>
+                    &bull;
                     <?= $m->nome . " - " . $m->estado ?>
                 </span>
 

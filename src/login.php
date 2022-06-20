@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
     <?php include "_lateral.html"; ?>
 
     <main>
-        <form action="php/autenticacao.php" method="post">
+        <form action="php/autenticacao.php" method="post" class="box">
             <h1 id>Login</h1>
             
             <fieldset id="dados-fs">

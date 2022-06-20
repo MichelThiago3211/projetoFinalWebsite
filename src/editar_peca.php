@@ -85,7 +85,7 @@
     <?php include "_header.php"; ?>
 
     <main>
-        <form action="php/_editar_peca" method="post" enctype="multipart/form-data">
+        <form action="php/_editar_peca" method="post" enctype="multipart/form-data" class="box">
             <h1><?= $edicao ? "Editar" : "Adicionar" ?> peça</h1>
 
             <?php if ($edicao): ?>

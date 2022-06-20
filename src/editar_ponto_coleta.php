@@ -56,7 +56,7 @@
     <?php include "_header.php"; ?>
 
     <main>
-        <form action="php/_editar_ponto_coleta" method="post" enctype="multipart/form-data">
+        <form action="php/_editar_ponto_coleta" method="post" enctype="multipart/form-data" class="box">
             <h1><?= $edicao ? "Editar" : "Adicionar" ?> ponto de coleta</h1>
 
             <?php if ($edicao): ?>

@@ -21,7 +21,7 @@
     <?php include "_lateral.html"; ?>
 
     <main>
-        <form enctype="multipart/form-data" action="php/adicionar_fornecedor.php" method="post">
+        <form enctype="multipart/form-data" action="php/adicionar_fornecedor.php" method="post" class="box">
             <h1 id>Cadastro</h1>
             
             <fieldset id="dados-fs">
