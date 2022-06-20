@@ -44,10 +44,6 @@ h1
     cursor: pointer
     color: #666
 
-.botao
-    width: 200px
-    margin: 0 auto
-
 #preco
     position: relative
 
@@ -70,10 +66,21 @@ h1
         width: 100%
         resize: none
 
-#ponto-coleta, .botao, #imagens, #titulo, h1
+#ponto-coleta, #botoes, #imagens, #titulo, h1
     grid-column: span 2
 
 #caracteristicas
     display: grid
     grid-template-columns: 1fr 1fr
     gap: 10px
+
+#botoes
+    display: flex
+    gap: 20px
+    justify-content: center
+
+#deletar
+    background-color: global.$cor-vermelho
+
+.botao
+    width: 200px

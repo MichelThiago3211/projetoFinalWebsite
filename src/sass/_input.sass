@@ -78,6 +78,7 @@ input[type=file]
     position: absolute
 
 .botao
+    display: block
     border: none
     border-radius: 8px
     background-color: global.$cor-primaria
@@ -86,3 +87,7 @@ input[type=file]
     font-size: global.$fonte-md
     cursor: pointer
     padding: 10px
+
+    &.desabilitado
+        cursor: not-allowed
+        opacity: 75%

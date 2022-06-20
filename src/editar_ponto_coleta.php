@@ -27,6 +27,14 @@
             exit;
         }
     }
+
+    // Verifica se alguma peça está localizada nesse ponto de coleta
+    $stm = $conexao->prepare("SELECT * FROM peca WHERE id_ponto_coleta = ?");
+    $stm->bind_param("i", $id);
+    $stm->execute();
+    $res = $stm->get_result();
+
+    $pontoColetaUsado = $res->num_rows > 0;
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +72,16 @@
             </div>
 
             <!-- Confirmação -->
-            <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
+            <div id="botoes">
+                <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
+                <?php if ($edicao): ?>
+                    <?php if ($pontoColetaUsado): ?>
+                        <a id="deletar" class="botao desabilitado" title="Ainda existem peças neste ponto de coleta!">Deletar</a>
+                    <?php else: ?>
+                        <a id="deletar" class="botao" href="php/deletar_ponto_coleta?id=<?= $id ?>">Deletar</a>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
         </form>
     </main>
 </body>

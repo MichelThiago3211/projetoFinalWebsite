@@ -174,7 +174,12 @@
             </select>
 
             <!-- Confirmação -->
-            <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
+            <div id="botoes">
+                <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
+                <?php if ($edicao): ?>
+                    <a href="php/deletar_peca?id=<?= $id ?>" id="deletar" class="botao">Deletar</a>
+                <?php endif; ?>
+            </div>
         </form>
     </main>
 </body>
