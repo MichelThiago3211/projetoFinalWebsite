@@ -38,7 +38,6 @@ Os arquivos Sass devem ser compilados pelos métodos descritos acima antes do si
 ## Funcionalidades ainda não implementadas
 - Edição do perfil do fornecedor
 - Botão de Logout
-- Botão para remover peças e pontos de coleta
 - Modo responsivo para usuários mobile
 - Opções de acessibilidade
 - Ativação de contas de fornecedores via E-mail
