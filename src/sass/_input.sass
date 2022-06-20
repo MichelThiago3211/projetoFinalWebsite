@@ -41,12 +41,17 @@ div.campo
         border-radius: 8px 8px 0 0
 
 select
-    border: 1px solid black
+    --contorno: black
+    
+    border: 1px solid var(--contorno)
     border-radius: 8px
     background-color: #ddd
     height: 40px
     font-size: global.$fonte-sm
     padding: 5px
+
+    &:invalid
+            --contorno: crimson
 
 .imagem-input
     @extend %centro
