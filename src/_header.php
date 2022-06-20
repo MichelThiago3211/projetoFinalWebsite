@@ -29,6 +29,7 @@
     <a id="logo" href="cadastro">
         <img src="img/logo_branco.png" alt="Logo">
         <h1>Nome do Site</h1>
+        
     </a>
     <nav>
         <a href="catalogo">CATÁLOGO</a>
@@ -37,14 +38,17 @@
     <div id="usuario">
         <!-- Se estiver logado, exibe o perfil do usuário; caso contrário, um botão de login -->
         <?php if (isset($idSessao)): ?>
-            <a href='perfil?id=<?= $idSessao ?>'>
-                <?= $nome ?>
-                <?php if ($logo != null): ?>
-                    <img src='<?= $logo ?>' alt='Logo'>
-                <?php endif; ?>
-            </a>
+            
+            <div>
+                <a href="perfil?id=<?= $idSessao ?>"><h2><?= $nome ?></h2></a>
+                <a href="php/logout" id="sair">Sair</a>
+            </div>
+            <?php if ($logo != null): ?>
+                <a href="perfil?id=<?= $idSessao ?>"><img src='<?= $logo ?>' alt='Logo'></a>
+            <?php endif; ?>
+        
         <?php else: ?>
-            <a href='login'>Login</a>
+            <a href='login'><h2>Login</h2></a>
         <?php endif; ?>
     </div>
 </header>
