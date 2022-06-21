@@ -64,15 +64,21 @@ main
 .endereco
     --borda: #999
 
+    position: relative
     border-radius: 8px
     display: flex
     width: 100%
     background-color: #eee
     border: 1px solid var(--borda)
     gap: 10px
+    min-height: 70px
 
-    .fa
+    span
+        margin: 0
+
+    & > .fa
         @extend %centro
+        color: black
         height: 100%
         width: 80px
         border-right: 1px solid var(--borda)
@@ -80,3 +86,21 @@ main
 .sede
     background-color: #c2d7e5
     --borda: #3998cf
+
+.editar-ponto-coleta
+    position: absolute
+    text-align: center
+    height: 100%
+    width: 100%
+    opacity: 0
+
+    &:hover
+        opacity: .5
+
+    a
+        @extend %centro
+        position: absolute
+        right: 0
+        width: 50px
+        height: 100%
+        color: black

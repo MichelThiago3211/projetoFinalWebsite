@@ -105,14 +105,20 @@
                 <h2>Pontos de coleta</h2>
                 <?php foreach($pontosColeta as $p): ?>
                     <div class="endereco <?= $p->sede? "sede" : ""?>">
-                        <i class="fa <?= $p->sede? "fa-flag" : "fa-map-marker"?> fa-2x" aria-hidden="true"></i>
+                        <i class="fa fa-2x <?= $p->sede? "fa-flag" : "fa-map-marker"?>" aria-hidden="true"></i>
                         <div>
                             <?php if($p->referencia != ""): ?>
-                                <p><b>Referência:</b> <?= $p->referencia?></p>
+                                <span><b><?= $p->referencia?></b></span><br>
                             <?php endif; ?>
-                            <p><b>Endereço:</b> <?= $p->formatar()?></p>
-                            <p><b>Horário de funcionamento: </b> <?= $p->horario? "$p->horario" : "<i>Não informado</i>"?></p>
-                        </div>    
+                            <span><?= $p->formatar()?></span><br>
+                            <span><b>Horário de funcionamento: </b> <?= $p->horario? "$p->horario" : "<i>Não informado</i>"?></span>
+                        </div>
+
+                        <?php if($dono): ?>
+                            <div class="editar-ponto-coleta">
+                                <a href="editar_ponto_coleta?id=<?= $p->id ?>"><i class="fa fa-edit fa-2x"></i></a>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
                 
