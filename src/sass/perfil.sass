@@ -47,24 +47,23 @@ main
 
 #pecas
     grid-column: span 2
+    display: grid
+    grid-template-rows: auto auto
+    gap: 20px
+    padding: 20px
+
+    .controles
+        display: flex
+        justify-content: center
+
+        .botao
+            width: 200px
+
+#lista-pecas
     display: flex
-    height: 100%
-    position: relative
-    overflow: auto
-    max-width: 100%
     gap: 20px
     justify-content: center
     flex-flow: row wrap
-    padding: 20px
-
-    h2
-        width: 100%
-        align-items: left
-        margin: 8px 10px 9px 
-
-#add-peca
-    height: 44px
-    min-width: 44px
 
 .ponto-coleta
     display: flex

@@ -122,7 +122,7 @@
                         <div class="elementos">
                             <p><b>Endereço:</b> <?= $p->formatar()?></p>
                             <?php if($p->referencia != ""): ?>
-                            <p><b>Referência:</b> <?= $p->referencia?></p>                         
+                                <p><b>Referência:</b> <?= $p->referencia?></p>
                             <?php endif; ?>
                             
                             <p><b>Horário de funcionamento:</b> <?= $p->horario?></p>
@@ -132,20 +132,21 @@
                 
                 <?php if($dono): ?>
                     <a href="editar_ponto_coleta" class="botao">Adicionar ponto de coleta</a>
-                <?php endif; ?>  
-
+                <?php endif; ?>
             </div>
         </div>
+        <div id="pecas" class="box">
+            <div class="controles">
+                <?php if($dono): ?>
+                    <a href="editar_peca" id="add-peca" class="botao">Adicionar peça</i></a>
+                <?php endif; ?>
+            </div>
 
-        <div id="pecas" class="box">           
-            <?php
-                include "_pecas.php";
-            ?>
-
-            <?php if($dono): ?>
-                <a href="editar_peca" id="add-peca" class="botao"><i class="fa fa-plus" aria-hidden="true"></i></a>
-            <?php endif; ?>         
-        
+            <div id="lista-pecas">
+                <?php
+                    include "_pecas.php";
+                ?>
+            </div>
         </div>
     </main>
 </body>
