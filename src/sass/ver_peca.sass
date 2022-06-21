@@ -2,40 +2,38 @@
 @use "input"
 @use "base"
 
-body
-    max-height: 100vh
-    grid-template-rows: 75px calc(100vh - 75px)
-
 main
     display: grid
     grid-template-columns: 2fr 1fr
     grid-template-rows: 1fr 1fr
     gap: 20px
     
-    & > div, & > form
+    & > *
         background-color: white
         padding: 20px
 
 #peca
     display: flex
-    height: 100%
     gap: 20px
     position: relative
+
+p
+    font-size: 18px
 
 #ponto-coleta
     display: grid
     grid-template-columns: 1fr 1fr
     gap: 20px
-
-    p
-        font-size: 20px
     
     iframe
         border-radius: 10px
         outline: 1px solid #ccc
     
     h2
-        margin-bottom: 15px
+        margin: 0
+        margin-bottom: 5px
+        padding-bottom: 5px
+        border-bottom: 1px solid #999
 
 #informacoes
     display: flex
@@ -47,7 +45,7 @@ main
     font-size: 20px
     margin-top: auto
     display: flex
-    justify-content: space-around
+    justify-content: space-evenly
     
     i
         width: 15px
@@ -96,7 +94,6 @@ main
 
 #descricao
     margin: 10px 0
-    font-size: 20px
     white-space: pre-wrap
 
 #reserva
@@ -116,3 +113,9 @@ input[type="submit"]
 
 #horario
     white-space: pre-wrap
+
+#preco
+    color: #666
+    font-size: 20px
+    width: 200px
+    margin: 0 auto

@@ -19,22 +19,17 @@
         // Pega os dados do usuário
         $valores = $res->fetch_assoc();
         $nome = $valores["nome"];
-        $logo = $valores["imagem"];
+        $logo = $valores["imagem"] ?? "img/perfil.png";
     }
 ?>
 
 <link href="css/header.css" rel="stylesheet">
 
 <header>
-    <a id="logo" href="cadastro">
+    <a id="logo" href="catalogo">
         <img src="img/logo_branco.png" alt="Logo">
         <h1>Nome do Site</h1>
-        
     </a>
-    <nav>
-        <a href="catalogo">CATÁLOGO</a>
-        <a href="sobre">SOBRE NÓS</a>
-    </nav>
     <div id="usuario">
         <!-- Se estiver logado, exibe o perfil do usuário; caso contrário, um botão de login -->
         <?php if (isset($idSessao)): ?>
@@ -43,10 +38,7 @@
                 <a href="perfil?id=<?= $idSessao ?>"><h2><?= $nome ?></h2></a>
                 <a href="php/logout" id="sair">Sair</a>
             </div>
-            <?php if ($logo != null): ?>
-                <a href="perfil?id=<?= $idSessao ?>"><img src='<?= $logo ?>' alt='Logo'></a>
-            <?php endif; ?>
-        
+            <a href="perfil?id=<?= $idSessao ?>"><img src='<?= $logo ?>' alt='Logo'></a>
         <?php else: ?>
             <a href='login'><h2>Login</h2></a>
         <?php endif; ?>

@@ -54,7 +54,7 @@
     }
     $filtros[] = "id_reserva IS NULL";
 
-    $stm = $conexao->prepare("SELECT * FROM peca" . (count($filtros) > 0 ? " WHERE " . implode(" AND ", $filtros) : ""));
+    $stm = $conexao->prepare("SELECT * FROM peca" . (count($filtros) > 0 ? " WHERE " . implode(" AND ", $filtros) : "") . " ORDER BY preco");
     $stm->execute();
     $res = $stm->get_result();
 
@@ -76,19 +76,20 @@
     <!-- JavaScript -->
     <script src="js/catalogo.js" defer></script>
 
-    <!-- Fontes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <?php include "_fontes.php" ?>
 </head>
 <body>
     <?php include "_header.php"; ?>
 
     <main>
+        <!-- Pesquisa -->
+        <div id="pesquisa" class="campo">
+            <input type="text" form="filtros" name="pesquisa" value="<?= $pesquisa ?>">
+            <label>Pesquisar</label>
+        </div>
+
         <!-- Menu de filtros -->
-        <form id="filtros" action="catalogo" method="get" class="box">
-            <h2>Filtros</h2>
-            
+        <form id="filtros" action="catalogo" method="get">
             <!-- Categoria -->
             <select name="categoria">
                 <option value="">Categoria</option>
@@ -149,12 +150,6 @@
                 <input type="reset" id="limpar" value="Limpar filtros" class="botao">
             </div>
         </form>
-
-        <!-- Pesquisa -->
-        <div id="pesquisa" class="campo">
-            <input type="text" form="filtros" name="pesquisa" value="<?= $pesquisa ?>">
-            <label>Pesquisar</label>
-        </div>
 
         <!-- Peças -->
         <div id="pecas">

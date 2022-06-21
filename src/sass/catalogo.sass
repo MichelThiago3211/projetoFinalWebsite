@@ -1,31 +1,24 @@
 @use "global"
 @use "input"
-@use "base"
-
-body
-    max-height: 100vh
-    grid-template-rows: 75px calc(100vh - 75px)
+@use "base" 
 
 main
-    display: grid
-    grid-template-columns: 300px 1fr
-    grid-template-rows: 40px 1fr
-    gap: 20px
-    max-height: 100%
+    display: flex
+    flex-direction: column
+    grid-template-rows: 40px auto 1fr
+    gap: 30px
 
 #filtros
-    grid-row: span 2
+    height: min-content
     display: flex
-    flex-direction: column
-    gap: 20px
-    border-radius: 10px
-    text-align: center
-    padding: 10px 20px 20px 20px
+    flex-flow: row wrap
+    gap: 10px
+
+    & > .campo, & > select
+        width: 200px
 
 #botoes
-    margin-top: auto
     display: flex
-    flex-direction: column
     gap: 10px
     width: 100%
 
@@ -46,7 +39,5 @@ main
 #pecas
     display: flex
     flex-flow: row wrap
-    height: 100%
     gap: 20px
-    overflow: auto
-    padding-right: 20px
+    justify-content: center

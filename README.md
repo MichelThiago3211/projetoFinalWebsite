@@ -16,7 +16,7 @@ Com essa plataforma, buscamos permitir com que instituições de caridade ou bre
 ## Execução local
 ### Requisitos
 - Apache server (XAMPP ou outro)
-- MySQL (XAMPP, outro ou instalado separadamente)
+- MySQL (instalado separadamente, pelo XAMPP ou outro)
 - Compilador Sass (por meio de extensões de IDEs como Live Sass Compiler ou outro método*)
 
 \* Nesse caso, os arquivos podem ser compilados executando `sass --update src/sass:src/css` na raiz do repositório
@@ -41,6 +41,6 @@ Os arquivos Sass devem ser compilados pelos métodos descritos acima antes do si
 - Opções de acessibilidade
 - Ativação de contas de fornecedores via E-mail
 - Reporte de fornecedores e/ou peças
-- Limitação de reservas por dispositivo/endereço
+- Limitação no número de reservas por dispositivo, CPF ou endereço IP
 - Invalidação de reservas após um período de tempo
-- Confirmação da retirada de peças
+- Confirmação de que a peça foi entregue

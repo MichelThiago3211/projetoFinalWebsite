@@ -1,10 +1,38 @@
+<?php     
+    include_once "php/sessao.php";
+    include_once "model/peca.php";
+
+    // Pega o ID da peça na URL
+    $id = $_GET['id'] ?? false;
+    if (!$id) {
+        header("Location: catalogo");
+        exit;
+    }
+
+    // Busca a peça no banco de dados
+    $stm = $conexao->prepare("SELECT * FROM peca WHERE id_peca = ?");
+    $stm->bind_param("i", $id);
+    $stm->execute();
+    $res = $stm->get_result();
+
+    if ($res->num_rows == 0) {
+        header("Location: catalogo");
+        exit;
+    }
+
+    $peca = Peca::ler($res->fetch_assoc());
+    $dono = $peca->pontoColeta()->fornecedor == ($idSessao ?? -1);
+
+    $urlImagens = array_map(fn($img) => "'".$img->caminho."'", $peca->imagens());
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre nós</title>
+    <title><?= $peca->titulo ?></title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/ver_peca.css">
@@ -12,42 +40,10 @@
     <!-- JavaScript -->
     <script src="js/ver_peca.js" defer></script>
 
-    <!-- Fontes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-    <!-- Ícones -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
+    <?php include "_fontes.php" ?>
 </head>
 <body>
-    <?php 
-        include "_header.php";
-        
-        include_once "php/sessao.php";
-        include_once "model/peca.php";
-
-        $id = $_GET['id'];
-
-        $stm = $conexao->prepare("SELECT * FROM peca WHERE id_peca = ?");
-        $stm->bind_param("i", $id);
-        $stm->execute();
-        $res = $stm->get_result();
-    ?>
-
-    <?php if ($res->num_rows == 0): ?>
-        <main style = "display: flex; justify-content: center; align-items: center;">
-            <h1>Peça não encontrada</h1>
-        </main>
-        </body>
-        </html>
-    <?php exit; endif; ?>
-
-    <?php
-        $peca = Peca::ler($res->fetch_assoc());
-        $dono = $peca->pontoColeta()->fornecedor == ($idSessao ?? -1);
-        $urlImagens = array_map(fn($img) => "'".$img->caminho."'", $peca->imagens());
-    ?>
+    <?php include "_header.php"; ?>
 
     <script>
         window.imagens = [<?= implode(",", $urlImagens) ?>];
@@ -75,7 +71,7 @@
                 <h1><?= $peca->titulo ?></h1>
 
                 <!-- Descrição -->
-                <div id="descricao"><?= $peca->descricao ?></div>
+                <p id="descricao"><?= $peca->descricao ?></p>
                 <span id="dados-lista">
                     <!-- Categoria -->
                     <span>
@@ -110,7 +106,7 @@
                     $municipio = $endereco->municipio();
                 ?>
 
-                <h2>Ponto de coleta</h2>
+                <h2>Distribuído por <a href="perfil?id=<?= $endereco->fornecedor ?>"><?= $endereco->fornecedor()->nome ?></a></h2>
                 <p>
                     <?php if ($endereco->referencia != ""): ?>
                         <b><?= $endereco->referencia ?></b>
@@ -139,6 +135,7 @@
                 <label>CPF</label>
             </div>
             <input type="submit" value="Reservar" class="botao">
+            <div id="preco">Custo: <?= $peca->preco == 0? "Gratuito" : "R$ " . number_format((float)$peca->preco, 2, ',', '') ?></div>
         </form>
     </main>
 </body>
