@@ -85,8 +85,8 @@
                 <b>Telefone:</b> <?= $telefoneFormatado ?><br>
                 <b>Email:</b> <?= $email ?><br>
                 <?php
-                    $stm = $conexao->prepare("SELECT tipo FROM fornecedor WHERE nome = ? AND email = ?");
-                    $stm->bind_param("ss", $nome, $email);
+                    $stm = $conexao->prepare("SELECT tipo FROM fornecedor WHERE id_fornecedor = ?");
+                    $stm->bind_param("i", $idGet);
                     $stm->execute();
                     $res = $stm->get_result();
 
