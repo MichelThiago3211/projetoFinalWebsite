@@ -25,26 +25,6 @@ main
         border-radius: 10px
         margin: 20px 0
 
-#pontos-coleta
-    display: grid
-    grid-template-columns: 1fr 1fr
-    padding: 20px
-    gap: 20px
-
-    iframe
-        border-radius: 8px
-        overflow: hidden
-
-#pontos-lista
-    display: flex
-    flex-direction: column
-    align-items: center
-
-    div
-        border-radius: 8px
-        padding: 0 20px
-        cursor: pointer
-
 #pecas
     grid-column: span 2
     display: flex
@@ -66,17 +46,38 @@ main
     height: 44px
     min-width: 44px
 
-.ponto-coleta
-    display: flex
-    flex-direction: row
-    align-items: center
-    border: #ddd 1px
-    grid-gap: 10px
-    width: 500px
-    margin: 5px
-    background-color: #eee
-    border: 1px solid #999
+#pontos-coleta
+    display: grid
+    grid-template-columns: 1fr 1fr
+    padding: 20px
+    gap: 20px
 
-    & > *
-        width: auto
-        height: min-content
+    iframe
+        border-radius: 8px
+        overflow: hidden
+
+#pontos-lista
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 10px
+
+.endereco
+    --borda: #999
+
+    border-radius: 8px
+    display: flex
+    width: 100%
+    background-color: #eee
+    border: 1px solid var(--borda)
+    gap: 10px
+
+    .fa
+        @extend %centro
+        height: 100%
+        width: 80px
+        border-right: 1px solid var(--borda)
+
+.sede
+    background-color: #c2d7e5
+    --borda: #3998cf

@@ -36,17 +36,11 @@
     $stm->execute();
     $res = $stm->get_result();
 
-    $sedes = array();
-    $pontos = array();
+    $pontosColeta = array();
 
     while ($ponto = $res->fetch_assoc()) {
         $p = PontoColeta::ler($ponto);
-        
-        if ($ponto["sede"]) {
-            $sedes[] = $p;
-        } else {
-            $pontos[] = $p;
-        }
+        $pontosColeta[] = $p;
     }
 
     // Consulta as peças do fornecedor
@@ -105,27 +99,19 @@
         <div id="pontos-coleta" class="box">
             <iframe
             height="100%" width="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=<?= $_ENV["MAPS_API"] ?>&q=<?= urlencode($sedes[0]->formatar()) ?>">
+            src="https://www.google.com/maps/embed/v1/place?key=<?= $_ENV["MAPS_API"] ?>&q=<?= urlencode($pontosColeta[0]->formatar()) ?>">
             </iframe>
             <div id="pontos-lista">
-                <h2>Sede</h2>
-                
-                <?php foreach ($sedes as $p): ?>
-                    <p><b>Endereço:</b> <?= $p->formatar()?></p>
-                <?php endforeach; ?>
-                    
                 <h2>Pontos de coleta</h2>
-                    
-                <?php foreach ($pontos as $p): ?>
-                    <div class="ponto-coleta">
-                        <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                        <div class="elementos">
-                            <p><b>Endereço:</b> <?= $p->formatar()?></p>
+                <?php foreach($pontosColeta as $p): ?>
+                    <div class="endereco <?= $p->sede? "sede" : ""?>">
+                        <i class="fa <?= $p->sede? "fa-flag" : "fa-map-marker"?> fa-2x" aria-hidden="true"></i>
+                        <div>
                             <?php if($p->referencia != ""): ?>
                             <p><b>Referência:</b> <?= $p->referencia?></p>                         
                             <?php endif; ?>
-                            
-                            <p><b>Horário de funcionamento:</b> <?= $p->horario?></p>
+                            <p><b>Endereço:</b> <?= $p->formatar()?></p>
+                            <p><b>Horário de funcionamento: </b> <?= $p->horario? "$p->horario" : "<i>Não informado</i>"?></p>
                         </div>    
                     </div>
                 <?php endforeach; ?>
