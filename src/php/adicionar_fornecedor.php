@@ -69,6 +69,25 @@
         header("Location: ../cadastro");
     }
 
+    // Enviar mensagem de aviso
+    $tokenTelegram = $_ENV["TELEGRAM_API"];
+    $canaisTelegram = explode(",", $_ENV["ID_CANAIS_TELEGRAM"]);
+    $urlAtivacao = "https://$_SERVER[HTTP_HOST]" . dirname($_SERVER["REQUEST_URI"]) . "/ativar_fornecedor?id=$idFornecedor";
+    var_dump($urlAtivacao);
+    $conteudoMensagem = "<b>Um novo usuário entrou para a plataforma:</b> %0A%0AID: $idFornecedor %0ANome: $nomeCompleto %0ATelefone: $telefone %0AE-mail: $email %0AAtivar fornecedor: <a href='$urlAtivacao'>ABC</a>";
+
+    foreach ($canaisTelegram as $canal) {
+        $url = "https://api.telegram.org/bot$tokenTelegram/sendMessage?chat_id=$canal&text=$conteudoMensagem&parse_mode=html";
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, array());
+        $response = curl_exec($curl);
+        curl_close($curl);
+    }
+
+    exit;
+
     // Autenticação
     include "autenticacao.php";
 ?>
