@@ -2,21 +2,11 @@
 @use "base"
 @use "input"
 
-body
-    display: grid
-    grid-template-rows: 75px auto
-    margin: 0
-    padding: 0
-    min-height: 100vh
-    background-color: global.$cor-clara
-
 main
     display: grid
     grid-template-columns: 300px auto
-    grid-template-rows: auto min-content
-    padding: 30px 200px
     gap: 20px
-
+    max-width: 100%
 
 #dados
     display: flex
@@ -24,8 +14,6 @@ main
     align-items: center
     justify-content: flex-start
     padding: 20px
-    background-color: #fff
-    border-radius: 20px
 
     #logo
         width: 250px
@@ -36,14 +24,11 @@ main
         border-radius: 10px
         margin: 20px 0
 
-#pontos
+#pontos-coleta
     display: grid
     grid-template-columns: 1fr 1fr
     padding: 20px
     gap: 20px
-    width: 100%
-    background-color: #fff
-    border-radius: 20px
 
     iframe
         border-radius: 8px
@@ -56,7 +41,6 @@ main
 
     div
         border-radius: 8px
-       
         padding: 0 20px
         cursor: pointer
 
@@ -67,8 +51,10 @@ main
     position: relative
     overflow: auto
     max-width: 100%
-    gap: 0 20px
-    align-items: center
+    gap: 20px
+    justify-content: center
+    flex-flow: row wrap
+    padding: 20px
 
     h2
         width: 100%
@@ -78,8 +64,8 @@ main
 #add-peca
     height: 44px
     min-width: 44px
-    
-#box-pontos
+
+.ponto-coleta
     display: flex
     flex-direction: row
     align-items: center
@@ -87,10 +73,9 @@ main
     grid-gap: 10px
     width: 500px
     margin: 5px
-    background-color: lightgray
+    background-color: #eee
+    border: 1px solid #999
 
-.elementos
-    width: auto
-    height: min-content
-    
-    
+    & > *
+        width: auto
+        height: min-content

@@ -15,6 +15,7 @@
     $stm->execute();
     $res = $stm->get_result();
 
+    // Se a peça não existir, volta para o catálogo
     if ($res->num_rows == 0) {
         header("Location: catalogo");
         exit;
