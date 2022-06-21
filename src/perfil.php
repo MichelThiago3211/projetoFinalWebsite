@@ -82,6 +82,21 @@
             <p>
                 <b>Telefone:</b> <?= $telefoneFormatado ?><br>
                 <b>Email:</b> <?= $email ?><br>
+                <?php
+                    $stm = $conexao->prepare("SELECT tipo FROM fornecedor WHERE nome = ? AND email = ?");
+                    $stm->bind_param("ss", $nome, $email);
+                    $stm->execute();
+                    $res = $stm->get_result();
+
+                    $tipo = $res->fetch_array()[0];
+
+                    if($tipo == 0){
+                        $tipoEscreve = "Brechó";
+                    } else{
+                        $tipoEscreve = "Instituição";
+                    }
+                ?>
+                <b>Tipo:</b> <?= $tipoEscreve ?><br>
             </p>
         </div>
 
@@ -100,7 +115,20 @@
                 <h2>Pontos de coleta</h2>
                     
                 <?php foreach ($pontos as $p): ?>
-                    <p><b>Endereço:</b> <?= $p->formatar() ?></p>
+                    
+                    <div id="box-pontos">
+                        <div class="elementos">
+                            <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                        </div>
+                        <div class="elementos">
+                            <p><b>Endereço:</b> <?= $p->formatar()?></p>
+                            <?php if($p->referencia != ""): ?>
+                            <p><b>Referência:</b> <?= $p->referencia?></p>                         
+                            <?php endif; ?>
+                            
+                            <p><b>Horário de funcionamento:</b> <?= $p->horario?></p>
+                        </div>    
+                    </div>
                 <?php endforeach; ?>
                 
                 <?php if($dono): ?>
@@ -109,11 +137,26 @@
 
             </div>
         </div>
-        <div id="pecas">
-            <h2>Peças anunciadas</h2>
-            
+        <div id="pecas">           
+            <?php
+                include_once "model/peca.php";
+
+                $stm = $conexao->prepare("SELECT * FROM peca WHERE (SELECT id_fornecedor FROM ponto_coleta WHERE ponto_coleta.id_ponto_coleta = peca.id_ponto_coleta) = ?;");
+                $stm->bind_param("i", $idGet);
+                $stm->execute();
+                $res = $stm->get_result();
+
+                $pecas = array();
+
+                while ($linha = $res->fetch_assoc()) {
+                    $pecas[] = Peca::ler($linha);
+                }
+
+                include "_pecas.php";
+            ?>
+
             <?php if($dono): ?>
-                <a href="editar_peca" id="add-peca" class="botao">Adicionar peça</a>
+                <a href="editar_peca" id="add-peca" class="botao"><i class="fa fa-plus" aria-hidden="true"></i></a>
             <?php endif; ?>         
         
         </div>
