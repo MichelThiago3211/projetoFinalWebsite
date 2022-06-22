@@ -15,8 +15,6 @@
 	$stm->execute();
     $res = $stm->get_result();
 
-    exit;
-
     // Se encontrou, inicia a sessão
 	if ($res->num_rows > 0) {
 		session_start();
