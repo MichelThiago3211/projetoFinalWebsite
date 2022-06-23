@@ -1,14 +1,14 @@
 <?php
-    include "env.php";
 
-    $endereco = $_ENV['DB_ENDERECO'];
-    $usuario = $_ENV['DB_USUARIO'];
-    $senha = $_ENV['DB_SENHA'];
-    $banco = $_ENV['DB_BANCO'];
+include "env.php";
 
-    $conexao = mysqli_connect($endereco, $usuario, $senha, $banco);
+$endereco = $_ENV['DB_ENDERECO'];
+$usuario = $_ENV['DB_USUARIO'];
+$senha = $_ENV['DB_SENHA'];
+$banco = $_ENV['DB_BANCO'];
 
-    if (!$conexao) {
-        echo "<script>alert('Não foi possível conectar ao banco de dados.');</script>";
-    }
-?>
+$conexao = mysqli_connect($endereco, $usuario, $senha, $banco);
+
+if (!$conexao) {
+    echo "<script>alert('Não foi possível conectar ao banco de dados.');</script>";
+}
