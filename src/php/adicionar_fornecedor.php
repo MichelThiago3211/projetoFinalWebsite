@@ -3,27 +3,27 @@
     include_once "buscar_municipio.php";
 
     // Informações básicas
-    $tipo = ($_POST['tipo'] == 'brecho'? 0 : 1);
-    $nomeCompleto = $tipo == 1? $_POST['nome'] : ($_POST['nome'] . " " . $_POST['sobrenome']);
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-    $cnp = $_POST['cnp'];
-    $senha = $_POST['senha'];
+    $tipo = ($_POST["tipo"] == "brecho"? 0 : 1);
+    $nome = trim($_POST["nome"]);
+    $email = $_POST["email"];
+    $telefone = $_POST["telefone"];
+    $cnp = $_POST["cnp"];
+    $senha = $_POST["senha"];
 
     // Endereço    
-    $cep = $_POST['cep'];
-    $cidade = $_POST['cidade'];
-    $uf = $_POST['uf'];
-    $rua = $_POST['rua'];
-    $numero = $_POST['numero'];
-    $referencia = $_POST['referencia'];
-    $complemento = $_POST['complemento'];
+    $cep = $_POST["cep"];
+    $cidade = $_POST["cidade"];
+    $uf = $_POST["uf"];
+    $rua = $_POST["rua"];
+    $numero = $_POST["numero"];
+    $referencia = $_POST["referencia"];
+    $complemento = $_POST["complemento"];
 
     // Logo
-    $logo = $_FILES['imagem'];
-    $temImagem = $logo['name'] != '' && $logo['error'] == 0;
+    $logo = $_FILES["imagem"];
+    $temImagem = $logo["name"] != "" && $logo["error"] == 0;
     if ($temImagem) {
-        $extensao = pathinfo($logo['name'], PATHINFO_EXTENSION);
+        $extensao = pathinfo($logo["name"], PATHINFO_EXTENSION);
         $imagemCaminho = "../imagens/fornecedor/$cnp.$extensao";
     }
 
@@ -32,7 +32,7 @@
 
     // Insere o fornecedor no banco de dados
     $stm = $conexao->prepare("INSERT INTO fornecedor(nome, telefone, email, senha, cnp, tipo, ativo) VALUES (?, ?, ?, ?, ?, ?, 0)");
-    $stm->bind_param("sssssi", $nomeCompleto, $telefone, $email, $senhaCriptografada, $cnp, $tipo);
+    $stm->bind_param("sssssi", $nome, $telefone, $email, $senhaCriptografada, $cnp, $tipo);
     $stm->execute();
 
     $idFornecedor = $stm->insert_id;
@@ -43,7 +43,7 @@
         $stm->bind_param("ss", $imagemCaminho, $idFornecedor);
         $stm->execute();
     
-        $movido = move_uploaded_file($logo["tmp_name"], '../'.$imagemCaminho);
+        $movido = move_uploaded_file($logo["tmp_name"], "../".$imagemCaminho);
         if (!$movido) {
             echo "<script>alert('Erro ao salvar imagem');</script>";
             header("Location: ../cadastro");
@@ -60,7 +60,7 @@
         $host = str_replace("localhost", "127.0.0.1", $_SERVER["HTTP_HOST"]);
         $caminho = dirname($_SERVER["REQUEST_URI"]);
         $urlAtivacao = "http://$host$caminho/ativar_fornecedor?id=$idFornecedor";
-        $conteudoMensagem = "<b>Um novo usuário entrou para a plataforma:</b> %0A%0AID: $idFornecedor %0ANome: $nomeCompleto %0ATelefone: $telefone %0AE-mail: $email %0A%0A<a href='$urlAtivacao'>Ativar fornecedor</a>";
+        $conteudoMensagem = "<b>Um novo usuário entrou para a plataforma:</b> %0A%0AID: $idFornecedor %0ANome: $nome %0ATelefone: $telefone %0AE-mail: $email %0A%0A<a href='$urlAtivacao'>Ativar fornecedor</a>";
 
         $tokenTelegram = $_ENV["TELEGRAM_API"];
         $canaisTelegram = explode(",", $_ENV["ID_CANAIS_TELEGRAM"]);

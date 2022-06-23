@@ -3,8 +3,8 @@
 
     // Permite com que esse arquivo seja chamado por um form ou por outros arquivos.
     if (!isset($email) || !isset($senha)) {
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
+        $email = $_POST["email"];
+        $senha = $_POST["senha"];
     }
 
     $senhaCriptografada = hash("sha256", $senha);
@@ -18,10 +18,10 @@
     // Se encontrou, inicia a sessão
 	if ($res->num_rows > 0) {
 		session_start();
-		$_SESSION['id_fornecedor'] = $res->fetch_array()[0];
-		header('Location: ../catalogo');
+		$_SESSION["id_fornecedor"] = $res->fetch_array()[0];
+		header("Location: ../catalogo");
 	}
 	else {
-		header('Location: ../login');
+		header("Location: ../login");
 	}
 ?>
