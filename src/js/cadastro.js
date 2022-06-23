@@ -1,10 +1,9 @@
 "use strict";
 
 const nomeInput = document.getElementById("nome");
-const sobrenomeInput = document.getElementById("sobrenome");
 const cnpInput = document.getElementById("cnp");
 
-// Quando o tipo de fornecedor for alterado, atualiza o campo CNP e os campos do nome e sobrenome
+// Quando o tipo de fornecedor for alterado, atualiza os campos do CNP e do nome
 function atualizarTipo() {
   const value = document.getElementById("tipo").value;
 
@@ -13,12 +12,7 @@ function atualizarTipo() {
     cnpInput.children[0].pattern = "\\d{11}"
     cnpInput.children[0].placeholder = "___.___.___-__";
 
-    nomeInput.children[1].innerHTML = "Nome";
-    nomeInput.children[0].setAttribute("maxlength", 69);
-    nomeInput.style.gridColumn = "initial";
-
-    sobrenomeInput.children[0].required = true;
-    sobrenomeInput.hidden = false;
+    nomeInput.children[1].innerHTML = "Nome completo";
   }
   else {
     cnpInput.children[1].innerHTML = "CNPJ";
@@ -26,11 +20,6 @@ function atualizarTipo() {
     cnpInput.children[0].placeholder = "__.___.___/0001-__";
 
     nomeInput.children[1].innerHTML = "Nome da instituição";
-    nomeInput.children[0].setAttribute("maxlength", 100);
-    nomeInput.style.gridColumn = "span 2";
-    
-    sobrenomeInput.children[0].required = false;
-    sobrenomeInput.hidden = true;
   }
 };
 

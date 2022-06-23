@@ -32,13 +32,8 @@
                 </div>
                 <!-- Nome -->
                 <div class="campo" id="nome">
-                    <input type="text" name="nome" autocomplete="given-name" autofocus required>
-                    <label>Nome</label>
-                </div>
-                <!-- Sobrenome -->
-                <div class="campo" id="sobrenome">
-                    <input type="text" name="sobrenome" autocomplete="family-name" maxlength=30>
-                    <label>Sobrenome</label>
+                    <input type="text" name="nome" autocomplete="name" autofocus maxlength=100 required>
+                    <label></label>
                 </div>
                 <div id="dados-imagem">
                     <div class="campos">
