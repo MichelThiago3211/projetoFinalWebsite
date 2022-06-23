@@ -56,6 +56,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo</title>
 
+    <!-- JavaScript -->
+    <script src="js/perfil.js" defer></script>
+    <script>
+        window.urlMapa = "https://www.google.com/maps/embed/v1/place?key=<?= $_ENV["MAPS_API"] ?>&q=";
+    </script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/perfil.css">
     
@@ -77,13 +83,13 @@
 
         <div id="pontos-coleta" class="box">
             <iframe
-            height="100%" width="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=<?= $_ENV["MAPS_API"] ?>&q=<?= urlencode($pontosColeta[0]->formatar()) ?>">
+                height="100%" width="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed/v1/place?key=<?= $_ENV["MAPS_API"] ?>&q=<?= urlencode($pontosColeta[0]->formatar()) ?>">
             </iframe>
             <div id="pontos-lista">
                 <h2>Pontos de coleta</h2>
                 <?php foreach($pontosColeta as $pc): ?>
-                    <div class="endereco <?= $pc->sede? "sede" : ""?>">
+                    <div class="endereco <?= $pc->sede? "sede" : ""?>" onclick="alterarMapa('<?= $pc->formatar() ?>')">
                         <i class="fa fa-2x <?= $pc->sede? "fa-flag" : "fa-map-marker"?>" aria-hidden="true"></i>
                         <div>
                             <?php if($pc->referencia != ""): ?>

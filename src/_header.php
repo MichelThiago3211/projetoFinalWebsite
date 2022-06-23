@@ -26,11 +26,11 @@
 <link href="css/header.css" rel="stylesheet">
 
 <header>
-    <a id="logo" href="catalogo">
+    <a class="logo" href="catalogo">
         <img src="img/logo_branco.png" alt="Logo">
         <h1>Nome do Site</h1>
     </a>
-    <div id="usuario">
+    <div class="usuario">
         <!-- Se estiver logado, exibe o perfil do usuário; caso contrário, um botão de login -->
         <?php if (isset($idSessao)): ?>
             
