@@ -1,3 +1,7 @@
+"use strict";
+
+// Implementa a funcionalidade do carrossel de imagens
+
 const carrossel = document.getElementById("carrossel");
 const proxima = document.getElementById("proxima");
 const anterior = document.getElementById("anterior");

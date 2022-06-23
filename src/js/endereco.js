@@ -7,6 +7,7 @@ const ufInput = document.getElementsByName("uf")[0];
 cepInput.addEventListener("input", testarCEP);
 testarCEP();
 
+// Verifica se um CEP existe e, nesse caso, autopreenche o nome da cidade e estado
 async function testarCEP() {
   cepInput.setCustomValidity("CEP inválido");
   const cep = cepInput.value;
