@@ -38,9 +38,9 @@
                 <a href="perfil?id=<?= $idSessao ?>"><h2><?= $nome ?></h2></a>
                 <a href="php/logout" id="sair">Sair</a>
             </div>
-            <a href="perfil?id=<?= $idSessao ?>"><img src='<?= $logo ?>' alt='Logo'></a>
+            <a href="perfil?id=<?= $idSessao ?>"><img src="<?= $logo ?>" alt="Logo"></a>
         <?php else: ?>
-            <a href='login'><h2>Login</h2></a>
+            <a href="login" class="botao transparente">Login</a>
         <?php endif; ?>
     </div>
 </header>
