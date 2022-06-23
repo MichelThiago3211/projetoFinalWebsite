@@ -42,15 +42,7 @@
         $stm = $conexao->prepare("UPDATE fornecedor SET imagem = ? WHERE id_fornecedor = ?");
         $stm->bind_param("ss", $imagemCaminho, $idFornecedor);
         $stm->execute();
-    }
-   
-    // Verifica se ocorreu algum erro
-    if ($stm->error) {
-        echo "<script>alert('Erro ao inserir fornecedor no banco de dados');</script>";
-        header("Location: ../cadastro");
-    }
     
-    if ($temImagem) {
         $movido = move_uploaded_file($logo["tmp_name"], '../'.$imagemCaminho);
         if (!$movido) {
             echo "<script>alert('Erro ao salvar imagem');</script>";
@@ -63,34 +55,31 @@
     $stm->bind_param("ssisiiis", $horario, $complemento, $numero, $rua, $cep, $idMunicipio, $idFornecedor, $referencia);
     $stm->execute();
 
-    // Verifica se ocorreu algum erro
-    if ($stm->error) {
-        echo "<script>alert('Erro ao inserir ponto de coleta no banco de dados');</script>";
-        header("Location: ../cadastro");
-    }
+    // Enviar notificações via Telegram
+    if (isset($_ENV["TELEGRAM_API"])) {
+        $host = str_replace("localhost", "127.0.0.1", $_SERVER["HTTP_HOST"]);
+        $caminho = dirname($_SERVER["REQUEST_URI"]);
+        $urlAtivacao = "http://$host$caminho/ativar_fornecedor?id=$idFornecedor";
+        $conteudoMensagem = "<b>Um novo usuário entrou para a plataforma:</b> %0A%0AID: $idFornecedor %0ANome: $nomeCompleto %0ATelefone: $telefone %0AE-mail: $email %0A%0A<a href='$urlAtivacao'>Ativar fornecedor</a>";
 
-    // Enviar mensagem de aviso
-    $host = str_replace("localhost", "127.0.0.1", $_SERVER["HTTP_HOST"]);
-    $caminho = dirname($_SERVER["REQUEST_URI"]);
-    $urlAtivacao = "https://$host$caminho/ativar_fornecedor?id=$idFornecedor";
-    $conteudoMensagem = "<b>Um novo usuário entrou para a plataforma:</b> %0A%0AID: $idFornecedor %0ANome: $nomeCompleto %0ATelefone: $telefone %0AE-mail: $email %0A%0A<a href='$urlAtivacao'>Ativar fornecedor</a>";
+        $tokenTelegram = $_ENV["TELEGRAM_API"];
+        $canaisTelegram = explode(",", $_ENV["ID_CANAIS_TELEGRAM"]);
 
-    $tokenTelegram = $_ENV["TELEGRAM_API"];
-    $canaisTelegram = explode(",", $_ENV["ID_CANAIS_TELEGRAM"]);
-
-    foreach ($canaisTelegram as $canal) {
-        $url = "https://api.telegram.org/bot$tokenTelegram/sendMessage?chat_id=$canal&text=$conteudoMensagem&parse_mode=html";
-        $valores = array(
-            "chat_id" => $canal,
-            "text" => $conteudoMensagem,
-            "parse_mode" => "html"
-        );
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $valores);
-        $response = curl_exec($curl);
-        curl_close($curl);
+        // Envia a notificação para cada canal/chat passado
+        foreach ($canaisTelegram as $canal) {
+            $url = "https://api.telegram.org/bot$tokenTelegram/sendMessage?chat_id=$canal&text=$conteudoMensagem&parse_mode=html";
+            $parametros = array(
+                "chat_id" => $canal,
+                "text" => $conteudoMensagem,
+                "parse_mode" => "html"
+            );
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $parametros);
+            $response = curl_exec($curl);
+            curl_close($curl);
+        }
     }
 
     // Autenticação

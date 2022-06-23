@@ -100,4 +100,8 @@ class Peca {
         
         return $imagens;
     }
+
+    public function precoFormatado() {
+        return "R$ ".number_format((float)$this->preco, 2, ",", "");
+    }
 }

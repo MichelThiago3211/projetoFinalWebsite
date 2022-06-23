@@ -40,15 +40,15 @@
 
     <!-- JavaScript -->
     <script src="js/ver_peca.js" defer></script>
+    <script>
+        window.imagens = [<?= implode(",", $urlImagens) ?>];
+    </script>
 
     <?php include "_fontes.php" ?>
 </head>
 <body>
     <?php include "_header.php"; ?>
 
-    <script>
-        window.imagens = [<?= implode(",", $urlImagens) ?>];
-    </script>
 
     <main>
         <div id="peca" class="box">
@@ -136,7 +136,7 @@
                 <label>CPF</label>
             </div>
             <input type="submit" value="Reservar" class="botao">
-            <div id="preco">Custo: <?= $peca->preco == 0? "Gratuito" : "R$ " . number_format((float)$peca->preco, 2, ',', '') ?></div>
+            <div id="preco">Custo: <?= $peca->preco == 0? "Gratuito" : $peca->precoFormatado() ?></div>
         </form>
     </main>
 </body>

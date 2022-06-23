@@ -78,9 +78,9 @@ main
 
     & > .fa
         @extend %centro
-        color: black
+        color: var(--borda)
         height: 100%
-        width: 80px
+        min-width: 80px
         border-right: 1px solid var(--borda)
 
 .sede
@@ -95,7 +95,7 @@ main
     opacity: 0
 
     &:hover
-        opacity: .5
+        opacity: 1
 
     a
         @extend %centro
@@ -103,4 +103,4 @@ main
         right: 0
         width: 50px
         height: 100%
-        color: black
+        color: var(--borda)

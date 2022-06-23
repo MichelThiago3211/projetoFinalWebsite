@@ -4,14 +4,14 @@
     include_once "model/peca.php";
     include_once "model/fornecedor.php";
     
-    $idGet = $_GET["id"];
+    $id = $_GET["id"];
     
     // Se os IDs forem iguais, o usuário é o dono do perfil
-    $dono = isset($idSessao) && $idSessao == $idGet;
+    $dono = isset($idSessao) && $idSessao == $id;
 
     // Consulta os dados do fornecedor
     $stm = $conexao->prepare("SELECT * FROM fornecedor WHERE id_fornecedor = ?");
-    $stm->bind_param("i", $idGet);
+    $stm->bind_param("i", $id);
     $stm->execute();
     $res = $stm->get_result();
 
@@ -22,35 +22,28 @@
     }
 
     // Dados do fornecedor
-    $dados = $res->fetch_assoc();
-    $nome = $dados["nome"];
-    $imagem = $dados["imagem"] ?? "img/perfil.png";
-    $telefone = $dados["telefone"];
-    $email = $dados["email"];
-    
-    $telefoneFormatado = "(".substr($telefone, 0, 2).") ".substr($telefone, 2, 5)."-".substr($telefone, 7, 4);
+    $fornecedor = Fornecedor::ler($res->fetch_assoc());
+    $imagem = $fornecedor->imagem ?? "img/perfil.png";
 
     // Consulta os pontos de coleta do fornecedor
     $stm = $conexao->prepare("SELECT * FROM ponto_coleta WHERE id_fornecedor = ?");
-    $stm->bind_param("i", $idGet);
+    $stm->bind_param("i", $id);
     $stm->execute();
     $res = $stm->get_result();
 
     $pontosColeta = array();
-
     while ($ponto = $res->fetch_assoc()) {
         $p = PontoColeta::ler($ponto);
         $pontosColeta[] = $p;
     }
 
     // Consulta as peças do fornecedor
-    $stm = $conexao->prepare("SELECT * FROM peca WHERE (SELECT id_fornecedor FROM ponto_coleta WHERE ponto_coleta.id_ponto_coleta = peca.id_ponto_coleta) = ?;");
-    $stm->bind_param("i", $idGet);
+    $stm = $conexao->prepare("SELECT * FROM peca WHERE (SELECT id_fornecedor FROM ponto_coleta WHERE ponto_coleta.id_ponto_coleta = peca.id_ponto_coleta) = ? ORDER BY titulo;");
+    $stm->bind_param("i", $id);
     $stm->execute();
     $res = $stm->get_result();
 
     $pecas = array();
-
     while ($linha = $res->fetch_assoc()) {
         $pecas[] = Peca::ler($linha);
     }
@@ -73,26 +66,12 @@
 
     <main>
         <div id="dados" class="box">
-            <h2><?= $nome ?></h2>
-            <img id="logo" src="<?= $imagem ?>" alt="<?= $nome ?>"></h2>
+            <h2><?= $fornecedor->nome ?></h2>
+            <img id="logo" src="<?= $imagem ?>" alt="<?= $fornecedor->nome ?>"></h2>
             <p>
-                <b>Telefone:</b> <?= $telefoneFormatado ?><br>
-                <b>Email:</b> <?= $email ?><br>
-                <?php
-                    $stm = $conexao->prepare("SELECT tipo FROM fornecedor WHERE id_fornecedor = ?");
-                    $stm->bind_param("i", $idGet);
-                    $stm->execute();
-                    $res = $stm->get_result();
-
-                    $tipo = $res->fetch_array()[0];
-
-                    if($tipo == 0){
-                        $tipoEscreve = "Brechó";
-                    } else{
-                        $tipoEscreve = "Instituição";
-                    }
-                ?>
-                <b>Tipo:</b> <?= $tipoEscreve ?><br>
+                <b>Telefone:</b> <?= $fornecedor->telefoneFormatado() ?><br>
+                <b>Email:</b> <?= $fornecedor->email ?><br>
+                <b>Tipo:</b> <?= $fornecedor->tipo? "Instituição" : "Brechó" ?><br>
             </p>
         </div>
 
@@ -103,41 +82,47 @@
             </iframe>
             <div id="pontos-lista">
                 <h2>Pontos de coleta</h2>
-                <?php foreach($pontosColeta as $p): ?>
-                    <div class="endereco <?= $p->sede? "sede" : ""?>">
-                        <i class="fa fa-2x <?= $p->sede? "fa-flag" : "fa-map-marker"?>" aria-hidden="true"></i>
+                <?php foreach($pontosColeta as $pc): ?>
+                    <div class="endereco <?= $pc->sede? "sede" : ""?>">
+                        <i class="fa fa-2x <?= $pc->sede? "fa-flag" : "fa-map-marker"?>" aria-hidden="true"></i>
                         <div>
-                            <?php if($p->referencia != ""): ?>
-                                <span><b><?= $p->referencia?></b></span><br>
+                            <?php if($pc->referencia != ""): ?>
+                                <span><b><?= $pc->referencia?></b></span><br>
                             <?php endif; ?>
-                            <span><?= $p->formatar()?></span><br>
-                            <span><b>Horário de funcionamento: </b> <?= $p->horario? "$p->horario" : "<i>Não informado</i>"?></span>
+                            <span><?= $pc->formatar()?></span><br>
+                            <span><b>Horário de funcionamento: </b> <?= $pc->horario? "$pc->horario" : "<i>Não informado</i>"?></span>
                         </div>
 
-                        <?php if($dono): ?>
+                        <?php if($dono && $fornecedor->ativo): ?>
                             <div class="editar-ponto-coleta">
-                                <a href="editar_ponto_coleta?id=<?= $p->id ?>"><i class="fa fa-edit fa-2x"></i></a>
+                                <a href="editar_ponto_coleta?id=<?= $pc->id ?>"><i class="fa fa-edit fa-2x"></i></a>
                             </div>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
                 
                 <?php if($dono): ?>
-                    <a href="editar_ponto_coleta" class="botao">Adicionar ponto de coleta</a>
+                    <?php if ($fornecedor->ativo): ?>
+                        <a href="editar_ponto_coleta" class="botao">Adicionar ponto de coleta</a>
+                    <?php else: ?>
+                        <a href="" class="botao desabilitado" title="Sua conta ainda não está ativa">Adicionar ponto de coleta</a>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>
         <div id="pecas" class="box">
             <div class="controles">
                 <?php if($dono): ?>
-                    <a href="editar_peca" id="add-peca" class="botao">Adicionar peça</i></a>
+                    <?php if ($fornecedor->ativo): ?>
+                        <a href="editar_peca" id="add-peca" class="botao">Adicionar peça</a>
+                    <?php else: ?>
+                        <a href="" class="botao desabilitado" id="add-peca" title="Sua conta ainda não está ativa">Adicionar peça</a>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
 
             <div id="lista-pecas">
-                <?php
-                    include "_pecas.php";
-                ?>
+                <?php include "_pecas.php"; ?>
             </div>
         </div>
     </main>

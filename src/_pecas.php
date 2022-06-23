@@ -41,7 +41,7 @@
 
             </div>
             <!-- Preço -->
-            <div class="preco"><?= $p->preco == 0? "DOAÇÃO" : "R$ " . number_format((float)$p->preco, 2, ',', '') ?></div>
+            <div class="preco"><?= $p->preco == 0? "DOAÇÃO" : $p->precoFormatado() ?></div>
         </div>
     </a>
 <?php endforeach; ?>

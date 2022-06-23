@@ -73,7 +73,7 @@
                 <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
                 <?php if ($edicao): ?>
                     <?php if ($pontoColetaUsado): ?>
-                        <a id="deletar" class="botao desabilitado" title="Ainda existem peças neste ponto de coleta!">Deletar</a>
+                        <a id="deletar" class="botao desabilitado" title="Ainda existem peças associadas a este ponto de coleta">Deletar</a>
                     <?php else: ?>
                         <a id="deletar" class="botao" href="php/deletar_ponto_coleta?id=<?= $id ?>">Deletar</a>
                     <?php endif; ?>

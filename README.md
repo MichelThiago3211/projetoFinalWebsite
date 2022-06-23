@@ -31,7 +31,14 @@ DB_BANCO="projeto_ms"
 MAPS_API="<CHAVE>"
 ```
 
-Caso o XAMPP seja utilizado para a execução do servidor, o repositório poderá ser clonado diretamente para a pasta `htdocs/` dentro da instalação do XAMPP, e o site poderá ser acessado em `localhost:8000/projetoFinalWebsite/` (a porta deve estar livre e configurada corretamente).
+Para que o bot do Telegram que notifica novos cadastros funcione, outras duas variáveis de ambiente ainda precisam ser definidas:
+```
+TELEGRAM_API="<TOKEN>"
+ID_CANAIS_TELEGRAM="<IDS DOS CHATS, SEPARADOS POR VÍRGULAS>"
+```
+Se o token for omitido, nenhuma notificação será enviada.
+
+Caso o XAMPP seja utilizado para a execução do servidor, o repositório poderá ser clonado diretamente para a pasta `htdocs/` dentro da instalação do XAMPP, e o site poderá ser acessado em `localhost:[porta]/projetoFinalWebsite/`.
 
 Os arquivos Sass devem ser compilados pelos métodos descritos acima antes do site ser acessado.
 
@@ -39,7 +46,6 @@ Os arquivos Sass devem ser compilados pelos métodos descritos acima antes do si
 - Edição do perfil do fornecedor
 - Modo responsivo para usuários mobile
 - Opções de acessibilidade
-- Ativação de contas de fornecedores via E-mail
 - Reporte de fornecedores e/ou peças
 - Limitação no número de reservas por dispositivo, CPF ou endereço IP
 - Invalidação de reservas após um período de tempo
