@@ -12,7 +12,7 @@ main
     height: min-content
     display: flex
     flex-flow: row wrap
-    gap: 10px
+    gap: 20px 10px
 
     & > .campo, & > select
         width: 200px
@@ -41,3 +41,13 @@ main
     flex-flow: row wrap
     gap: 20px
     justify-content: center
+
+@media (max-width: 800px)
+    #filtros
+        flex-direction: column
+
+        & > .campo, & > select
+            width: initial
+    
+    #botoes
+        justify-content: center

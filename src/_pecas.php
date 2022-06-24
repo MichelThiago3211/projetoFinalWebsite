@@ -6,7 +6,7 @@
 ?>
 
 <?php foreach ($pecas as $p): ?>
-    <a href="ver_peca?id=<?= $p->id ?>">
+    <a href="ver_peca?id=<?= $p->id ?>" class="peca-wrapper">
         <div class="peca box <?= $p->preco == 0? "doacao" : "venda" ?>">
             <?php
                 // Imagem
@@ -26,7 +26,7 @@
             ?>
 
             <!-- Imagem -->
-            <img src="<?= $primeiraImagem->caminho ?>" alt="<?= $p->titulo ?>">
+            <img loading="lazy" src="<?= $primeiraImagem->caminho ?>" alt="<?= $p->titulo ?>">
             
             <div class="dados">
                 <!-- Título -->

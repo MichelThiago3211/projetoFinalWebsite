@@ -44,9 +44,9 @@ Os arquivos Sass devem ser compilados pelos métodos descritos acima antes do si
 
 ## Funcionalidades ainda não implementadas
 - Edição do perfil do fornecedor
-- Modo responsivo para usuários mobile
+- Modo responsivo em todas as páginas
 - Opções de acessibilidade
-- Reporte de fornecedores e/ou peças
+- Possibilidade de denunciar fornecedores e/ou peças
 - Limitação no número de reservas por dispositivo, CPF ou endereço IP
 - Invalidação de reservas após um período de tempo
 - Confirmação de que a peça foi entregue

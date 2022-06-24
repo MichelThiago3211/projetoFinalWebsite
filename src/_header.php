@@ -28,17 +28,19 @@
 <header>
     <a class="logo" href="catalogo">
         <img src="img/logo_branco.png" alt="Logo">
-        <h1>Nome do Site</h1>
+        <h1 class="desktop">Nome do Site</h1>
     </a>
     <div class="usuario">
         <!-- Se estiver logado, exibe o perfil do usuário; caso contrário, um botão de login -->
         <?php if (isset($idSessao)): ?>
-            
             <div>
-                <a href="perfil?id=<?= $idSessao ?>"><h2><?= $nome ?></h2></a>
-                <a href="php/logout" id="sair">Sair</a>
+                <a class="desktop" href="perfil?id=<?= $idSessao ?>"><h2><?= $nome ?></h2></a>
+                <a class="desktop" href="php/logout" id="sair">Sair</a>
             </div>
             <a href="perfil?id=<?= $idSessao ?>"><img src="<?= $logo ?>" alt="Logo"></a>
+            <a href="php/logout" class="botao transparente mobile">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
         <?php else: ?>
             <a href="login" class="botao transparente">Login</a>
         <?php endif; ?>
