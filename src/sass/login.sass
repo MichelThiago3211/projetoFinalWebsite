@@ -1,11 +1,12 @@
 @use 'cadastro'
 
-form    
-    width: 500px
-
 fieldset
     display: flex
     flex-direction: column
 
 #dados-fs
     margin-top: 50px
+
+@media (min-width: 600px)
+    form    
+        width: 500px

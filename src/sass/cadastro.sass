@@ -6,14 +6,13 @@ body
     grid-template-columns: 2fr 3fr
 
 main
-    overflow: auto
     @extend %centro
     background-color: global.$cor-clara
+    padding: 50px 0
 
 form
     width: 600px
     padding: 20px 40px
-    margin: 50px
 
     h1
         width: 100%
@@ -68,5 +67,15 @@ fieldset
 
 @media (max-width: 600px)
     body
-        grid-template-columns: 1fr
-        grid-template-rows: 1fr 1fr
+        display: flex
+        flex-direction: column
+
+    main
+        padding: 0
+    
+    form
+        margin: 0
+        width: 100%
+        border: none
+        border-radius: 0
+        padding: 30px 25px
