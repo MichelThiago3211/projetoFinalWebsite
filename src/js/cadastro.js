@@ -50,3 +50,31 @@ document.getElementById("imagem").onchange = e => {
     URL.revokeObjectURL(preview.src);
   }
 }
+
+function exibirValidacaoSenha(icone, valido) {
+  if (valido) {
+    icone.classList.remove("fa-times-circle");
+    icone.classList.add("fa-check-circle");
+  }
+  else {
+    icone.classList.remove("fa-check-circle");
+    icone.classList.add("fa-times-circle");
+  }
+}
+
+const senhaRequisitos = [...document.getElementById("senha-requisitos").children]
+  .map(el => el.firstElementChild);
+
+// Quando a senha for alterada, atualiza os requisitos
+senhaInput.addEventListener("input", () => {
+  const senha = senhaInput.value;
+
+  // Tamanho >= 8
+  exibirValidacaoSenha(senhaRequisitos[0], senha.length >= 8);
+  // Ao menos um número
+  exibirValidacaoSenha(senhaRequisitos[1], /[0-9]/.test(senha));
+  // Ao menos uma letra minúscula
+  exibirValidacaoSenha(senhaRequisitos[2], /[a-z]/.test(senha));
+  // Ao menos uma letra maiúscula
+  exibirValidacaoSenha(senhaRequisitos[3], /[A-Z]/.test(senha));
+});

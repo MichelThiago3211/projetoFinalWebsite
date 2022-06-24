@@ -65,6 +65,19 @@ fieldset
 #dados-fs
     margin-top: 20px
 
+#senha-requisitos
+    display: flex
+    flex-direction: column
+    gap: 5px 10px
+
+    .fa::before
+        font-size: 20px
+        padding-right: 10px
+        color: global.$cor-vermelho
+
+    .fa-check-circle::before
+        color: global.$cor-primaria
+
 @media (max-width: 600px)
     body
         display: flex

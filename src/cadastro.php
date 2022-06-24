@@ -79,6 +79,12 @@
                     <input type="password" required autocomplete="off">
                     <label>Confirmar senha</label>
                 </div>
+                <div id="senha-requisitos">
+                    <span><i class="fa fa-times-circle" aria-hidden="true"></i>8 ou mais caracteres</span>
+                    <span><i class="fa fa-times-circle" aria-hidden="true"></i>Número</span>
+                    <span><i class="fa fa-times-circle" aria-hidden="true"></i>Letra minúscula</span>
+                    <span><i class="fa fa-times-circle" aria-hidden="true"></i>Letra maiúscula</span>
+                </div>
             </fieldset>
 
             <fieldset id="botoes">
