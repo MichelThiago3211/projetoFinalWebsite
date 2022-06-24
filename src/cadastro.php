@@ -23,13 +23,10 @@
             
             <fieldset id="dados-fs">
                 <!-- Tipo -->
-                <div id="tipo-fornecedor">
-                    <label for="tipo">Tipo de fornecedor</label>
-                    <select name="tipo" id="tipo">
-                        <option value="brecho" selected>Brechó</option>
-                        <option value="instituicao">Instituição</option>
-                    </select>
-                </div>
+                <select name="tipo" id="tipo">
+                    <option value="brecho" selected>Brechó</option>
+                    <option value="instituicao">Instituição</option>
+                </select>
                 <!-- Nome -->
                 <div class="campo" id="nome">
                     <input type="text" name="nome" autocomplete="name" autofocus maxlength=100 required>
@@ -56,7 +53,8 @@
                     <!-- Logo do brechó/instituição -->
                     <label class="imagem-input" for="imagem">
                         <img id="preview">
-                        Inserir imagem
+                        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                        Inserir imagem (opcional)
                     </label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="1048576"> <!-- 1MB -->
                     <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg">

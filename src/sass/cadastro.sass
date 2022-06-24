@@ -14,9 +14,12 @@ form
     width: 600px
     padding: 20px 40px
 
-    h1
-        width: 100%
+    h1, h2
         text-align: center
+
+    h2
+        font-size: 24px
+        font-weight: 400
 
 #dados-imagem
     display: flex
@@ -47,13 +50,7 @@ fieldset
     .botao
         width: 200px
 
-#tipo-fornecedor
-    display: flex
-    flex-direction: column
-    gap: 10px
-    font-size: 16px
-
-#tipo-fornecedor, .endereco, #nome
+#tipo, .endereco, #nome
     grid-column: 1/3
 
 #logo
@@ -61,6 +58,32 @@ fieldset
     border: 1px solid black
     border-radius: 8px
     grid-row: span 3
+
+.imagem-input
+    @extend %centro-col
+    border: 1px solid black
+    border-radius: 8px
+    cursor: pointer
+    overflow: hidden
+    position: relative
+    height: 160px
+    width: 160px
+    gap: 10px
+    text-align: center
+
+    .fa
+        font-size: 30px
+    
+    img
+        position: absolute
+        @extend %centro
+        width: 100%
+        height: 100%
+        object-fit: cover
+        display: none
+
+        &[src]
+            display: block
 
 #dados-fs
     margin-top: 20px
@@ -79,7 +102,7 @@ fieldset
         color: global.$cor-primaria
 
 @media (max-width: 600px)
-    body
+    body, #dados-imagem, #senha-fs
         display: flex
         flex-direction: column
 
@@ -92,3 +115,9 @@ fieldset
         border: none
         border-radius: 0
         padding: 30px 25px
+
+    #dados-imagem
+        gap: 20px
+    
+    .imagem-input
+        width: 100%

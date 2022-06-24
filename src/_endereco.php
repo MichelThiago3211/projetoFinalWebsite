@@ -26,7 +26,7 @@
             <label>Rua</label>
         </div>
         <div class="campo">
-            <input type="text" name="numero" autocomplete="cc-number" required maxlength=3 value="<?= $pontoColeta->numero ?? "" ?>">
+            <input type="text" name="numero" autocomplete="cc-number" required maxlength=4 value="<?= $pontoColeta->numero ?? "" ?>">
             <label>Nº</label>
         </div>
     </div>

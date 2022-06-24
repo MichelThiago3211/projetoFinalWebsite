@@ -6,7 +6,7 @@
     gap: 20px
 
     & > div
-        gap: 10px
+        gap: 20px 10px
         display: grid
 
 .endereco-1
@@ -17,3 +17,8 @@
 
 .endereco-3
     grid-template-columns: 4fr 2fr
+
+@media (max-width: 600px)
+    .endereco > div
+        display: flex
+        flex-direction: column

@@ -52,23 +52,6 @@ select
     &:invalid
         --contorno: #c00
 
-.imagem-input
-    @extend %centro
-    border: 1px solid black
-    border-radius: 8px
-    height: 160px
-    width: 160px
-    cursor: pointer
-    overflow: hidden
-    position: relative
-    
-    img
-        position: absolute
-        @extend %centro
-        width: 100%
-        height: 100%
-        object-fit: cover
-
 input[type=file]
     // Usa 'opacity: 0' ao invés de 'display: none' ou outro para que o input possa ter 'required'
     opacity: 0
@@ -96,5 +79,5 @@ input[type=file]
         opacity: 75%
 
 @media (max-width: 600px)
-    .campo
+    .campo, select
         height: 50px
