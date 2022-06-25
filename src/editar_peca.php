@@ -171,7 +171,7 @@
             <div id="botoes">
                 <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
                 <?php if ($edicao): ?>
-                    <a href="php/deletar_peca?id=<?= $id ?>" id="deletar" class="botao">Deletar</a>
+                    <a href="php/deletar_peca?id=<?= $id ?>" class="botao vermelho">Deletar</a>
                 <?php endif; ?>
             </div>
         </form>

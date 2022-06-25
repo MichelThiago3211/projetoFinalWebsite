@@ -72,7 +72,7 @@ input[type=file]
 
     transition: background-color 200ms
 
-    &:not(.desabilitado):hover
+    &:hover
         background-color: darken(global.$cor-primaria, 10%)
 
     &.transparente
@@ -82,9 +82,16 @@ input[type=file]
         &:hover
             background-color: rgba(255, 255, 255, 20%)
 
+    &.vermelho
+        background-color: global.$cor-vermelho
+
+        &:hover
+            background-color: darken(global.$cor-vermelho, 10%)
+
     &.desabilitado
         cursor: not-allowed
         opacity: 50%
+        pointer-events: none
 
 @media (max-width: 800px)
     .campo, select

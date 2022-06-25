@@ -28,12 +28,15 @@ h1
     width: 200px
 
 #botoes
-    display: flex
-    gap: 20px
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 10px 20px
     justify-content: center
-
-#deletar
-    background-color: global.$cor-vermelho
+    margin: 0 auto
+    
+    p
+        text-align: center
+        grid-column: span 2
 
 @media (max-width: 800px)
     main
@@ -45,6 +48,7 @@ h1
         width: 100%
     
     #botoes
+        display: flex
         flex-direction: column
     
     .botao
