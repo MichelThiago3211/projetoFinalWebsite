@@ -11,7 +11,9 @@ function limparFormulario() {
   }
   const inputElements = document.getElementsByTagName("input");
   for (let input of inputElements) {
-    input.value = "";
+    if (!["submit", "button", "reset"].includes(input.type)) {
+      input.value = "";
+    }
   }
   form.submit();
 }
