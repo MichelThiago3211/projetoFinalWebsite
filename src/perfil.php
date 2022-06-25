@@ -106,7 +106,8 @@
                                 <span><b><?= $pc->referencia?></b></span><br>
                             <?php endif; ?>
                             <span><?= $pc->formatar()?></span><br>
-                            <span><b>Horário de funcionamento: </b> <?= $pc->horario? "$pc->horario" : "<i>Não informado</i>"?></span>
+                            <span><b>Horário de funcionamento: </b><br>
+                            <?= $pc->horario? "$pc->horario" : "<i>Não informado</i>"?></span>
                         </div>
 
                         <?php if($dono && $fornecedor->ativo): ?>
