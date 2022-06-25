@@ -31,7 +31,8 @@ h1
     & > *
         border-radius: 10px
         height: 100px
-        width: auto
+        width: 100px
+        object-fit: cover
         border-radius: 8px
 
 #add-imagem
@@ -84,3 +85,26 @@ h1
 
 .botao
     width: 200px
+
+@media (max-width: 800px)
+    main
+        padding: 0
+        
+    form.box
+        border: none
+        border-radius: 0
+        width: 100%
+
+    #botoes
+        flex-direction: column
+    
+    #caracteristicas, form.box
+        display: flex
+        flex-direction: column
+        gap: 20px
+
+    .botao
+        width: 100%
+
+    #descricao
+        height: 150px
