@@ -86,8 +86,18 @@
                 height="100%" width="100%" style="border:0" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
                 src="https://www.google.com/maps/embed/v1/place?key=<?= $_ENV["MAPS_API"] ?>&q=<?= urlencode($pontosColeta[0]->formatar()) ?>">
             </iframe>
+            
             <div id="pontos-lista">
                 <h2>Pontos de coleta</h2>
+                
+                <?php if($dono): ?>
+                    <?php if ($fornecedor->ativo): ?>
+                        <a href="editar_ponto_coleta" class="botao">Adicionar ponto de coleta</a>
+                    <?php else: ?>
+                        <a href="" class="botao desabilitado" title="Sua conta ainda não está ativa">Adicionar ponto de coleta</a>
+                    <?php endif; ?>
+                <?php endif; ?>
+    
                 <?php foreach($pontosColeta as $pc): ?>
                     <div class="endereco <?= $pc->sede? "sede" : ""?>" onclick="alterarMapa('<?= $pc->formatar() ?>')">
                         <i class="fa fa-2x <?= $pc->sede? "fa-flag" : "fa-map-marker"?>" aria-hidden="true"></i>
@@ -107,17 +117,12 @@
                     </div>
                 <?php endforeach; ?>
                 
-                <?php if($dono): ?>
-                    <?php if ($fornecedor->ativo): ?>
-                        <a href="editar_ponto_coleta" class="botao">Adicionar ponto de coleta</a>
-                    <?php else: ?>
-                        <a href="" class="botao desabilitado" title="Sua conta ainda não está ativa">Adicionar ponto de coleta</a>
-                    <?php endif; ?>
-                <?php endif; ?>
             </div>
         </div>
         <div id="pecas" class="box">
             <div class="controles">
+                <h2 class="mobile">Peças</h2>
+                
                 <?php if($dono): ?>
                     <?php if ($fornecedor->ativo): ?>
                         <a href="editar_peca" id="add-peca" class="botao">Adicionar peça</a>
