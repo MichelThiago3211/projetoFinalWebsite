@@ -70,9 +70,17 @@ input[type=file]
     cursor: pointer
     padding: 10px
 
+    transition: background-color 200ms
+
+    &:not(.desabilitado):hover
+        background-color: darken(global.$cor-primaria, 10%)
+
     &.transparente
         border: 1px solid white
         background-color: transparent
+
+        &:hover
+            background-color: rgba(255, 255, 255, 20%)
 
     &.desabilitado
         cursor: not-allowed
