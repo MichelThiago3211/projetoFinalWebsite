@@ -54,7 +54,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo</title>
+    <title><?= $fornecedor->nome ?></title>
 
     <!-- JavaScript -->
     <script src="js/perfil.js" defer></script>
