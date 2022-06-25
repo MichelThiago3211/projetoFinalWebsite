@@ -52,7 +52,7 @@
     <main>
         <div id="peca" class="box">
             <?php if ($dono): ?>
-                <a id="botao-editar" href="editar_peca?id=<?= $id ?>">
+                <a id="editar-peca" class="botao" href="editar_peca?id=<?= $id ?>">
                     <i class="fa fa-2x fa-edit"></i>
                 </a>
             <?php endif; ?>
