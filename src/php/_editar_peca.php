@@ -36,7 +36,7 @@ if ($_FILES["imagens"]["size"][0] == 0) {
     exit;
 }
 
-$numImagens = count($_FILES["imagens"]["name"]);
+$numImagens = min(count($_FILES["imagens"]["name"]), 5);
 
 if ($edicao) {
     
