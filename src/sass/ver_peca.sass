@@ -117,3 +117,39 @@ input[type="submit"]
     font-size: 20px
     width: 200px
     margin: 0 auto
+
+@media (max-width: 800px)
+    main, #peca, #dados-lista, #ponto-coleta
+        display: flex
+        flex-direction: column
+    
+    #dados-lista
+        gap: 10px
+
+    #carrossel
+        width: 100%
+        height: auto
+
+    #controles
+        opacity: 1
+
+    main
+        padding: 0
+        gap: 10px
+
+        & > .box
+            border-radius: 0
+            border-width: 1px 0
+    
+    #editar-peca
+        position: static
+        padding: 10px
+
+        &::after 
+            content: "Editar peça"
+    
+    iframe
+        height: 400px
+    
+    .botao, .controles > .botao
+        width: 100%
