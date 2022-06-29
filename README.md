@@ -49,3 +49,4 @@ Os arquivos Sass devem ser compilados pelos métodos descritos acima antes do si
 - Limitação no número de reservas por dispositivo, CPF ou endereço IP
 - Invalidação de reservas após um período de tempo
 - Confirmação de que a peça foi entregue
+- Visualização dos itens que foram reservados
