@@ -74,19 +74,25 @@ input[type=file]
 
     &:hover
         background-color: darken(global.$cor-primaria, 10%)
+    &:active
+        background-color: darken(global.$cor-primaria, 30%)
 
     &.transparente
         border: 1px solid white
         background-color: transparent
 
         &:hover
-            background-color: rgba(255, 255, 255, 20%)
+            background-color: rgba(255, 255, 255, 15%)
+        &:active
+            background-color: rgba(255, 255, 255, 40%)
 
     &.vermelho
         background-color: global.$cor-vermelho
 
         &:hover
             background-color: darken(global.$cor-vermelho, 10%)
+        &:active
+            background-color: darken(global.$cor-vermelho, 30%)
 
     &.desabilitado
         cursor: not-allowed
