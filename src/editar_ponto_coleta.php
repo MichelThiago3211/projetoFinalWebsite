@@ -69,16 +69,17 @@
             </div>
 
             <!-- Confirmação -->
-            <div id="botoes">
-                <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
-                <?php if ($edicao): ?>
-                    <?php if ($pontoColetaUsado): ?>
-                        <a class="botao vermelho desabilitado">Deletar</a>
-                    <?php else: ?>
-                        <a class="botao vermelho" href="php/deletar_ponto_coleta?id=<?= $id ?>">Deletar</a>
+            <div id="wrapper-botoes">
+                <div id="botoes">
+                    <input type="submit" class="botao" value="<?= $edicao ? "Editar" : "Adicionar" ?>">
+                    <?php if ($edicao): ?>
+                        <?php if ($pontoColetaUsado): ?>
+                            <a class="botao vermelho desabilitado">Deletar</a>
+                        <?php else: ?>
+                            <a class="botao vermelho" href="php/deletar_ponto_coleta?id=<?= $id ?>">Deletar</a>
+                        <?php endif; ?>
                     <?php endif; ?>
-                <?php endif; ?>
-
+                </div>
                 <?php if ($pontoColetaUsado): ?>
                     <p>Ainda existem peças associadas a este ponto de coleta!</p>
                 <?php endif; ?>

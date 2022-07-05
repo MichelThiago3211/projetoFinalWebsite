@@ -27,13 +27,16 @@ h1
 .botao
     width: 200px
 
+#wrapper-botoes
+    display: flex
+    flex-direction: column
+    gap: 10px
+    align-items: center
+
 #botoes
-    display: grid
-    grid-template-columns: 1fr 1fr
-    gap: 10px 20px
-    justify-content: center
-    margin: 0 auto
-    
+    display: flex
+    gap: 20px
+
     p
         text-align: center
         grid-column: span 2
